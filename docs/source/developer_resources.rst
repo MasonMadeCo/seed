@@ -357,6 +357,17 @@ Migrating the Database
 
 Migrations are handles through Django; however, various versions have customs actions for the migrations. See the :doc:`migrations page <migrations>` for more information based on the version of SEED.
 
+Building Documentation
+----------------------
+
+.. code-block:: console
+
+    # make sure enchant is installed for spelling
+    brew install enchant
+
+    cd docs
+    sphinx-build -b html source htmlout
+
 
 Testing
 -------

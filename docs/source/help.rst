@@ -6,7 +6,7 @@ For SEED-Platform Users
 
 Please visit our User Support website for tutorials and documentation to help you learn how to use SEED-Platform.
 
-https://sites.google.com/a/lbl.gov/seed/
+https://seed-platform.org
 
 There is also a link to the SEED-Platform Users forum, where you can connect with other users.
 
