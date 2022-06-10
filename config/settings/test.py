@@ -42,6 +42,7 @@ CELERY_LOG_LEVEL = LOG_LEVELS['WARNING']
 # Testing
 INSTALLED_APPS += ( # noqa F405
     "django_nose",
+    "hurricane",
 )
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_PLUGINS = [

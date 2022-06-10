@@ -59,6 +59,7 @@ DATABASES = {
 if SEED_TESTING:
     INSTALLED_APPS += (  # noqa F405
         "django_nose",
+        "hurricane",
     )
     TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
     NOSE_PLUGINS = [

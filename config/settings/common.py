@@ -104,6 +104,7 @@ DJANGO_CORE_APPS = (
     'oauth2_jwt_provider',
     'crispy_forms',  # needed to squash warnings around collectstatic with rest_framework
     'post_office',
+    "hurricane",
 )
 
 SEED_CORE_APPS = (
