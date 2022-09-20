@@ -157,9 +157,9 @@ angular.module('BE.seed.controller.column_settings', []).controller('column_sett
       $scope.setModified();
     };
 
-    // Seperate array used to capture and track geocoding-enabled columns and their order
+    // Separate array used to capture and track geocoding-enabled columns and their order
     // Any change to the array leading to position switching should be followed by a
-    // recalulation of geocoding_order values using indeces.
+    // recalculation of geocoding_order values using indices.
     $scope.geocoding_columns = _.orderBy(
       _.filter(columns, function (column) {
         return column.geocoding_order > 0;
@@ -170,7 +170,7 @@ angular.module('BE.seed.controller.column_settings', []).controller('column_sett
     $scope.geocoding_columns_position_options = _.range(1, $scope.geocoding_columns.length + 1, 1);
 
     var update_geocoding_order_values = function () {
-      // Since array order represents geocoding order, use indeces to update geocoding_order values
+      // Since array order represents geocoding order, use indices to update geocoding_order values
       _.each($scope.geocoding_columns, function (geocode_active_col, index) {
         geocode_active_col.geocoding_order = index + 1;
       });
@@ -184,7 +184,7 @@ angular.module('BE.seed.controller.column_settings', []).controller('column_sett
 
     var set_modified_and_check_sort = function () {
       $scope.setModified();
-      if ($scope.column_sort == 'geocoding_order') {
+      if ($scope.column_sort === 'geocoding_order') {
         geocoding_order_sort();
       }
     };

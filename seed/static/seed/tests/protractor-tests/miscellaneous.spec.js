@@ -129,7 +129,7 @@ describe('When I do miscellaneous things', function () {
     browser.driver.navigate().refresh();
   }, 60000);
 
-  it('should refesh and rules are correctly saved', function () {
+  it('should refresh and rules are correctly saved', function () {
     expect(
       element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()
     ).toBe(true);
@@ -141,7 +141,7 @@ describe('When I do miscellaneous things', function () {
     browser.driver.navigate().refresh();
   }, 60000);
 
-  it('should refesh again and check rules', function () {
+  it('should refresh again and check rules', function () {
     expect(
       element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()
     ).toBe(false);

@@ -118,7 +118,7 @@ angular
         uploader_service
           .sensor_readings_preview($scope.file_id, $scope.organization_id, $scope.view_id, $scope.data_logger_id)
           .then(function (result) {
-            var addtional_columnDefs = [
+            var additional_columnDefs = [
               {
                 field: 'exists',
                 enableHiding: false
@@ -127,7 +127,7 @@ angular
 
             $scope.proposed_imports_options = {
               data: result,
-              columnDefs: [...base_sensor_readings_col_defs, ...addtional_columnDefs],
+              columnDefs: [...base_sensor_readings_col_defs, ...additional_columnDefs],
               enableColumnResizing: true,
               enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
               enableVerticalScrollbar:
