@@ -313,13 +313,10 @@ angular.module('BE.seed.controller.inventory_cycles', []).controller('inventory_
 
     $scope.updateHeight = function () {
       var height = 0;
-      _.forEach(
-        ['.header', '.page_header_container', '.section_nav_container', '.inventory-list-controls'],
-        function (selector) {
-          var element = angular.element(selector)[0];
-          if (element) height += element.offsetHeight;
-        }
-      );
+      _.forEach(['.header', '.page_header_container', '.section_nav_container', '.inventory-list-controls'], function (selector) {
+        var element = angular.element(selector)[0];
+        if (element) height += element.offsetHeight;
+      });
       angular.element('#grid-container').css('height', 'calc(100vh - ' + (height + 2) + 'px)');
       angular.element('#grid-container > div').css('height', 'calc(100vh - ' + (height + 4) + 'px)');
       $scope.gridApi.core.handleWindowResize();

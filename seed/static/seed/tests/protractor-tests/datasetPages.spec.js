@@ -147,10 +147,7 @@ describe('When I visit the data set page', function () {
           return;
         });
     });
-    $$('[ng-change="updateInventoryTypeDropdown(); change(tcm)"]')
-      .first()
-      .element(by.cssContainingText('option', 'Tax Lot'))
-      .click();
+    $$('[ng-change="updateInventoryTypeDropdown(); change(tcm)"]').first().element(by.cssContainingText('option', 'Tax Lot')).click();
     $('#mapped-row-input-box-0').clear();
     $('#mapped-row-input-box-0').sendKeys('Address Line 1');
     $('#mapped-row-input-box-0').clear();

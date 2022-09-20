@@ -339,10 +339,7 @@ angular.module('BE.seed.service.search', []).factory('search_service', [
      *
      */
     search_service.add_remove_to_list = function (building) {
-      if (
-        ((building.checked && !this.select_all_checkbox) || (!building.checked && this.select_all_checkbox)) &&
-        !_.includes(this.selected_buildings, building.id)
-      ) {
+      if (((building.checked && !this.select_all_checkbox) || (!building.checked && this.select_all_checkbox)) && !_.includes(this.selected_buildings, building.id)) {
         this.selected_buildings.push(building.id);
       } else {
         // remove from list

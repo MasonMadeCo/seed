@@ -25,12 +25,7 @@ angular.module('BE.seed.service.columns', []).factory('columns_service', [
     };
 
     columns_service.rename_column = function (column_id, column_name, overwrite_preference) {
-      return columns_service.rename_column_for_org(
-        user_service.get_organization().id,
-        column_id,
-        column_name,
-        overwrite_preference
-      );
+      return columns_service.rename_column_for_org(user_service.get_organization().id, column_id, column_name, overwrite_preference);
     };
 
     columns_service.rename_column_for_org = function (org_id, column_id, column_name, overwrite_preference) {

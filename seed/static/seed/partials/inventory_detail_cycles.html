@@ -20,15 +20,9 @@
       <div class="section_action_container left" style="width: 50%">
         <span>
           <h2>
-            <span ng-if="::inventory_type==='properties'">
-              <i class="fa fa-building-o"></i><span translate>Property</span> :
-            </span>
-            <span ng-if="::inventory_type==='taxlots'">
-              <i class="fa fa-map-o"></i><span translate>Tax Lot</span> :
-            </span>
-            <span ng-bind-html="inventory_name"
-              >{$ inventory_display_name(inventory_type==='properties' ? 'property' : 'taxlot') | translate $}</span
-            >
+            <span ng-if="::inventory_type==='properties'"> <i class="fa fa-building-o"></i><span translate>Property</span> : </span>
+            <span ng-if="::inventory_type==='taxlots'"> <i class="fa fa-map-o"></i><span translate>Tax Lot</span> : </span>
+            <span ng-bind-html="inventory_name">{$ inventory_display_name(inventory_type==='properties' ? 'property' : 'taxlot') | translate $}</span>
           </h2>
         </span>
       </div>
@@ -40,11 +34,7 @@
         <span ng-show="profiles.length > 0">
           <label>{$:: 'Detail Column List Profile' | translate $}:</label>
           <div style="display: inline-block">
-            <select
-              class="form-control input-sm"
-              ng-model="currentProfile"
-              ng-options="option.name for option in profiles track by option.id"
-            ></select>
+            <select class="form-control input-sm" ng-model="currentProfile" ng-options="option.name for option in profiles track by option.id"></select>
           </div>
         </span>
       </div>
@@ -59,15 +49,10 @@
             <th id="building-fields">{$:: 'Field' | translate $}</th>
             <!-- Cycle Names -->
             <th ng-repeat="state in ::states">
-              <span
-                popover-placement="bottom-left"
-                uib-popover="{$:: cycles[state.cycle_id].start | date: 'yyyy-MM-dd' $} to {$:: cycles[state.cycle_id].end | date: 'yyyy-MM-dd' $}"
-              >
+              <span popover-placement="bottom-left" uib-popover="{$:: cycles[state.cycle_id].start | date: 'yyyy-MM-dd' $} to {$:: cycles[state.cycle_id].end | date: 'yyyy-MM-dd' $}">
                 {$:: cycles[state.cycle_id].name $}
               </span>
-              <a
-                ui-sref="inventory_detail(inventory_type === 'properties' ? {inventory_type: 'properties', view_id: state.view_id} : {inventory_type: 'taxlots', view_id: state.view_id})"
-              >
+              <a ui-sref="inventory_detail(inventory_type === 'properties' ? {inventory_type: 'properties', view_id: state.view_id} : {inventory_type: 'taxlots', view_id: state.view_id})">
                 <i class="ui-grid-icon-info-circled"></i>
               </a>
             </th>

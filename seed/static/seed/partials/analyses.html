@@ -31,18 +31,10 @@
           <tbody>
             <tr ng-repeat="analysis in analyses | filter:filter_params:strict">
               <td>
-                <a ui-sref="analysis(::{organization_id: org.id, analysis_id: analysis.id})" ui-sref-active="active"
-                  >{$:: analysis.name $}</a
-                >
+                <a ui-sref="analysis(::{organization_id: org.id, analysis_id: analysis.id})" ui-sref-active="active">{$:: analysis.name $}</a>
               </td>
               <td>
-                <i
-                  class="glyphicon glyphicon-play"
-                  title="Start Analysis"
-                  aria-hidden="true"
-                  ng-if="analysis.status === 'Ready'"
-                  ng-click="start_analysis(analysis.id)"
-                ></i>
+                <i class="glyphicon glyphicon-play" title="Start Analysis" aria-hidden="true" ng-if="analysis.status === 'Ready'" ng-click="start_analysis(analysis.id)"></i>
                 <i
                   class="glyphicon glyphicon-stop"
                   title="Stop Analysis"
@@ -51,12 +43,7 @@
                   ng-disabled="['Pending Creation', 'Queued'].indexOf(analysis.status) >= 0"
                   ng-click="stop_analysis(analysis.id)"
                 ></i>
-                <i
-                  class="glyphicon glyphicon-trash"
-                  title="Delete Analysis"
-                  aria-hidden="true"
-                  ng-click="delete_analysis(analysis.id)"
-                ></i>
+                <i class="glyphicon glyphicon-trash" title="Delete Analysis" aria-hidden="true" ng-click="delete_analysis(analysis.id)"></i>
               </td>
               <td>{$:: analysis.number_of_analysis_property_views $}</td>
               <td>{$:: analysis.service $}</td>
@@ -71,11 +58,7 @@
               </td>
               <td>{$:: analysis.created_at | date : 'MM-dd-yyyy HH:mm' $}</td>
               <td class="analysis-status {$ analysis.status.toLowerCase() $}">
-                <i
-                  class="fa fa-refresh fa-pulse fa-fw"
-                  style="padding-right: 0"
-                  ng-if="!analysis._finished_with_tasks"
-                ></i>
+                <i class="fa fa-refresh fa-pulse fa-fw" style="padding-right: 0" ng-if="!analysis._finished_with_tasks"></i>
                 {$ analysis.status $}
               </td>
               <td>{$:: analysis.start_time | date : 'MM-dd-yyyy HH:mm' $}</td>
@@ -103,38 +86,24 @@
           <tbody>
             <tr ng-repeat="view in views | filter:filter_params:strict">
               <td>
-                <a
-                  ui-sref="analysis_run(::{run_id: view.id, analysis_id: view.analysis, organization_id: org.id})"
-                  ui-sref-active="active"
-                  >{$:: view.id $}</a
-                >
+                <a ui-sref="analysis_run(::{run_id: view.id, analysis_id: view.analysis, organization_id: org.id})" ui-sref-active="active">{$:: view.id $}</a>
               </td>
               <td>
-                <a
-                  ng-if="original_views[view.id]"
-                  ui-sref="inventory_detail({inventory_type: 'properties', view_id: original_views[view.id]})"
-                >
+                <a ng-if="original_views[view.id]" ui-sref="inventory_detail({inventory_type: 'properties', view_id: original_views[view.id]})">
                   {$:: get_display_name(view.property_state) || 'Property ' + original_views[view.id] $}
                 </a>
-                <span ng-if="!original_views[view.id]" uib-tooltip="Property no longer exists">
-                  {$:: get_display_name(view.property_state) || 'Unknown' $}
-                </span>
+                <span ng-if="!original_views[view.id]" uib-tooltip="Property no longer exists"> {$:: get_display_name(view.property_state) || 'Unknown' $} </span>
               </td>
               <td>
                 <ul>
-                  <li ng-repeat="message in messages | filter : {'analysis_property_view':view.id}">
-                    {$:: message['user_message'] $}
-                  </li>
+                  <li ng-repeat="message in messages | filter : {'analysis_property_view':view.id}">{$:: message['user_message'] $}</li>
                 </ul>
               </td>
               <td>
                 <span ng-repeat="file in view.output_files | filter:filter_params:strict">
-                  <a ng-if="file['analysis_property_views'].length > 1" href="{$:: file.file $}" download
-                    >Portfolio Report <span class="fa fa-download"></span
-                  ></a>
+                  <a ng-if="file['analysis_property_views'].length > 1" href="{$:: file.file $}" download>Portfolio Report <span class="fa fa-download"></span></a>
                   <a ng-if="file['analysis_property_views'].length == 1" href="{$:: file.file $}" download
-                    >{$:: file.content_type == 'html' ? 'Building Report' : file.content_type $}
-                    <span class="fa fa-download"></span
+                    >{$:: file.content_type == 'html' ? 'Building Report' : file.content_type $} <span class="fa fa-download"></span
                   ></a>
                   <span ng-repeat-end ng-if="!$last">, </span>
                 </span>

@@ -28,15 +28,7 @@
           <div id="spinner_placeholder" style="width: 15px"></div>
         </span>
       </button>
-      <button
-        type="button"
-        class="btn btn-warning center-block"
-        ng-show="!preview_loading"
-        ng-click="goto_step(2)"
-        translate
-      >
-        Preview
-      </button>
+      <button type="button" class="btn btn-warning center-block" ng-show="!preview_loading" ng-click="goto_step(2)" translate>Preview</button>
     </div>
   </div>
 
@@ -53,23 +45,13 @@
       <button type="button" class="btn btn-primary col-sm-6 center-block" ng-disabled="true" translate>Confirm</button>
     </div>
     <div class="row text-center" ng-show="!preview_loading">
-      <button
-        type="button"
-        class="btn btn-primary col-sm-6 center-block"
-        ng-click="confirm()"
-        ng-disabled="!checks.warnings_acknowledged"
-        translate
-      >
-        Confirm
-      </button>
+      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-click="confirm()" ng-disabled="!checks.warnings_acknowledged" translate>Confirm</button>
     </div>
   </div>
 
   <div ng-switch-when="2">
     <div class="row text-center">
-      <button type="button" class="btn btn-warning col-sm-6 center-block" ng-click="goto_step(1)" translate>
-        Close Preview
-      </button>
+      <button type="button" class="btn btn-warning col-sm-6 center-block" ng-click="goto_step(1)" translate>Close Preview</button>
     </div>
   </div>
 

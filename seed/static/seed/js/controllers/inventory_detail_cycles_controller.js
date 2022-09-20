@@ -15,20 +15,7 @@ angular.module('BE.seed.controller.inventory_detail_cycles', []).controller('inv
   'profiles',
   'current_profile',
   'organization_payload',
-  function (
-    $scope,
-    $filter,
-    $stateParams,
-    $window,
-    cycles,
-    spinner_utility,
-    inventory_service,
-    inventory_payload,
-    columns,
-    profiles,
-    current_profile,
-    organization_payload
-  ) {
+  function ($scope, $filter, $stateParams, $window, cycles, spinner_utility, inventory_service, inventory_payload, columns, profiles, current_profile, organization_payload) {
     $scope.inventory_type = $stateParams.inventory_type;
     $scope.inventory = {
       view_id: $stateParams.view_id
@@ -99,17 +86,12 @@ angular.module('BE.seed.controller.inventory_detail_cycles', []).controller('inv
     var table_container = $('.table-xscroll-fixed-header-container');
 
     table_container.scroll(function () {
-      $('.table-xscroll-fixed-header-container > .table-body-x-scroll').width(
-        table_container.width() + table_container.scrollLeft()
-      );
+      $('.table-xscroll-fixed-header-container > .table-body-x-scroll').width(table_container.width() + table_container.scrollLeft());
     });
 
     $scope.inventory_display_name = function (property_type) {
       let error = '';
-      let field =
-        property_type == 'property'
-          ? $scope.organization.property_display_field
-          : $scope.organization.taxlot_display_field;
+      let field = property_type == 'property' ? $scope.organization.property_display_field : $scope.organization.taxlot_display_field;
       if (!(field in $scope.base_state)) {
         error = field + ' does not exist';
         field = 'address_line_1';
@@ -119,9 +101,7 @@ angular.module('BE.seed.controller.inventory_detail_cycles', []).controller('inv
       }
       $scope.inventory_name = $scope.base_state[field]
         ? $scope.base_state[field]
-        : '(' +
-          error +
-          ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
+        : '(' + error + ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
     };
 
     $scope.displayValue = function (dataType, value) {

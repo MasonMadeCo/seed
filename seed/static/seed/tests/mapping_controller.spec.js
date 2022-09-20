@@ -16,18 +16,7 @@ describe('controller: mapping_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function (
-      $controller,
-      $rootScope,
-      $uibModal,
-      urls,
-      $q,
-      inventory_service,
-      $timeout,
-      geocode_service,
-      organization_service,
-      user_service
-    ) {
+    inject(function ($controller, $rootScope, $uibModal, urls, $q, inventory_service, $timeout, geocode_service, organization_service, user_service) {
       controller = $controller;
       mapping_controller_scope = $rootScope.$new();
       timeout = $timeout;

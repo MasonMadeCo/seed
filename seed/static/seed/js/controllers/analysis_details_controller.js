@@ -15,9 +15,9 @@ angular.module('BE.seed.controller.analysis_details', []).controller('analysis_d
       stop_func();
     });
 
-    const refresh_analysis = analysis_id => {
+    const refresh_analysis = (analysis_id) => {
       // update analysis in scope
-      return analyses_service.get_analysis_for_org(analysis_id, $scope.org.id).then(data => {
+      return analyses_service.get_analysis_for_org(analysis_id, $scope.org.id).then((data) => {
         $scope.analysis = data.analysis;
         return data.analysis;
       });

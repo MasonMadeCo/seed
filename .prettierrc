@@ -1,6 +1,30 @@
 {
-  "arrowParens": "avoid",
-  "printWidth": 120,
   "singleQuote": true,
-  "trailingComma": "none"
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "printWidth": 200
+      }
+    },
+    {
+      "files": "*.js",
+      "options": {
+        "printWidth": 200,
+        "trailingComma": "none"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "printWidth": 200
+      }
+    },
+    {
+      "files": ["*.yaml", "*.yml"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }

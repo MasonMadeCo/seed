@@ -104,8 +104,7 @@ angular.module('BE.seed.service.uploader', []).factory('uploader_service', [
       progress_bar_obj.progress_last_checked = right_now;
 
       const new_progress_value = _.clamp(data.progress * multiplier + offset, 0, 100);
-      const updating_progress =
-        new_progress_value != progress_bar_obj.progress || progress_bar_obj.status_message != data.status_message;
+      const updating_progress = new_progress_value != progress_bar_obj.progress || progress_bar_obj.status_message != data.status_message;
       if (updating_progress) {
         progress_bar_obj.progress_last_updated = right_now;
       }
@@ -131,14 +130,7 @@ angular.module('BE.seed.service.uploader', []).factory('uploader_service', [
      * @param {obj} progress_bar_obj: progress bar object, attr 'progress'
      *   is set with the progress
      */
-    uploader_factory.check_progress_loop = function (
-      progress_key,
-      offset,
-      multiplier,
-      success_fn,
-      failure_fn,
-      progress_bar_obj
-    ) {
+    uploader_factory.check_progress_loop = function (progress_key, offset, multiplier, success_fn, failure_fn, progress_bar_obj) {
       uploader_factory.check_progress(progress_key).then(function (data) {
         $timeout(function () {
           update_progress_bar_obj(data, {
@@ -147,14 +139,7 @@ angular.module('BE.seed.service.uploader', []).factory('uploader_service', [
             progress_bar_obj
           });
           if (data.progress < 100) {
-            uploader_factory.check_progress_loop(
-              progress_key,
-              offset,
-              multiplier,
-              success_fn,
-              failure_fn,
-              progress_bar_obj
-            );
+            uploader_factory.check_progress_loop(progress_key, offset, multiplier, success_fn, failure_fn, progress_bar_obj);
           } else {
             success_fn(data);
           }
@@ -162,19 +147,14 @@ angular.module('BE.seed.service.uploader', []).factory('uploader_service', [
       }, failure_fn);
     };
 
-    uploader_factory.check_progress_loop_main_sub = function (
-      progress_argument,
-      success_fn,
-      failure_fn,
-      sub_progress_argument = null
-    ) {
+    uploader_factory.check_progress_loop_main_sub = function (progress_argument, success_fn, failure_fn, sub_progress_argument = null) {
       const { progress_key } = progress_argument;
       const sub_progress_key = sub_progress_argument ? sub_progress_argument.progress_key : null;
 
       let progress_list = [uploader_factory.check_progress(progress_key)];
       sub_progress_argument && progress_list.push(uploader_factory.check_progress(sub_progress_key));
 
-      Promise.all(progress_list).then(values => {
+      Promise.all(progress_list).then((values) => {
         check_and_update_progress(values);
       });
 
@@ -183,13 +163,7 @@ angular.module('BE.seed.service.uploader', []).factory('uploader_service', [
           update_progress_bar_obj(data[0], progress_argument);
           if (data[0].progress < 100) {
             data.length > 1
-              ? (update_progress_bar_obj(data[1], sub_progress_argument),
-                uploader_factory.check_progress_loop_main_sub(
-                  progress_argument,
-                  success_fn,
-                  failure_fn,
-                  sub_progress_argument
-                ))
+              ? (update_progress_bar_obj(data[1], sub_progress_argument), uploader_factory.check_progress_loop_main_sub(progress_argument, success_fn, failure_fn, sub_progress_argument))
               : uploader_factory.check_progress_loop_main_sub(progress_argument, success_fn, failure_fn);
           } else {
             success_fn(data[0]);

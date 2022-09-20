@@ -106,9 +106,7 @@ angular.module('BE.seed.service.inventory_reports', []).factory('inventory_repor
           }
         })
         .then(function (response) {
-          building_reports_factory.aggregated_reports_data = _.has(response.data, 'report_data')
-            ? response.data.report_data
-            : [];
+          building_reports_factory.aggregated_reports_data = _.has(response.data, 'report_data') ? response.data.report_data : [];
           return response.data;
         })
         .catch(function () {

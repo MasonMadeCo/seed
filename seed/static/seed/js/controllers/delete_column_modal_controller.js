@@ -13,18 +13,7 @@ angular.module('BE.seed.controller.delete_column_modal', []).controller('delete_
   'uploader_service',
   'organization_id',
   'column',
-  function (
-    $scope,
-    $window,
-    $log,
-    $interval,
-    $uibModalInstance,
-    spinner_utility,
-    columns_service,
-    uploader_service,
-    organization_id,
-    column
-  ) {
+  function ($scope, $window, $log, $interval, $uibModalInstance, spinner_utility, columns_service, uploader_service, organization_id, column) {
     $scope.column_name = column.column_name;
 
     $scope.progressBar = {
@@ -75,9 +64,7 @@ angular.module('BE.seed.controller.delete_column_modal', []).controller('delete_
           $scope.initialCompleted = $scope.progressBar.completed_records;
         }
         var diff = moment().diff(this.startTime);
-        var progress =
-          ($scope.progressBar.completed_records - $scope.initialCompleted) /
-          ($scope.progressBar.total_records - $scope.initialCompleted);
+        var progress = ($scope.progressBar.completed_records - $scope.initialCompleted) / ($scope.progressBar.total_records - $scope.initialCompleted);
         if (progress) {
           return $scope.formatTime(moment.duration(diff / progress - diff));
         }

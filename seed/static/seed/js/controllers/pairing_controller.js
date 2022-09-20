@@ -508,17 +508,11 @@ angular.module('BE.seed.controller.pairing', []).controller('pairing_controller'
       if ($scope.inventory_type === 'properties') {
         taxlotId = +container[0].getAttribute('rightParentId');
         propertyId = $scope.pickedUpEle;
-        promise = pairing_service.pair_taxlot_to_property(
-          $scope.pickedUpEle,
-          +container[0].getAttribute('rightParentId')
-        );
+        promise = pairing_service.pair_taxlot_to_property($scope.pickedUpEle, +container[0].getAttribute('rightParentId'));
       } else {
         taxlotId = $scope.pickedUpEle;
         propertyId = +container[0].getAttribute('rightParentId');
-        promise = pairing_service.pair_property_to_taxlot(
-          $scope.pickedUpEle,
-          +container[0].getAttribute('rightParentId')
-        );
+        promise = pairing_service.pair_property_to_taxlot($scope.pickedUpEle, +container[0].getAttribute('rightParentId'));
       }
 
       promise.then(function (data) {

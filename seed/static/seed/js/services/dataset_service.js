@@ -30,9 +30,7 @@ angular.module('BE.seed.service.dataset', []).factory('dataset_service', [
           }
         })
         .then(function (response) {
-          dataset_service.total_datasets_for_user = _.has(response.data.datasets, 'length')
-            ? response.data.datasets.length
-            : 0;
+          dataset_service.total_datasets_for_user = _.has(response.data.datasets, 'length') ? response.data.datasets.length : 0;
           return response.data;
         });
     };

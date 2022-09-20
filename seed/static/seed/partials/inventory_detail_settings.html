@@ -26,40 +26,15 @@
     <div class="section_action_container right_wide settings_profile">
       <div>
         <span>Detail Column List Profile:</span>
-        <select
-          class="form-control input-sm"
-          ng-model="currentProfile"
-          ng-options="option.name for option in profiles track by option.id"
-        ></select>
+        <select class="form-control input-sm" ng-model="currentProfile" ng-options="option.name for option in profiles track by option.id"></select>
 
-        <button
-          class="btn btn-success"
-          type="button"
-          ng-click="saveProfile()"
-          ng-disabled="!currentProfile || !isModified()"
-          tooltip-placement="bottom"
-          uib-tooltip="Save"
-        >
+        <button class="btn btn-success" type="button" ng-click="saveProfile()" ng-disabled="!currentProfile || !isModified()" tooltip-placement="bottom" uib-tooltip="Save">
           <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
         </button>
-        <button
-          class="btn btn-primary"
-          type="button"
-          ng-click="renameProfile()"
-          ng-disabled="!currentProfile"
-          tooltip-placement="bottom"
-          uib-tooltip="Rename"
-        >
+        <button class="btn btn-primary" type="button" ng-click="renameProfile()" ng-disabled="!currentProfile" tooltip-placement="bottom" uib-tooltip="Rename">
           <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
         </button>
-        <button
-          class="btn btn-danger"
-          type="button"
-          ng-click="removeProfile()"
-          ng-disabled="!currentProfile"
-          tooltip-placement="bottom"
-          uib-tooltip="Delete"
-        >
+        <button class="btn btn-danger" type="button" ng-click="removeProfile()" ng-disabled="!currentProfile" tooltip-placement="bottom" uib-tooltip="Delete">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         </button>
         <button class="btn btn-info" type="button" ng-click="newProfile()" tooltip-placement="bottom" uib-tooltip="New">
@@ -73,10 +48,7 @@
 <div class="section_content_container" ng-cloak style="clear: both; overflow: hidden">
   <div class="section_content with_padding" style="overflow: hidden">
     <h3 translate="NUMBER_COLUMNS_AVAILABLE" translate-values="{ count: (data.length | number) }"></h3>
-    <p>
-      {$:: (inventory_type === 'taxlots' ? 'LIST_GUIDANCE_TAXLOTS_NO_PIN' : 'LIST_GUIDANCE_PROPERTIES_NO_PIN') |
-      translate $}
-    </p>
+    <p>{$:: (inventory_type === 'taxlots' ? 'LIST_GUIDANCE_TAXLOTS_NO_PIN' : 'LIST_GUIDANCE_PROPERTIES_NO_PIN') | translate $}</p>
   </div>
   <div class="section_content">
     <div id="grid-container">

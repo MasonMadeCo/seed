@@ -86,8 +86,7 @@ angular.module('BE.seed.controller.pairing_settings', []).controller('pairing_se
         {
           name: 'displayName',
           displayName: 'Column Name',
-          cellTemplate:
-            '<div class="ui-grid-cell-contents inventory-settings-cell" title="TOOLTIP" data-after-content="{$ row.entity.name $}">{$ COL_FIELD CUSTOM_FILTERS $}</div>',
+          cellTemplate: '<div class="ui-grid-cell-contents inventory-settings-cell" title="TOOLTIP" data-after-content="{$ row.entity.name $}">{$ COL_FIELD CUSTOM_FILTERS $}</div>',
           enableHiding: false
         }
       ],
@@ -126,8 +125,7 @@ angular.module('BE.seed.controller.pairing_settings', []).controller('pairing_se
         {
           name: 'displayName',
           displayName: 'Column Name',
-          cellTemplate:
-            '<div class="ui-grid-cell-contents inventory-settings-cell" title="TOOLTIP" data-after-content="{$ row.entity.name $}">{$ COL_FIELD CUSTOM_FILTERS $}</div>',
+          cellTemplate: '<div class="ui-grid-cell-contents inventory-settings-cell" title="TOOLTIP" data-after-content="{$ row.entity.name $}">{$ COL_FIELD CUSTOM_FILTERS $}</div>',
           enableHiding: false
         }
       ],

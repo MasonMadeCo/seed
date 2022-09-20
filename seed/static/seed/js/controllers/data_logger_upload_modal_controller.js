@@ -37,11 +37,11 @@ angular.module('BE.seed.controller.data_logger_upload_modal', []).controller('da
             $scope.data_logger.serial_number,
             $scope.data_logger.identifier
           )
-          .then(result => {
+          .then((result) => {
             $scope.data_logger = result;
             $scope.refresh_page();
           })
-          .catch(err => {
+          .catch((err) => {
             if (err.status == 400) {
               $scope.data_logger_display_name_not_unique_alert = true;
             }

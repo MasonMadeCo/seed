@@ -9,14 +9,7 @@
         <form class="form-horizontal" role="form">
           <div class="form-group">
             <div class="col-sm-6">
-              <input
-                type="text"
-                class="form-control"
-                id="fileName"
-                ng-model="export_name"
-                placeholder="{$:: 'File Name' | translate $}"
-                required
-              />
+              <input type="text" class="form-control" id="fileName" ng-model="export_name" placeholder="{$:: 'File Name' | translate $}" required />
             </div>
           </div>
         </form>
@@ -51,41 +44,17 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button
-    type="button"
-    class="btn btn-primary"
-    ng-click="export_selected('csv')"
-    ng-disabled="!export_name.length || exporting"
-    translate
-  >
-    Export CSV
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    ng-click="export_selected('xlsx')"
-    ng-disabled="!export_name.length || exporting"
-    ng-if="inventory_type === 'properties'"
-    translate
-  >
+  <button type="button" class="btn btn-primary" ng-click="export_selected('csv')" ng-disabled="!export_name.length || exporting" translate>Export CSV</button>
+  <button type="button" class="btn btn-primary" ng-click="export_selected('xlsx')" ng-disabled="!export_name.length || exporting" ng-if="inventory_type === 'properties'" translate>
     Export BuildingSync in Excel format
   </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    ng-click="export_selected('geojson')"
-    ng-disabled="!export_name.length || exporting"
-    translate
-  >
-    Export GeoJSON
-  </button>
+  <button type="button" class="btn btn-primary" ng-click="export_selected('geojson')" ng-disabled="!export_name.length || exporting" translate>Export GeoJSON</button>
 </div>
 <div class="progress_bar_container export_progress" ng-if="exporting">
   <div class="progress_bar_copy_top">Progress:</div>
   <uib-progressbar class="progress-striped active" value="exporter_progress.progress" type="success"></uib-progressbar>
   <div class="progress_bar_copy_bottom">
-    {$ exporter_progress.progress | number:0 $}% {$:: 'Complete' | translate $} {$ exporter_progress.status_message ? ':
-    ' + exporter_progress.status_message : '' $}
+    {$ exporter_progress.progress | number:0 $}% {$:: 'Complete' | translate $} {$ exporter_progress.status_message ? ': ' + exporter_progress.status_message : '' $}
   </div>
 </div>
 <div class="modal-footer">

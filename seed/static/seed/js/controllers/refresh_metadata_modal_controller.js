@@ -12,17 +12,7 @@ angular.module('BE.seed.controller.refresh_metadata_modal', []).controller('refr
   'inventory_type',
   'inventory_service',
   'uploader_service',
-  function (
-    $scope,
-    $state,
-    $uibModalInstance,
-    ids,
-    property_states,
-    taxlot_states,
-    inventory_type,
-    inventory_service,
-    uploader_service
-  ) {
+  function ($scope, $state, $uibModalInstance, ids, property_states, taxlot_states, inventory_type, inventory_service, uploader_service) {
     const states = property_states || taxlot_states;
     $scope.id_count = ids.length;
     $scope.inventory_type = inventory_type;
@@ -34,7 +24,7 @@ angular.module('BE.seed.controller.refresh_metadata_modal', []).controller('refr
 
     $scope.refresh_metadata = function () {
       $scope.refreshing = true;
-      inventory_service.start_refresh_metadata().then(data => {
+      inventory_service.start_refresh_metadata().then((data) => {
         uploader_service.check_progress_loop(
           data.data.progress_key,
           0,

@@ -13,25 +13,11 @@
 </div>
 
 <div class="inventory-list-controls">
-  <form
-    name="listControlsForm"
-    class="form-inline"
-    role="form"
-    ng-submit="submitNewLabelForm(newLabelForm.$valid)"
-    novalidate
-  >
+  <form name="listControlsForm" class="form-inline" role="form" ng-submit="submitNewLabelForm(newLabelForm.$valid)" novalidate>
     <div class="form-group">
       <div uib-dropdown class="btn-group pointer" ng-style="nothing_selected_cursor()">
-        <button id="btnInventoryActions" type="button" uib-dropdown-toggle class="btn btn-default btn-sm">
-          {$:: 'Actions' | translate $} <span class="caret"></span>
-        </button>
-        <ul
-          id="inventory-actions-dropdown"
-          uib-dropdown-menu
-          class="dropdown-menu"
-          role="menu"
-          aria-labelledby="btnInventoryActions"
-        >
+        <button id="btnInventoryActions" type="button" uib-dropdown-toggle class="btn btn-default btn-sm">{$:: 'Actions' | translate $} <span class="caret"></span></button>
+        <ul id="inventory-actions-dropdown" uib-dropdown-menu class="dropdown-menu" role="menu" aria-labelledby="btnInventoryActions">
           <li role="menuitem">
             <a ng-click="toggle_layer(layers.hexbin_layer.zIndex)">Toggle Hexbins</a>
           </li>
@@ -65,56 +51,19 @@
           add-from-autocomplete-only="true"
           ng-disabled="!labels.length"
         >
-          <auto-complete
-            source="loadLabelsForFilter($query)"
-            max-results-to-show="255"
-            min-length="0"
-            load-on-empty="true"
-            load-on-focus="true"
-            ng-disabled="!labels.length"
-          ></auto-complete>
+          <auto-complete source="loadLabelsForFilter($query)" max-results-to-show="255" min-length="0" load-on-empty="true" load-on-focus="true" ng-disabled="!labels.length"></auto-complete>
         </tags-input>
       </div>
     </div>
     <div class="form-group btn-group">
-      <label
-        class="btn btn-default btn-sm"
-        style="width: 50px"
-        ng-class="{active: labelLogic === 'and'}"
-        ng-click="labelLogicUpdated('and')"
-        ng-disabled="!labels.length"
-        translate
-        >AND</label
-      >
-      <label
-        class="btn btn-default btn-sm"
-        style="width: 50px"
-        ng-class="{active: labelLogic === 'or'}"
-        ng-click="labelLogicUpdated('or')"
-        ng-disabled="!labels.length"
-        translate
-        >OR</label
-      >
-      <label
-        class="btn btn-default btn-sm"
-        style="width: 75px"
-        ng-class="{active: labelLogic === 'exclude'}"
-        ng-click="labelLogicUpdated('exclude')"
-        ng-disabled="!labels.length"
-        translate
+      <label class="btn btn-default btn-sm" style="width: 50px" ng-class="{active: labelLogic === 'and'}" ng-click="labelLogicUpdated('and')" ng-disabled="!labels.length" translate>AND</label>
+      <label class="btn btn-default btn-sm" style="width: 50px" ng-class="{active: labelLogic === 'or'}" ng-click="labelLogicUpdated('or')" ng-disabled="!labels.length" translate>OR</label>
+      <label class="btn btn-default btn-sm" style="width: 75px" ng-class="{active: labelLogic === 'exclude'}" ng-click="labelLogicUpdated('exclude')" ng-disabled="!labels.length" translate
         >EXCLUDE</label
       >
     </div>
     <div class="form-group btn-group building-list-filter-buttons">
-      <button
-        type="button"
-        ng-click="clear_labels()"
-        class="btn btn-default btn-sm"
-        ng-disabled="!selected_labels.length"
-        translate
-      >
-        Clear Labels
-      </button>
+      <button type="button" ng-click="clear_labels()" class="btn btn-default btn-sm" ng-disabled="!selected_labels.length" translate>Clear Labels</button>
     </div>
   </form>
 
@@ -177,14 +126,8 @@
       />&nbsp;&nbsp;Hexagonal Bins</label
     >
     <label class="pad-right-20">
-      <input
-        type="checkbox"
-        name="points"
-        ng-model="layers.points_layer.visible"
-        ng-true-value="1"
-        ng-false-value="0"
-        ng-change="toggle_layer(layers.points_layer.zIndex)"
-      />{$:: inventory_type === 'properties'?' Building Points':' Tax Lot Points' $}</label
+      <input type="checkbox" name="points" ng-model="layers.points_layer.visible" ng-true-value="1" ng-false-value="0" ng-change="toggle_layer(layers.points_layer.zIndex)" />{$:: inventory_type ===
+      'properties'?' Building Points':' Tax Lot Points' $}</label
     >
     <label class="pad-right-20">
       <input

@@ -39,14 +39,10 @@ angular.module('BE.seed.controller.delete_modal', []).controller('delete_modal_c
 
       var promises = [];
 
-      if ($scope.property_view_ids.length)
-        promises.push(inventory_service.delete_property_states($scope.property_view_ids));
+      if ($scope.property_view_ids.length) promises.push(inventory_service.delete_property_states($scope.property_view_ids));
       if ($scope.taxlot_view_ids.length) promises.push(inventory_service.delete_taxlot_states($scope.taxlot_view_ids));
-      if ($scope.delete.analyses)
-        for (i in $scope.analysis_ids) promises.push(analyses_service.delete_analysis($scope.analysis_ids[i]));
-      if ($scope.delete.batch_analyses)
-        for (i in $scope.batch_analysis_ids)
-          promises.push(analyses_service.delete_analysis($scope.batch_analysis_ids[i]));
+      if ($scope.delete.analyses) for (i in $scope.analysis_ids) promises.push(analyses_service.delete_analysis($scope.analysis_ids[i]));
+      if ($scope.delete.batch_analyses) for (i in $scope.batch_analysis_ids) promises.push(analyses_service.delete_analysis($scope.batch_analysis_ids[i]));
 
       return $q
         .all(promises)
@@ -61,10 +57,7 @@ angular.module('BE.seed.controller.delete_modal', []).controller('delete_modal_c
             }
           });
 
-          if (
-            $scope.property_view_ids.length !== $scope.deletedProperties ||
-            $scope.taxlot_view_ids.length !== $scope.deletedTaxlots
-          ) {
+          if ($scope.property_view_ids.length !== $scope.deletedProperties || $scope.taxlot_view_ids.length !== $scope.deletedTaxlots) {
             $scope.delete_state = 'incomplete';
             return;
           }

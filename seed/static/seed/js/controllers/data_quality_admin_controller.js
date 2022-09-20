@@ -136,7 +136,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
       { id: 'kBtu/m**2/year', label: 'kBtu/m²/year' }
     ];
 
-    $scope.columns = _.map(angular.copy(columns.filter(col => !col.derived_column)), function (col) {
+    $scope.columns = _.map(angular.copy(columns.filter((col) => !col.derived_column)), function (col) {
       if (!_.find(used_columns, ['id', col.id])) {
         col.group = 'Not Mapped';
       } else {
@@ -145,7 +145,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
       return col;
     });
     $scope.columns.push(
-      ...derived_columns_payload.derived_columns.map(derived_column => {
+      ...derived_columns_payload.derived_columns.map((derived_column) => {
         return {
           ...derived_column,
           data_type: $scope.data_type_keys.number,
@@ -322,9 +322,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
               }
             }
 
-            var include_or_exclude_without_text =
-              (r.condition === 'include' || r.condition === 'exclude') &&
-              (r.text_match === null || r.text_match === '');
+            var include_or_exclude_without_text = (r.condition === 'include' || r.condition === 'exclude') && (r.text_match === null || r.text_match === '');
             var valid_severity_without_label = r.severity === $scope.severity_type_keys.valid && !r.status_label;
             if (include_or_exclude_without_text || valid_severity_without_label) {
               misconfigured_rules.push({
@@ -374,9 +372,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
 
       if (include_or_exclude_without_text_count) {
         Notification.error({
-          message:
-            'Must Contain and Must Not Contain rules cannot have empty text. Count: ' +
-            include_or_exclude_without_text_count,
+          message: 'Must Contain and Must Not Contain rules cannot have empty text. Count: ' + include_or_exclude_without_text_count,
           delay: 60000
         });
       }
@@ -505,11 +501,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
     $scope.change_condition = function (rule) {
       $scope.rules_updated = false;
       $scope.rules_reset = false;
-      if (
-        rule.condition === 'include' ||
-        (rule.condition === 'exclude' && rule.data_type !== $scope.data_type_keys.string)
-      )
-        rule.data_type = $scope.data_type_keys.string;
+      if (rule.condition === 'include' || (rule.condition === 'exclude' && rule.data_type !== $scope.data_type_keys.string)) rule.data_type = $scope.data_type_keys.string;
       if (
         _.isMatch(rule, {
           condition: 'range',
@@ -561,10 +553,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
         rule.text_match = null;
         rule.units = '';
 
-        if (
-          !_.includes([null, $scope.data_type_keys.number], original) ||
-          !_.includes([null, $scope.data_type_keys.number], newDataType)
-        ) {
+        if (!_.includes([null, $scope.data_type_keys.number], original) || !_.includes([null, $scope.data_type_keys.number], newDataType)) {
           // Reset min/max if the data type is something other than null <-> number
           rule.min = null;
           rule.max = null;
@@ -585,8 +574,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
       }
       $scope.ruleGroups[$scope.inventory_type][rule.field].push(rule);
       // remove old rule.
-      if ($scope.ruleGroups[$scope.inventory_type][oldField].length === 1)
-        delete $scope.ruleGroups[$scope.inventory_type][oldField];
+      if ($scope.ruleGroups[$scope.inventory_type][oldField].length === 1) delete $scope.ruleGroups[$scope.inventory_type][oldField];
       else $scope.ruleGroups[$scope.inventory_type][oldField].splice(index, 1);
       rule.autofocus = true;
 
@@ -606,10 +594,7 @@ angular.module('BE.seed.controller.data_quality_admin', []).controller('data_qua
       _.forEach(rule_group, function (currentRule) {
         currentRule.text_match = null;
 
-        if (
-          !_.includes(['', $scope.data_type_keys.number], oldValue) ||
-          !_.includes([null, $scope.data_type_keys.number], data_type)
-        ) {
+        if (!_.includes(['', $scope.data_type_keys.number], oldValue) || !_.includes([null, $scope.data_type_keys.number], data_type)) {
           // Reset min/max if the data type is something other than null <-> number
           currentRule.min = null;
           currentRule.max = null;

@@ -12,17 +12,7 @@ angular.module('BE.seed.controller.sample_data_modal', []).controller('sample_da
   'organization',
   'cycle',
   'profiles',
-  function (
-    $scope,
-    $state,
-    $uibModalInstance,
-    Notification,
-    inventory_service,
-    organization_service,
-    organization,
-    cycle,
-    profiles
-  ) {
+  function ($scope, $state, $uibModalInstance, Notification, inventory_service, organization_service, organization, cycle, profiles) {
     $scope.inProgress = false;
     $scope.hasData = cycle.num_properties > 0 || cycle.num_taxlots > 0;
 
@@ -30,12 +20,10 @@ angular.module('BE.seed.controller.sample_data_modal', []).controller('sample_da
       $scope.inProgress = true;
 
       // Create column list profile if it doesn't exist
-      let foundProfile = profiles.find(
-        ({ name, profile_location }) => name === 'Auto-Populate' && profile_location === 'List View Profile'
-      );
+      let foundProfile = profiles.find(({ name, profile_location }) => name === 'Auto-Populate' && profile_location === 'List View Profile');
       let profilePromise;
       if (foundProfile) {
-        profilePromise = new Promise(resolve => resolve(foundProfile));
+        profilePromise = new Promise((resolve) => resolve(foundProfile));
       } else {
         profilePromise = inventory_service.new_column_list_profile({
           name: 'Auto-Populate',
@@ -51,15 +39,15 @@ angular.module('BE.seed.controller.sample_data_modal', []).controller('sample_da
       // 3. Get all properties
       // 4. Find only populated columns, and save to column list profile Auto-Populate
       profilePromise
-        .then(profile => {
+        .then((profile) => {
           inventory_service.save_last_profile(profile.id, 'properties');
           inventory_service.save_last_cycle(cycle.id);
 
           return organization_service
             .insert_sample_data(organization.org_id)
             .then(() => {
-              return inventory_service.get_property_columns().then(columns => {
-                return inventory_service.get_properties(1, undefined, cycle, -1).then(inventory => {
+              return inventory_service.get_property_columns().then((columns) => {
+                return inventory_service.get_properties(1, undefined, cycle, -1).then((inventory) => {
                   const visibleColumns = findPopulatedColumns(columns, inventory.results);
                   const profileId = profile.id;
                   profile = _.omit(profile, 'id');
@@ -68,7 +56,7 @@ angular.module('BE.seed.controller.sample_data_modal', []).controller('sample_da
                 });
               });
             })
-            .catch(response => {
+            .catch((response) => {
               let msg = 'Error: Failed to insert sample data';
               if (response.data.message) {
                 msg = `${msg} (${response.data.message})`;

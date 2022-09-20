@@ -134,18 +134,7 @@ angular.module('ui.grid').config([
       'ScrollEvent',
       'i18nService',
       '$rootScope',
-      function (
-        $delegate,
-        $compile,
-        $timeout,
-        $window,
-        $document,
-        gridUtil,
-        uiGridConstants,
-        ScrollEvent,
-        i18nService,
-        $rootScope
-      ) {
+      function ($delegate, $compile, $timeout, $window, $document, gridUtil, uiGridConstants, ScrollEvent, i18nService, $rootScope) {
         // Do stuff after mouse has been down this many ms on the header cell
         var mousedownTimeout = 500,
           changeModeTimeout = 500; // length of time between a touch event and a mouse event being recognised again, and vice versa
@@ -414,13 +403,7 @@ angular.module('ui.grid').config([
                 }
 
                 if (angular.isFunction($scope.col.headerCellClass)) {
-                  classAdded = $scope.col.headerCellClass(
-                    $scope.grid,
-                    $scope.row,
-                    $scope.col,
-                    $scope.rowRenderIndex,
-                    $scope.colRenderIndex
-                  );
+                  classAdded = $scope.col.headerCellClass($scope.grid, $scope.row, $scope.col, $scope.rowRenderIndex, $scope.colRenderIndex);
                 } else {
                   classAdded = $scope.col.headerCellClass;
                 }
@@ -428,15 +411,11 @@ angular.module('ui.grid').config([
 
                 $scope.$applyAsync(function () {
                   var rightMostContainer =
-                    $scope.grid.renderContainers['right'] &&
-                    $scope.grid.renderContainers['right'].visibleColumnCache.length
+                    $scope.grid.renderContainers['right'] && $scope.grid.renderContainers['right'].visibleColumnCache.length
                       ? $scope.grid.renderContainers['right']
                       : $scope.grid.renderContainers['body'];
                   $scope.isLastCol =
-                    uiGridCtrl.grid.options &&
-                    uiGridCtrl.grid.options.enableGridMenu &&
-                    $scope.col ===
-                      rightMostContainer.visibleColumnCache[rightMostContainer.visibleColumnCache.length - 1];
+                    uiGridCtrl.grid.options && uiGridCtrl.grid.options.enableGridMenu && $scope.col === rightMostContainer.visibleColumnCache[rightMostContainer.visibleColumnCache.length - 1];
                 });
 
                 // Figure out whether this column is sortable or not
@@ -451,11 +430,7 @@ angular.module('ui.grid').config([
                 });
 
                 // figure out whether we support column menus
-                $scope.colMenu =
-                  $scope.col.grid.options &&
-                  $scope.col.grid.options.enableColumnMenus !== false &&
-                  $scope.col.colDef &&
-                  $scope.col.colDef.enableColumnMenu !== false;
+                $scope.colMenu = $scope.col.grid.options && $scope.col.grid.options.enableColumnMenus !== false && $scope.col.colDef && $scope.col.colDef.enableColumnMenu !== false;
 
                 /**
                  * @ngdoc property
@@ -505,9 +480,7 @@ angular.module('ui.grid').config([
               }
 
               // Register a data change watch that would get triggered whenever someone edits a cell or modifies column defs
-              var dataChangeDereg = $scope.grid.registerDataChangeCallback(updateHeaderOptions, [
-                uiGridConstants.dataChange.COLUMN
-              ]);
+              var dataChangeDereg = $scope.grid.registerDataChangeCallback(updateHeaderOptions, [uiGridConstants.dataChange.COLUMN]);
 
               $scope.$on('$destroy', dataChangeDereg);
 

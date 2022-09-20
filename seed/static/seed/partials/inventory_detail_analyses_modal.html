@@ -21,13 +21,7 @@
         </div>
         <div class="form-group">
           <label class="control-label sectionLabel">Type</label>
-          <select
-            class="form-control"
-            ng-model="new_analysis.service"
-            ng-dropdown
-            ng-change="initializeAnalysisConfig()"
-            required
-          >
+          <select class="form-control" ng-model="new_analysis.service" ng-dropdown ng-change="initializeAnalysisConfig()" required>
             <option ng-option value="BSyncr" selected="selected">BSyncr</option>
             <option ng-option value="BETTER" selected="selected">BETTER</option>
             <option ng-option value="EUI" selected="selected">EUI</option>
@@ -55,9 +49,7 @@
                   ></i>
                 </label>
                 <select class="form-control" ng-model="new_analysis.configuration.savings_target" ng-dropdown required>
-                  <option ng-repeat="model in better_savings_targets" selected="selected" ng-value="model">
-                    {$:: model $}
-                  </option>
+                  <option ng-repeat="model in better_savings_targets" selected="selected" ng-value="model">{$:: model $}</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -69,9 +61,7 @@
                   ></i>
                 </label>
                 <select class="form-control" ng-model="new_analysis.configuration.benchmark_data" ng-dropdown required>
-                  <option ng-repeat="model in better_benchmark_options" selected="selected" ng-value="model">
-                    {$:: model $}
-                  </option>
+                  <option ng-repeat="model in better_benchmark_options" selected="selected" ng-value="model">{$:: model $}</option>
                 </select>
               </div>
             </div>
@@ -103,46 +93,23 @@
                     uib-tooltip-html="'If the BETTER analysis continues to fail for your property, it might be worth enabling this option. When selected, SEED will process your meter data before sending it to BETTER. Note that this might result in different reported energy usage than when this option is not enabled.'"
                   ></i>
                 </label>
-                <input
-                  ng-model="new_analysis.configuration.preprocess_meters"
-                  type="checkbox"
-                  style="width: 34px; height: 34px; display: block; margin: 0"
-                />
+                <input ng-model="new_analysis.configuration.preprocess_meters" type="checkbox" style="width: 34px; height: 34px; display: block; margin: 0" />
               </div>
               <div class="col-md-3" style="padding-top: 1em; padding-bottom: 1em">
                 <label class="control-label sectionLabel text-muted">
                   Run Portfolio Analysis
-                  <i
-                    class="ui-grid-icon-info-circled"
-                    uib-tooltip-html="'Only available if more than one properties were selected for analysis from the inventory list page'"
-                  ></i>
+                  <i class="ui-grid-icon-info-circled" uib-tooltip-html="'Only available if more than one properties were selected for analysis from the inventory list page'"></i>
                 </label>
-                <input
-                  ng-model="new_analysis.configuration.portfolio_analysis"
-                  ng-disabled="inventory_count == 1"
-                  type="checkbox"
-                  style="width: 34px; height: 34px; display: block; margin: 0"
-                />
+                <input ng-model="new_analysis.configuration.portfolio_analysis" ng-disabled="inventory_count == 1" type="checkbox" style="width: 34px; height: 34px; display: block; margin: 0" />
               </div>
             </div>
             <div class="form-row" style="padding-top: 1em; padding-bottom: 1em">
               <div class="btn-group">
-                <label class="btn btn-primary" ng-model="new_analysis.configuration.select_meters" uib-btn-radio="'all'"
-                  >Use All Meter Data</label
-                >
-                <label
-                  class="btn btn-primary"
-                  ng-model="new_analysis.configuration.select_meters"
-                  uib-btn-radio="'select'"
-                  >Select Meter Data Range</label
-                >
+                <label class="btn btn-primary" ng-model="new_analysis.configuration.select_meters" uib-btn-radio="'all'">Use All Meter Data</label>
+                <label class="btn btn-primary" ng-model="new_analysis.configuration.select_meters" uib-btn-radio="'select'">Select Meter Data Range</label>
               </div>
             </div>
-            <div
-              class="form-row"
-              ng-if="new_analysis.configuration.select_meters == 'select'"
-              style="padding-bottom: 1em"
-            >
+            <div class="form-row" ng-if="new_analysis.configuration.select_meters == 'select'" style="padding-bottom: 1em">
               <div class="col-md-6" ng-class="{'has-error' : invalidDates }" style="padding-bottom: 1em">
                 <label for="from-date">{$:: 'From date' | translate $}:</label>
 
@@ -200,29 +167,14 @@
             <div class="form-row">
               <label class="control-label sectionLabel text-muted">
                 Save Results to Property
-                <i
-                  class="ui-grid-icon-info-circled"
-                  uib-tooltip-html="'If checked, the results from the analysis will be saved to the property, overriding any existing values or defaults.'"
-                ></i>
+                <i class="ui-grid-icon-info-circled" uib-tooltip-html="'If checked, the results from the analysis will be saved to the property, overriding any existing values or defaults.'"></i>
               </label>
-              <input
-                ng-model="new_analysis.configuration.save_co2_results"
-                type="checkbox"
-                style="width: 34px; height: 34px; display: block; margin: 0"
-                checked="checked"
-              />
+              <input ng-model="new_analysis.configuration.save_co2_results" type="checkbox" style="width: 34px; height: 34px; display: block; margin: 0" checked="checked" />
             </div>
           </div>
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary"
-          ng-disabled="newAnalysisForm.$invalid || waiting_for_server"
-          translate
-        >
-          Create Analysis
-        </button>
+        <button type="submit" class="btn btn-primary" ng-disabled="newAnalysisForm.$invalid || waiting_for_server" translate>Create Analysis</button>
       </form>
     </div>
   </div>

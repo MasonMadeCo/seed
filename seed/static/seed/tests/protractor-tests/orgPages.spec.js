@@ -16,9 +16,7 @@ describe('When I visit the accounts page', function () {
     expect(rows.count()).not.toBeLessThan(1);
   });
   it('should find and create new sub org', function () {
-    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent))
-      .element(by.xpath('..'))
-      .element(by.xpath('..'));
+    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent)).element(by.xpath('..')).element(by.xpath('..'));
     expect(myNewOrg.isPresent()).toBe(true);
 
     browser.actions().mouseMove(myNewOrg.$('[ng-show="org.is_parent"]').$('.sub_head.sub_org.right')).perform();
@@ -27,9 +25,7 @@ describe('When I visit the accounts page', function () {
     $('[id="createOrganizationInvite"]').sendKeys(browser.params.login.user);
     $('.btn.btn-primary').click();
 
-    var myNewSub = element(by.cssContainingText('.account_org.left', browser.params.testOrg.child)).element(
-      by.xpath('..')
-    );
+    var myNewSub = element(by.cssContainingText('.account_org.left', browser.params.testOrg.child)).element(by.xpath('..'));
 
     // expect(myNewSub.count() > 0);
     expect(myNewSub.isPresent()).toBe(true);
@@ -55,9 +51,7 @@ describe('When I visit the the parent org', function () {
     browser.ignoreSynchronization = false;
   });
   it('should go to parent organization', function () {
-    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent))
-      .element(by.xpath('..'))
-      .$('.account_org.right');
+    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent)).element(by.xpath('..')).$('.account_org.right');
 
     expect(myNewOrg.isPresent()).toBe(true);
 
@@ -109,9 +103,7 @@ describe('When I visit the the parent org', function () {
           });
       })
       .first();
-    expect(myNewCycle.all(by.tagName('td')).first().$('[ng-show="!rowform.$visible"]').getText()).toEqual(
-      browser.params.testOrg.cycle
-    );
+    expect(myNewCycle.all(by.tagName('td')).first().$('[ng-show="!rowform.$visible"]').getText()).toEqual(browser.params.testOrg.cycle);
   });
 
   it('should create new label', function () {
@@ -129,9 +121,7 @@ describe('When I visit the the parent org', function () {
     $('.input-group-btn.dropdown').click();
     element(by.cssContainingText('.dropdown-menu.pull-right', 'orange')).click();
     $('#btnCreateLabel').click();
-    var myNewLabel = element(by.cssContainingText('[editable-text="label.name"]', 'fake label'))
-      .element(by.xpath('..'))
-      .element(by.xpath('..'));
+    var myNewLabel = element(by.cssContainingText('[editable-text="label.name"]', 'fake label')).element(by.xpath('..')).element(by.xpath('..'));
 
     expect(myNewLabel.isPresent()).toBe(true);
 

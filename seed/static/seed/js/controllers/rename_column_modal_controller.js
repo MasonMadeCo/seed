@@ -12,17 +12,7 @@ angular.module('BE.seed.controller.rename_column_modal', []).controller('rename_
   'columns_service',
   'spinner_utility',
   'org_id',
-  function (
-    $scope,
-    $state,
-    $uibModalInstance,
-    all_column_names,
-    column_id,
-    column_name,
-    columns_service,
-    spinner_utility,
-    org_id
-  ) {
+  function ($scope, $state, $uibModalInstance, all_column_names, column_id, column_name, columns_service, spinner_utility, org_id) {
     $scope.step = {
       number: 1
     };
@@ -49,16 +39,14 @@ angular.module('BE.seed.controller.rename_column_modal', []).controller('rename_
 
     $scope.accept_rename = function () {
       spinner_utility.show();
-      columns_service
-        .rename_column_for_org(org_id, $scope.column.id, $scope.column.name, $scope.settings.overwrite_preference)
-        .then(function (response) {
-          $scope.results = {
-            success: response.data.success,
-            message: response.data.message
-          };
-          $scope.step.number = 2;
-          spinner_utility.hide();
-        });
+      columns_service.rename_column_for_org(org_id, $scope.column.id, $scope.column.name, $scope.settings.overwrite_preference).then(function (response) {
+        $scope.results = {
+          success: response.data.success,
+          message: response.data.message
+        };
+        $scope.step.number = 2;
+        spinner_utility.hide();
+      });
     };
 
     $scope.dismiss_and_refresh = function () {

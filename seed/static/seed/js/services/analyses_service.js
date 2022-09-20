@@ -31,11 +31,9 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
 
     const get_analyses_for_canonical_property = function (property_id) {
       const org = user_service.get_organization().id;
-      return $http
-        .get('/api/v3/analyses/?&include_views=false&organization_id=' + org + '&property_id=' + property_id)
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.get('/api/v3/analyses/?&include_views=false&organization_id=' + org + '&property_id=' + property_id).then(function (response) {
+        return response.data;
+      });
     };
 
     const get_analysis_for_org = function (analysis_id, org_id) {
@@ -45,11 +43,9 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
     };
 
     const get_analysis_messages_for_org = function (analysis_id, org_id) {
-      return $http
-        .get('/api/v3/analyses/' + analysis_id + '/messages/?organization_id=' + org_id)
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.get('/api/v3/analyses/' + analysis_id + '/messages/?organization_id=' + org_id).then(function (response) {
+        return response.data;
+      });
     };
 
     const get_analyses_messages_for_org = function (org_id) {
@@ -59,19 +55,15 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
     };
 
     const get_analysis_views_for_org = function (analysis_id, org_id) {
-      return $http
-        .get('/api/v3/analyses/' + analysis_id + '/views/?organization_id=' + org_id)
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.get('/api/v3/analyses/' + analysis_id + '/views/?organization_id=' + org_id).then(function (response) {
+        return response.data;
+      });
     };
 
     const get_analysis_view_for_org = function (analysis_id, view_id, org_id) {
-      return $http
-        .get('/api/v3/analyses/' + analysis_id + '/views/' + view_id + '/?organization_id=' + org_id)
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.get('/api/v3/analyses/' + analysis_id + '/views/' + view_id + '/?organization_id=' + org_id).then(function (response) {
+        return response.data;
+      });
     };
 
     const create_analysis = function (name, service, configuration, property_view_ids) {
@@ -195,7 +187,7 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
       // Termination condition is when there's no progress data (ie no progress key
       // returned by the get_progress_key service)
       const get_key_and_check_progress = () => {
-        get_progress_key(id).then(data => {
+        get_progress_key(id).then((data) => {
           const progress_key = data.progress_key;
           if (!progress_key) {
             // analysis isn't in a trackable state/status, stop checking
@@ -211,7 +203,7 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
 
               uploader_service
                 .check_progress(progress_key)
-                .then(data => {
+                .then((data) => {
                   if (data.progress < 100) {
                     // keep polling, not done yet
                     check_progress_loop();
@@ -224,7 +216,7 @@ angular.module('BE.seed.service.analyses', []).factory('analyses_service', [
                     });
                   }
                 })
-                .catch(data => {
+                .catch((data) => {
                   // yikes, something went wrong. Let the caller know the status
                   // probably changed and let's bail
                   status_update_callback(id).then(() => no_current_task_callback(id));

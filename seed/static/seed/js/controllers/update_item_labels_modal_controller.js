@@ -90,9 +90,7 @@ angular.module('BE.seed.controller.update_item_labels_modal', []).controller('up
     };
 
     $scope.modified = function () {
-      return Boolean(
-        _.filter($scope.labels, 'is_checked_add').length || _.filter($scope.labels, 'is_checked_remove').length
-      );
+      return Boolean(_.filter($scope.labels, 'is_checked_add').length || _.filter($scope.labels, 'is_checked_remove').length);
     };
 
     /* User has indicated 'Done' so perform selected label operations */

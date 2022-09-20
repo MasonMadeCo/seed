@@ -4,11 +4,7 @@ angular.module('BE.seed.service.audit_template', []).factory('audit_template_ser
   function ($http, $log) {
     const get_building_xml = function (org_id, audit_template_building_id) {
       return $http
-        .get(
-          ['/api/v3/audit_template/', audit_template_building_id, '/get_building_xml/?organization_id=', org_id].join(
-            ''
-          )
-        )
+        .get(['/api/v3/audit_template/', audit_template_building_id, '/get_building_xml/?organization_id=', org_id].join(''))
         .then(function (response) {
           return response.data;
         })
@@ -25,20 +21,7 @@ angular.module('BE.seed.service.audit_template', []).factory('audit_template_ser
       let headers = { 'Content-Type': undefined };
 
       return $http
-        .put(
-          [
-            '/api/v3/properties/',
-            property_view_id,
-            '/update_with_building_sync/?',
-            'cycle_id=',
-            cycle_id,
-            '&',
-            'organization_id=',
-            org_id
-          ].join(''),
-          body,
-          { headers: headers }
-        )
+        .put(['/api/v3/properties/', property_view_id, '/update_with_building_sync/?', 'cycle_id=', cycle_id, '&', 'organization_id=', org_id].join(''), body, { headers: headers })
         .then(function (response) {
           return response.data;
         })

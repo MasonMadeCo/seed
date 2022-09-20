@@ -7,16 +7,7 @@ angular.module('BE.seed.controller.geocode_modal', []).controller('geocode_modal
   'organization_service',
   'property_view_ids',
   'taxlot_view_ids',
-  function (
-    $scope,
-    $uibModalInstance,
-    geocode_service,
-    inventory_type,
-    org_id,
-    organization_service,
-    property_view_ids,
-    taxlot_view_ids
-  ) {
+  function ($scope, $uibModalInstance, geocode_service, inventory_type, org_id, organization_service, property_view_ids, taxlot_view_ids) {
     $scope.inventory_type = inventory_type;
     $scope.property_view_ids = _.uniq(property_view_ids);
     $scope.taxlot_view_ids = _.uniq(taxlot_view_ids);
@@ -84,8 +75,7 @@ angular.module('BE.seed.controller.geocode_modal', []).controller('geocode_modal
         })
         .catch(function (e) {
           $scope.geocode_state = 'fail';
-          if (e.message == 'MapQuestAPIKeyError')
-            $scope.error_message = 'MapQuest API key may be invalid or at its limit.';
+          if (e.message == 'MapQuestAPIKeyError') $scope.error_message = 'MapQuest API key may be invalid or at its limit.';
           else $scope.error_message = e.statusText;
         });
     };

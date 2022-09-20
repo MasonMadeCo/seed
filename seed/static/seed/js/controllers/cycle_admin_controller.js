@@ -15,19 +15,7 @@ angular.module('BE.seed.controller.cycle_admin', []).controller('cycle_admin_con
   '$translate',
   '$sce',
   '$uibModal',
-  function (
-    $scope,
-    $log,
-    urls,
-    Notification,
-    cycle_service,
-    cycles_payload,
-    organization_payload,
-    auth_payload,
-    $translate,
-    $sce,
-    $uibModal
-  ) {
+  function ($scope, $log, urls, Notification, cycle_service, cycles_payload, organization_payload, auth_payload, $translate, $sce, $uibModal) {
     $scope.org = organization_payload.organization;
     $scope.auth = auth_payload.auth;
     var processCycles = function (cycles) {
@@ -162,9 +150,9 @@ angular.module('BE.seed.controller.cycle_admin', []).controller('cycle_admin_con
         keyboard: false,
         resolve: {
           // use cycle data from organization endpoint b/c it includes inventory counts
-          cycle: organization_service => {
-            return organization_service.get_organization($scope.org.id).then(res => {
-              return res.organization.cycles.find(cycle => cycle.cycle_id == cycle_id);
+          cycle: (organization_service) => {
+            return organization_service.get_organization($scope.org.id).then((res) => {
+              return res.organization.cycles.find((cycle) => cycle.cycle_id == cycle_id);
             });
           },
           organization_id: () => $scope.org.id

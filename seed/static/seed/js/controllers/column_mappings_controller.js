@@ -66,12 +66,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
 
     var mapping_display_to_db = function (mapping) {
       // Also, clear from_units if mapping is not for units col
-      if (
-        !$scope.is_area_column(mapping) &&
-        !$scope.is_eui_column(mapping) &&
-        !$scope.is_ghg_column(mapping) &&
-        !$scope.is_ghg_intensity_column(mapping)
-      ) {
+      if (!$scope.is_area_column(mapping) && !$scope.is_eui_column(mapping) && !$scope.is_ghg_column(mapping) && !$scope.is_ghg_intensity_column(mapping)) {
         mapping.from_units = null;
       }
 
@@ -159,9 +154,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
       }
 
       // sort mappings by the appropriate column, using lower case to fix lodash's method of alphabetical sorting
-      $scope.current_profile.mappings = _.sortBy($scope.current_profile.mappings, [
-        map => map[sort_column_fields[column]].toLowerCase()
-      ]);
+      $scope.current_profile.mappings = _.sortBy($scope.current_profile.mappings, [(map) => map[sort_column_fields[column]].toLowerCase()]);
 
       // reverse the sort if descending
       if ($scope.column_sort_direction === 'desc') {
@@ -260,19 +253,17 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
       _.forEach($scope.current_profile.mappings, mapping_display_to_db);
       var updated_data = { mappings: $scope.current_profile.mappings };
 
-      column_mappings_service
-        .update_column_mapping_profile($scope.org.id, $scope.current_profile.id, updated_data)
-        .then(function (result) {
-          // If applicable, convert db names back to display names for rendering
-          _.forEach($scope.current_profile.mappings, mapping_db_to_display);
-          $scope.current_profile.updated = result.data.updated;
+      column_mappings_service.update_column_mapping_profile($scope.org.id, $scope.current_profile.id, updated_data).then(function (result) {
+        // If applicable, convert db names back to display names for rendering
+        _.forEach($scope.current_profile.mappings, mapping_db_to_display);
+        $scope.current_profile.updated = result.data.updated;
 
-          var profile_id = $scope.current_profile.id;
-          _.find($scope.profiles, ['id', profile_id]).mappings = $scope.current_profile.mappings;
+        var profile_id = $scope.current_profile.id;
+        _.find($scope.profiles, ['id', profile_id]).mappings = $scope.current_profile.mappings;
 
-          $scope.changes_possible = false;
-          Notification.primary('Saved ' + $scope.current_profile.name);
-        });
+        $scope.changes_possible = false;
+        Notification.primary('Saved ' + $scope.current_profile.name);
+      });
     };
 
     // Track changes to warn users about losing changes when data could be lost
@@ -313,9 +304,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
     });
     $scope.is_eui_column = function (mapping) {
       // All of these are on the PropertyState table
-      return (
-        mapping.to_table_name === 'PropertyState' && Boolean(_.find(eui_columns, { displayName: mapping.to_field }))
-      );
+      return mapping.to_table_name === 'PropertyState' && Boolean(_.find(eui_columns, { displayName: mapping.to_field }));
     };
 
     var area_columns = _.filter($scope.mappable_property_columns, {
@@ -323,9 +312,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
     });
     $scope.is_area_column = function (mapping) {
       // All of these are on the PropertyState table
-      return (
-        mapping.to_table_name === 'PropertyState' && Boolean(_.find(area_columns, { displayName: mapping.to_field }))
-      );
+      return mapping.to_table_name === 'PropertyState' && Boolean(_.find(area_columns, { displayName: mapping.to_field }));
     };
 
     var ghg_columns = _.filter($scope.mappable_property_columns, {
@@ -333,9 +320,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
     });
     $scope.is_ghg_column = function (mapping) {
       // All of these are on the PropertyState table
-      return (
-        mapping.to_table_name == 'PropertyState' && Boolean(_.find(ghg_columns, { displayName: mapping.to_field }))
-      );
+      return mapping.to_table_name == 'PropertyState' && Boolean(_.find(ghg_columns, { displayName: mapping.to_field }));
     };
 
     var ghg_intensity_columns = _.filter($scope.mappable_property_columns, {
@@ -343,10 +328,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
     });
     $scope.is_ghg_intensity_column = function (mapping) {
       // All of these are on the PropertyState table
-      return (
-        mapping.to_table_name == 'PropertyState' &&
-        Boolean(_.find(ghg_intensity_columns, { displayName: mapping.to_field }))
-      );
+      return mapping.to_table_name == 'PropertyState' && Boolean(_.find(ghg_intensity_columns, { displayName: mapping.to_field }));
     };
 
     var get_default_quantity_units = function (col) {
@@ -463,11 +445,7 @@ angular.module('BE.seed.controller.column_mappings', []).controller('column_mapp
     $scope.empty_units_present = function () {
       return Boolean(
         _.find($scope.current_profile.mappings, function (field) {
-          let has_units =
-            $scope.is_area_column(field) ||
-            $scope.is_eui_column(field) ||
-            $scope.is_ghg_column(field) ||
-            $scope.is_ghg_intensity_column(field);
+          let has_units = $scope.is_area_column(field) || $scope.is_eui_column(field) || $scope.is_ghg_column(field) || $scope.is_ghg_intensity_column(field);
           return field.to_table_name === 'PropertyState' && field.from_units === null && has_units;
         })
       );

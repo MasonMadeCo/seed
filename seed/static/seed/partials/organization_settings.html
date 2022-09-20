@@ -1,9 +1,7 @@
 <div class="page_header_container">
   <div class="page_header">
     <div class="left page_action_container">
-      <a ui-sref="organizations" class="page_action"
-        ><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a
-      >
+      <a ui-sref="organizations" class="page_action"><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a>
     </div>
     <div class="page_title">
       <h1>{$ org_static.name $}</h1>
@@ -37,13 +35,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="editOrganizationName"
-                  ng-model="org.name"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" id="editOrganizationName" ng-model="org.name" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -56,13 +48,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <input
-                  type="checkbox"
-                  class="form-control"
-                  style="width: 34px"
-                  ng-model="org.geocoding_enabled"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="checkbox" class="form-control" style="width: 34px" ng-model="org.geocoding_enabled" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -75,13 +61,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <input
-                  type="checkbox"
-                  class="form-control"
-                  style="width: 34px"
-                  ng-model="org.comstock_enabled"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="checkbox" class="form-control" style="width: 34px" ng-model="org.comstock_enabled" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -96,12 +76,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="org.mapquest_api_key"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" ng-model="org.mapquest_api_key" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -116,18 +91,10 @@
               <div class="col-sm-4">
                 <p>
                   Please refer to the
-                  <a href="{$ org.better_host_url $}/docs/api/" target="_blank" rel="noopener noreferrer"
-                    >BETTER documentation</a
-                  >
-                  to learn how to get an API key. Note, do not prefix the token with "Token ", only include the token
-                  itself. BETTER host is configured to be {$ org.better_host_url $}.
+                  <a href="{$ org.better_host_url $}/docs/api/" target="_blank" rel="noopener noreferrer">BETTER documentation</a>
+                  to learn how to get an API key. Note, do not prefix the token with "Token ", only include the token itself. BETTER host is configured to be {$ org.better_host_url $}.
                 </p>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="org.better_analysis_api_key"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" ng-model="org.better_analysis_api_key" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -141,12 +108,7 @@
             <div class="form-group">
               <div class="col-sm-4">
                 <p translate="AT_TOKEN_TEXT" translate-values="{ link: org.at_host_url }"></p>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="org.at_organization_token"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" ng-model="org.at_organization_token" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -160,12 +122,7 @@
             <div class="form-group">
               <div class="col-sm-4">
                 <p translate="AT_EMAIL_TEXT" translate-values="{ link: org.at_host_url }"></p>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="org.audit_template_user"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" ng-model="org.audit_template_user" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -179,12 +136,7 @@
             <div class="form-group">
               <div class="col-sm-4">
                 <p translate="AT_PASS_TEXT" translate-values="{ link: org.at_host_url }"></p>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="org.audit_template_password"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input type="text" class="form-control" ng-model="org.audit_template_password" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -199,11 +151,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-options="o.value as o.label for o in unit_options_eui"
-                  ng-model="org.display_units_eui"
-                ></select>
+                <select class="form-control" ng-options="o.value as o.label for o in unit_options_eui" ng-model="org.display_units_eui"></select>
               </div>
             </div>
           </form>
@@ -216,12 +164,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-change="get_valid_units_for_type()"
-                  ng-options="type.value as type.label for type in energy_type_options"
-                  ng-model="chosen_type_unit.type"
-                >
+                <select class="form-control" ng-change="get_valid_units_for_type()" ng-options="type.value as type.label for type in energy_type_options" ng-model="chosen_type_unit.type">
                   <option value="" translate>ENERGY_TYPE_DISPLAY_CHOICE_PLACEHOLDER</option>
                 </select>
               </div>
@@ -248,11 +191,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-options="o.value as o.label for o in unit_options_area"
-                  ng-model="org.display_units_area"
-                ></select>
+                <select class="form-control" ng-options="o.value as o.label for o in unit_options_area" ng-model="org.display_units_area"></select>
               </div>
             </div>
           </form>
@@ -265,11 +204,7 @@
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-options="o.value as o.label for o in decimal_places_options"
-                  ng-model="org.display_decimal_places"
-                ></select>
+                <select class="form-control" ng-options="o.value as o.label for o in decimal_places_options" ng-model="org.display_decimal_places"></select>
               </div>
             </div>
           </form>
@@ -281,17 +216,8 @@
           <h3 translate>THERMAL_CONV_ASSUMPTION_TITLE</h3>
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <div
-                class="col-sm-4"
-                uib-popover="Warning: Meters will be imported as and viewed according to this assumption."
-                popover-trigger="mouseenter"
-                popover-placement="right-top"
-              >
-                <select
-                  class="form-control"
-                  ng-options="country.value as country.label for country in thermal_conversion_countries"
-                  ng-model="org.thermal_conversion_assumption"
-                ></select>
+              <div class="col-sm-4" uib-popover="Warning: Meters will be imported as and viewed according to this assumption." popover-trigger="mouseenter" popover-placement="right-top">
+                <select class="form-control" ng-options="country.value as country.label for country in thermal_conversion_countries" ng-model="org.thermal_conversion_assumption"></select>
               </div>
             </div>
           </form>
@@ -303,19 +229,12 @@
       <div class="section_content_container">
         <div class="section_content with_padding">
           <h3 translate>Property Display Field</h3>
-          <small
-            >Determines which column field is used when displaying and identifying a property. Defaults to "Address Line
-            1".</small
-          >
+          <small>Determines which column field is used when displaying and identifying a property. Defaults to "Address Line 1".</small>
           <small>{$ all_columns $}</small>
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-options="column.column_name as column.display_name for column in property_column_names"
-                  ng-model="org.property_display_field"
-                ></select>
+                <select class="form-control" ng-options="column.column_name as column.display_name for column in property_column_names" ng-model="org.property_display_field"></select>
               </div>
             </div>
           </form>
@@ -325,19 +244,12 @@
       <div class="section_content_container">
         <div class="section_content with_padding">
           <h3 translate>Taxlot Display Field</h3>
-          <small
-            >Determines which column field is used when displaying and identifying a taxlot. Defaults to "Address Line
-            1".</small
-          >
+          <small>Determines which column field is used when displaying and identifying a taxlot. Defaults to "Address Line 1".</small>
           <small>{$ all_columns $}</small>
           <form class="form-horizontal" role="form">
             <div class="form-group">
               <div class="col-sm-4">
-                <select
-                  class="form-control"
-                  ng-options="column.column_name as column.display_name for column in taxlot_column_names"
-                  ng-model="org.taxlot_display_field"
-                ></select>
+                <select class="form-control" ng-options="column.column_name as column.display_name for column in taxlot_column_names" ng-model="org.taxlot_display_field"></select>
               </div>
             </div>
           </form>
@@ -349,33 +261,18 @@
       <div class="section_content_container">
         <div class="section_content with_padding">
           <h3 translate>New User Email</h3>
-          <small
-            >Customizes the email sent when a new user is invited to SEED. The body can accept placeholders
-            {{first_name}} and {{sign_up_link}}, including the braces.</small
-          >
+          <small>Customizes the email sent when a new user is invited to SEED. The body can accept placeholders {{first_name}} and {{sign_up_link}}, including the braces.</small>
           <form class="form-horizontal email-form" role="form">
             <div class="form-group">
               <label class="control-label col-sm-1" for="new-user-email-from" translate>From Email</label>
               <div class="col-sm-3">
-                <input
-                  id="new-user-email-from"
-                  type="email"
-                  class="form-control"
-                  ng-model="org.new_user_email_from"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input id="new-user-email-from" type="email" class="form-control" ng-model="org.new_user_email_from" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
             <div class="form-group">
               <label class="control-label col-sm-1" for="new-user-email-subject" translate>Subject</label>
               <div class="col-sm-3">
-                <input
-                  id="new-user-email-subject"
-                  type="text"
-                  class="form-control"
-                  ng-model="org.new_user_email_subject"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input id="new-user-email-subject" type="text" class="form-control" ng-model="org.new_user_email_subject" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
             <div class="form-group">
@@ -396,13 +293,7 @@
             <div class="form-group">
               <label class="control-label col-sm-1" for="new-user-email-signature" translate>Signature</label>
               <div class="col-sm-3">
-                <input
-                  id="new-user-email-signature"
-                  type="text"
-                  class="form-control"
-                  ng-model="org.new_user_email_signature"
-                  ng-disabled="::!auth.requires_owner"
-                />
+                <input id="new-user-email-signature" type="text" class="form-control" ng-model="org.new_user_email_signature" ng-disabled="::!auth.requires_owner" />
               </div>
             </div>
           </form>
@@ -414,12 +305,9 @@
       <div class="section_content_container">
         <div class="section_content with_padding maintenance">
           <h3 translate>Maintenance Actions</h3>
-          <small translate
-            >The following actions have destructive effects, please read all warnings after clicking an option.</small
-          >
+          <small translate>The following actions have destructive effects, please read all warnings after clicking an option.</small>
           <button class="btn btn-danger" type="button" ng-click="confirm_delete(org)" ng-disabled="org.progress > -1">
-            <i class="fa fa-exclamation-triangle"></i> {$:: 'Delete ' + (org.is_parent ? '' : 'Sub-') + 'Organization' |
-            translate $}
+            <i class="fa fa-exclamation-triangle"></i> {$:: 'Delete ' + (org.is_parent ? '' : 'Sub-') + 'Organization' | translate $}
           </button>
         </div>
       </div>

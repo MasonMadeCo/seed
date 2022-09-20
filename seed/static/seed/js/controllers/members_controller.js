@@ -12,17 +12,7 @@ angular.module('BE.seed.controller.members', []).controller('members_controller'
   'organization_service',
   'user_profile_payload',
   'urls',
-  function (
-    $scope,
-    $uibModal,
-    users_payload,
-    organization_payload,
-    auth_payload,
-    auth_service,
-    organization_service,
-    user_profile_payload,
-    urls
-  ) {
+  function ($scope, $uibModal, users_payload, organization_payload, auth_payload, auth_service, organization_service, user_profile_payload, urls) {
     $scope.ownerRoles = ['owner', 'member', 'viewer'];
     $scope.memberRoles = ['member', 'viewer'];
     $scope.users = users_payload.users;
@@ -94,9 +84,7 @@ angular.module('BE.seed.controller.members', []).controller('members_controller'
     /**
      * reset_all_passwords triggers a reset password email for all users
      */
-    $scope.reset_all_passwords = function (
-      confirm_message = 'Really reset all passwords?  This will sign you out of SEED.'
-    ) {
+    $scope.reset_all_passwords = function (confirm_message = 'Really reset all passwords?  This will sign you out of SEED.') {
       if (confirm(confirm_message)) {
         organization_service.reset_all_passwords($scope.org.id);
         window.location.href = '/accounts/login/?next=' + window.location.pathname + window.location.hash;
@@ -123,17 +111,9 @@ angular.module('BE.seed.controller.members', []).controller('members_controller'
       $scope.only_one_owner = _.chain($scope.users).filter(['role', 'owner']).size().value() === 1;
 
       if (auth_refresh) {
-        auth_service
-          .is_authorized($scope.org.id, [
-            'can_invite_member',
-            'can_remove_member',
-            'requires_owner',
-            'requires_member',
-            'requires_superuser'
-          ])
-          .then(function (data) {
-            $scope.auth = data.auth;
-          });
+        auth_service.is_authorized($scope.org.id, ['can_invite_member', 'can_remove_member', 'requires_owner', 'requires_member', 'requires_superuser']).then(function (data) {
+          $scope.auth = data.auth;
+        });
       }
     }
 

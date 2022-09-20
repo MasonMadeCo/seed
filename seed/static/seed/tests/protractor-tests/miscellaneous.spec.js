@@ -18,9 +18,7 @@ describe('When I do miscellaneous things', function () {
   });
 
   it('should go to parent organization', function () {
-    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent))
-      .element(by.xpath('..'))
-      .$('.account_org.right');
+    var myNewOrg = element(by.cssContainingText('.account_org.parent_org', browser.params.testOrg.parent)).element(by.xpath('..')).$('.account_org.right');
     expect(myNewOrg.isPresent()).toBe(true);
     browser.actions().mouseMove(myNewOrg).perform();
     myNewOrg.$$('a').first().click();
@@ -130,21 +128,15 @@ describe('When I do miscellaneous things', function () {
   }, 60000);
 
   it('should refresh and rules are correctly saved', function () {
-    expect(
-      element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()
-    ).toBe(true);
+    expect(element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()).toBe(true);
     $$('[ng-click="remove_label(rule)"]').first().click();
-    expect(
-      element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()
-    ).toBe(false);
+    expect(element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()).toBe(false);
     $$('[ng-click="save_settings()"]').first().click();
     browser.driver.navigate().refresh();
   }, 60000);
 
   it('should refresh again and check rules', function () {
-    expect(
-      element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()
-    ).toBe(false);
+    expect(element.all(by.repeater('rule in ruleGroup')).first().$('.form-control.label.label-primary').isPresent()).toBe(false);
     $$('[ng-click="create_label(rule, $index)"]').first().click();
     $$('.btn.btn-sm.btn-default.action_link').get(2).click();
     $$('[ng-click="save_settings()"]').first().click();
@@ -169,9 +161,7 @@ describe('When I do miscellaneous things', function () {
   // Check data quality on inventory page
   it('should select first item and test data quality modal and presence of rows', function () {
     $('#sidebar-inventory').click();
-    $('[ng-change="update_cycle(cycle.selected_cycle)"]')
-      .element(by.cssContainingText('option', browser.params.testOrg.cycle))
-      .click();
+    $('[ng-change="update_cycle(cycle.selected_cycle)"]').element(by.cssContainingText('option', browser.params.testOrg.cycle)).click();
 
     $$('.ui-grid-menu-button').first().click();
     var myOptions = element
@@ -234,9 +224,7 @@ describe('When I do miscellaneous things', function () {
   }, 60000);
 
   it('should test labels were applied correctly', function () {
-    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(
-      by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows')
-    );
+    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows'));
 
     //check labels -
     $('[ng-click="clear_labels()"]').click();

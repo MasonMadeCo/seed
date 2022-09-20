@@ -22,21 +22,7 @@ angular.module('BE.seed.controller.inventory_reports', []).controller('inventory
   '$sce',
   '$translate',
   '$uibModal',
-  function (
-    $scope,
-    $log,
-    $stateParams,
-    inventory_reports_service,
-    simple_modal_service,
-    columns,
-    cycles,
-    organization_payload,
-    flippers,
-    urls,
-    $sce,
-    $translate,
-    $uibModal
-  ) {
+  function ($scope, $log, $stateParams, inventory_reports_service, simple_modal_service, columns, cycles, organization_payload, flippers, urls, $sce, $translate, $uibModal) {
     $scope.inventory_type = $stateParams.inventory_type;
 
     var org_id = organization_payload.organization.id;
@@ -269,21 +255,9 @@ angular.module('BE.seed.controller.inventory_reports', []).controller('inventory
       });
     };
 
-    $scope.scatterChart = createChart(
-      (elementId = 'chartNew'),
-      (type = 'scatter'),
-      (xAxisKey = $scope.xAxisVars[0]['label']),
-      (yAxisKey = $scope.yAxisVars[0]['label']),
-      (indexAxis = 'x')
-    );
+    $scope.scatterChart = createChart((elementId = 'chartNew'), (type = 'scatter'), (xAxisKey = $scope.xAxisVars[0]['label']), (yAxisKey = $scope.yAxisVars[0]['label']), (indexAxis = 'x'));
 
-    $scope.barChart = createChart(
-      (elementId = 'aggChartNew'),
-      (type = 'bar'),
-      (xAxisKey = $scope.xAxisVars[0]['label']),
-      (yAxisKey = $scope.yAxisVars[0]['label']),
-      (indexAxis = 'y')
-    );
+    $scope.barChart = createChart((elementId = 'aggChartNew'), (type = 'bar'), (xAxisKey = $scope.xAxisVars[0]['label']), (yAxisKey = $scope.yAxisVars[0]['label']), (indexAxis = 'y'));
 
     // specific styling for bar chart
     $scope.barChart.options.scales.x.ticks = { precision: 0 };
@@ -496,12 +470,7 @@ angular.module('BE.seed.controller.inventory_reports', []).controller('inventory
       var yVar = $scope.yAxisSelectedItem.varName;
       $scope.aggChartIsLoading = true;
       inventory_reports_service
-        .get_aggregated_report_data(
-          xVar,
-          yVar,
-          $scope.fromCycle.selected_cycle.start,
-          $scope.toCycle.selected_cycle.end
-        )
+        .get_aggregated_report_data(xVar, yVar, $scope.fromCycle.selected_cycle.start, $scope.toCycle.selected_cycle.end)
         .then(
           function (data) {
             data = data.aggregated_data;
@@ -519,8 +488,8 @@ angular.module('BE.seed.controller.inventory_reports', []).controller('inventory
 
             // new agg chart
             let the_data = _.orderBy($scope.aggChartData.chartData, ['y'], ['desc']);
-            $scope.barChart.data.labels = the_data.map(a => a.y);
-            $scope.barChart.data.datasets[0].data = the_data.map(a => a.x);
+            $scope.barChart.data.labels = the_data.map((a) => a.y);
+            $scope.barChart.data.datasets[0].data = the_data.map((a) => a.x);
             $scope.barChart.update();
 
             if (!_.isEmpty($scope.aggChartData.chartData)) {

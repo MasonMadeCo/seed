@@ -35,16 +35,7 @@ describe('controller: data_upload_modal_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function (
-      $controller,
-      $rootScope,
-      $uibModal,
-      urls,
-      $q,
-      uploader_service,
-      mapping_service,
-      matching_service
-    ) {
+    inject(function ($controller, $rootScope, $uibModal, urls, $q, uploader_service, mapping_service, matching_service) {
       controller = $controller;
       data_upload_controller_scope = $rootScope.$new();
       modal_state = '';

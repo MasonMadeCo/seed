@@ -14,19 +14,7 @@ angular.module('BE.seed.controller.inventory_map', []).controller('inventory_map
   'organization_service',
   'labels',
   'urls',
-  function (
-    $scope,
-    $stateParams,
-    $state,
-    $log,
-    $uibModal,
-    cycles,
-    inventory_service,
-    user_service,
-    organization_service,
-    labels,
-    urls
-  ) {
+  function ($scope, $stateParams, $state, $log, $uibModal, cycles, inventory_service, user_service, organization_service, labels, urls) {
     $scope.inventory_type = $stateParams.inventory_type;
 
     $scope.data = [];
@@ -381,13 +369,7 @@ angular.module('BE.seed.controller.inventory_map', []).controller('inventory_map
       // Render map
       var layers = [];
       if ($scope.inventory_type === 'properties') {
-        layers = [
-          base_layer,
-          $scope.hexbin_layer,
-          $scope.points_layer,
-          $scope.building_bb_layer,
-          $scope.building_centroid_layer
-        ];
+        layers = [base_layer, $scope.hexbin_layer, $scope.points_layer, $scope.building_bb_layer, $scope.building_centroid_layer];
       } else {
         layers = [base_layer, $scope.points_layer, $scope.taxlot_bb_layer, $scope.taxlot_centroid_layer];
       }

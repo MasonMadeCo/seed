@@ -380,13 +380,9 @@ angular.module('BE.seed.controller.column_settings', []).controller('column_sett
         organization_service
           .match_merge_link($scope.org.id, $scope.inventory_type)
           .then(function (response) {
-            organization_service
-              .check_match_merge_link_status(response.progress_key)
-              .then(function (completion_notice) {
-                organization_service
-                  .get_match_merge_link_result($scope.org.id, completion_notice.unique_id)
-                  .then(column_update_complete);
-              });
+            organization_service.check_match_merge_link_status(response.progress_key).then(function (completion_notice) {
+              organization_service.get_match_merge_link_result($scope.org.id, completion_notice.unique_id).then(column_update_complete);
+            });
           })
           .catch(function () {
             Notification.error('There was an error trying to match, merge, link records for this organization.');
@@ -407,13 +403,7 @@ angular.module('BE.seed.controller.column_settings', []).controller('column_sett
 
       var missingDisplayNames = _.filter(columns, { displayName: undefined });
       if (missingDisplayNames.length) {
-        Notification.error(
-          'Error: ' +
-            missingDisplayNames.length +
-            ' required display name' +
-            (missingDisplayNames.length > 1 ? 's are' : ' is') +
-            ' empty'
-        );
+        Notification.error('Error: ' + missingDisplayNames.length + ' required display name' + (missingDisplayNames.length > 1 ? 's are' : ' is') + ' empty');
         return;
       }
 

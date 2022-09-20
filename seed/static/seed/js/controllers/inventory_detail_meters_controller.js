@@ -157,8 +157,8 @@ angular.module('BE.seed.controller.inventory_detail_meters', []).controller('inv
     var filterByMeterLabels = function filterByMeterLabels(readings, columnDefs, meterLabels) {
       var timeColumns = ['start_time', 'end_time', 'month', 'year'];
       var selectedColumns = meterLabels.concat(timeColumns);
-      var filteredReadings = readings.filter(reading => {
-        return meterLabels.some(label => Object.keys(reading).includes(label));
+      var filteredReadings = readings.filter((reading) => {
+        return meterLabels.some((label) => Object.keys(reading).includes(label));
       });
       var filteredColumnDefs = columnDefs.filter(function (columnDef) {
         return selectedColumns.includes(columnDef.field);
@@ -207,20 +207,11 @@ angular.module('BE.seed.controller.inventory_detail_meters', []).controller('inv
     $scope.applyFilters = function () {
       var results, readings, columnDefs;
       if ($scope.filterMethod.selected === 'meter') {
-        results = filterByMeterSelections(
-          property_meter_usage.readings,
-          property_meter_usage.column_defs,
-          $scope.meter_selections
-        );
+        results = filterByMeterSelections(property_meter_usage.readings, property_meter_usage.column_defs, $scope.meter_selections);
         readings = results.readings;
         columnDefs = results.columnDefs;
       } else if ($scope.filterMethod.selected === 'scenario') {
-        results = filterByScenarioSelections(
-          property_meter_usage.readings,
-          property_meter_usage.column_defs,
-          sorted_meters,
-          $scope.scenario_selections
-        );
+        results = filterByScenarioSelections(property_meter_usage.readings, property_meter_usage.column_defs, sorted_meters, $scope.scenario_selections);
         readings = results.readings;
         columnDefs = results.columnDefs;
       } else {
@@ -280,10 +271,7 @@ angular.module('BE.seed.controller.inventory_detail_meters', []).controller('inv
 
     $scope.inventory_display_name = function (property_type) {
       let error = '';
-      let field =
-        property_type == 'property'
-          ? $scope.organization.property_display_field
-          : $scope.organization.taxlot_display_field;
+      let field = property_type == 'property' ? $scope.organization.property_display_field : $scope.organization.taxlot_display_field;
       if (!(field in $scope.item_state)) {
         error = field + ' does not exist';
         field = 'address_line_1';
@@ -293,20 +281,15 @@ angular.module('BE.seed.controller.inventory_detail_meters', []).controller('inv
       }
       $scope.inventory_name = $scope.item_state[field]
         ? $scope.item_state[field]
-        : '(' +
-          error +
-          ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
+        : '(' + error + ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
     };
 
     $scope.updateHeight = function () {
       var height = 0;
-      _.forEach(
-        ['.header', '.page_header_container', '.section_nav_container', '.inventory-list-controls'],
-        function (selector) {
-          var element = angular.element(selector)[0];
-          if (element) height += element.offsetHeight;
-        }
-      );
+      _.forEach(['.header', '.page_header_container', '.section_nav_container', '.inventory-list-controls'], function (selector) {
+        var element = angular.element(selector)[0];
+        if (element) height += element.offsetHeight;
+      });
       angular.element('#grid-container').css('height', 'calc(100vh - ' + (height + 2) + 'px)');
       angular.element('#grid-container > div').css('height', 'calc(100vh - ' + (height + 4) + 'px)');
       $scope.gridApi.core.handleWindowResize();

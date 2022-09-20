@@ -141,10 +141,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
           };
           var isBuildingSyncProfile =
             $scope.current_profile.profile_type !== undefined &&
-            [
-              COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT,
-              COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM
-            ].includes($scope.current_profile.profile_type);
+            [COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM].includes($scope.current_profile.profile_type);
 
           if (isBuildingSyncProfile) {
             this_mapping.from_field_value = mapping.from_field_value;
@@ -168,9 +165,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
         // make sure the new profile mapping data has the required data
         var currentProfileForBuildingSync =
           $scope.current_profile.profile_type !== undefined &&
-          [COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM].includes(
-            $scope.current_profile.profile_type
-          );
+          [COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM].includes($scope.current_profile.profile_type);
 
         if (!currentProfileForBuildingSync) {
           // we need to add mapping data, from_field_value, using the default mapping
@@ -270,37 +265,27 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
 
     $scope.mappingBuildingSync = $scope.import_file.source_type === 'BuildingSync Raw';
 
-    matching_criteria_columns_payload.PropertyState = _.map(
-      matching_criteria_columns_payload.PropertyState,
-      function (column_name) {
-        var display_name = _.find($scope.mappable_property_columns, {
-          column_name: column_name
-        }).display_name;
-        return {
-          column_name: column_name,
-          display_name: display_name
-        };
-      }
-    );
-    matching_criteria_columns_payload.TaxLotState = _.map(
-      matching_criteria_columns_payload.TaxLotState,
-      function (column_name) {
-        var display_name = _.find($scope.mappable_taxlot_columns, {
-          column_name: column_name
-        }).display_name;
-        return {
-          column_name: column_name,
-          display_name: display_name
-        };
-      }
-    );
+    matching_criteria_columns_payload.PropertyState = _.map(matching_criteria_columns_payload.PropertyState, function (column_name) {
+      var display_name = _.find($scope.mappable_property_columns, {
+        column_name: column_name
+      }).display_name;
+      return {
+        column_name: column_name,
+        display_name: display_name
+      };
+    });
+    matching_criteria_columns_payload.TaxLotState = _.map(matching_criteria_columns_payload.TaxLotState, function (column_name) {
+      var display_name = _.find($scope.mappable_taxlot_columns, {
+        column_name: column_name
+      }).display_name;
+      return {
+        column_name: column_name,
+        display_name: display_name
+      };
+    });
 
-    $scope.property_matching_criteria_columns = _.map(matching_criteria_columns_payload.PropertyState, 'display_name')
-      .sort()
-      .join(', ');
-    $scope.taxlot_matching_criteria_columns = _.map(matching_criteria_columns_payload.TaxLotState, 'display_name')
-      .sort()
-      .join(', ');
+    $scope.property_matching_criteria_columns = _.map(matching_criteria_columns_payload.PropertyState, 'display_name').sort().join(', ');
+    $scope.taxlot_matching_criteria_columns = _.map(matching_criteria_columns_payload.TaxLotState, 'display_name').sort().join(', ');
 
     $scope.setAllFields = '';
     $scope.setAllFieldsOptions = [
@@ -321,10 +306,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
     });
     $scope.is_eui_column = function (col) {
       // All of these are on the PropertyState table
-      return (
-        col.suggestion_table_name === 'PropertyState' &&
-        Boolean(_.find(eui_columns, { column_name: col.suggestion_column_name }))
-      );
+      return col.suggestion_table_name === 'PropertyState' && Boolean(_.find(eui_columns, { column_name: col.suggestion_column_name }));
     };
 
     var area_columns = _.filter($scope.mappable_property_columns, {
@@ -332,20 +314,14 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
     });
     $scope.is_area_column = function (col) {
       // All of these are on the PropertyState table
-      return (
-        col.suggestion_table_name === 'PropertyState' &&
-        Boolean(_.find(area_columns, { column_name: col.suggestion_column_name }))
-      );
+      return col.suggestion_table_name === 'PropertyState' && Boolean(_.find(area_columns, { column_name: col.suggestion_column_name }));
     };
 
     var ghg_columns = _.filter($scope.mappable_property_columns, {
       data_type: 'ghg'
     });
     $scope.is_ghg_column = function (col) {
-      return (
-        col.suggestion_table_name == 'PropertyState' &&
-        Boolean(_.find(ghg_columns, { column_name: col.suggestion_column_name }))
-      );
+      return col.suggestion_table_name == 'PropertyState' && Boolean(_.find(ghg_columns, { column_name: col.suggestion_column_name }));
     };
 
     var ghg_intensity_columns = _.filter($scope.mappable_property_columns, {
@@ -471,9 +447,9 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
 
     // Verify there are not any suggested Column names that match an existing Derived Column name
     $scope.updateDerivedColumnMatchStatus = function () {
-      const suggestions = $scope.mappings.map(col => col.suggestion);
-      const derived_col_names = derived_columns_payload.derived_columns.map(col => col.name);
-      $scope.derived_column_match = suggestions.some(name => derived_col_names.includes(name)) ? true : false;
+      const suggestions = $scope.mappings.map((col) => col.suggestion);
+      const derived_col_names = derived_columns_payload.derived_columns.map((col) => col.name);
+      $scope.derived_column_match = suggestions.some((name) => derived_col_names.includes(name)) ? true : false;
     };
 
     var get_col_from_suggestion = function (name) {
@@ -572,7 +548,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
     $scope.get_mappings = function () {
       var mappings = [];
       _.forEach(
-        $scope.mappings.filter(m => !m.isOmitted),
+        $scope.mappings.filter((m) => !m.isOmitted),
         function (col) {
           mappings.push({
             from_field: col.name,
@@ -616,23 +592,14 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
       }
     });
 
-    var suggested_address_fields = [
-      { column_name: 'address_line_1' },
-      { column_name: 'city' },
-      { column_name: 'state' },
-      { column_name: 'postal_code' }
-    ];
+    var suggested_address_fields = [{ column_name: 'address_line_1' }, { column_name: 'city' }, { column_name: 'state' }, { column_name: 'postal_code' }];
 
     $scope.suggested_fields_present = function () {
       if (!$scope.mappings) return true;
 
-      var intersections = _.intersectionWith(
-        suggested_address_fields,
-        $scope.mappings,
-        function (required_field, raw_col) {
-          return required_field.column_name === raw_col.suggestion_column_name;
-        }
-      ).length;
+      var intersections = _.intersectionWith(suggested_address_fields, $scope.mappings, function (required_field, raw_col) {
+        return required_field.column_name === raw_col.suggestion_column_name;
+      }).length;
 
       return intersections === 4;
     };
@@ -655,7 +622,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
 
       var intersections = _.intersectionWith(
         required_property_fields,
-        $scope.mappings.filter(m => !m.isOmitted),
+        $scope.mappings.filter((m) => !m.isOmitted),
         function (required_field, raw_col) {
           return _.isMatch(required_field, {
             column_name: raw_col.suggestion_column_name,
@@ -683,16 +650,12 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
       });
       if (!taxlot_mappings_found) return true;
 
-      var intersections = _.intersectionWith(
-        required_taxlot_fields,
-        $scope.mappings,
-        function (required_field, raw_col) {
-          return _.isMatch(required_field, {
-            column_name: raw_col.suggestion_column_name,
-            inventory_type: raw_col.suggestion_table_name
-          });
-        }
-      ).length;
+      var intersections = _.intersectionWith(required_taxlot_fields, $scope.mappings, function (required_field, raw_col) {
+        return _.isMatch(required_field, {
+          column_name: raw_col.suggestion_column_name,
+          inventory_type: raw_col.suggestion_table_name
+        });
+      }).length;
 
       return intersections > 0;
     };
@@ -704,7 +667,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
     $scope.empty_fields_present = function () {
       return Boolean(
         _.find(
-          $scope.mappings.filter(m => !m.isOmitted),
+          $scope.mappings.filter((m) => !m.isOmitted),
           { suggestion: '' }
         )
       );
@@ -716,11 +679,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
     $scope.empty_units_present = function () {
       return Boolean(
         _.find($scope.mappings, function (field) {
-          return (
-            field.suggestion_table_name === 'PropertyState' &&
-            field.from_units === null &&
-            ($scope.is_area_column(field) || $scope.is_eui_column(field))
-          );
+          return field.suggestion_table_name === 'PropertyState' && field.from_units === null && ($scope.is_area_column(field) || $scope.is_eui_column(field));
         })
       );
     };
@@ -804,11 +763,7 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
 
       // Request the columns again because they may (most likely)
       // have changed from the initial import
-      $q.all([
-        inventory_service.get_property_columns(),
-        inventory_service.get_taxlot_columns(),
-        inventory_service.search_matching_inventory($scope.import_file.id)
-      ])
+      $q.all([inventory_service.get_property_columns(), inventory_service.get_taxlot_columns(), inventory_service.search_matching_inventory($scope.import_file.id)])
         .then(function (results) {
           $scope.property_columns = results[0];
           $scope.taxlot_columns = results[1];
@@ -884,29 +839,24 @@ angular.module('BE.seed.controller.mapping', []).controller('mapping_controller'
         })
         .finally(function () {
           // Submit the data quality checks and wait for the results
-          data_quality_service
-            .start_data_quality_checks_for_import_file($scope.organization.id, $scope.import_file.id)
-            .then(function (response) {
-              data_quality_service.data_quality_checks_status(response.progress_key).then(function (check_result) {
-                // Fetch data quality check results
-                $scope.data_quality_results_ready = false;
-                $scope.data_quality_results = data_quality_service.get_data_quality_results(
-                  $scope.organization.id,
-                  check_result.unique_id
-                );
-                $scope.data_quality_results.then(function (data) {
-                  $scope.data_quality_results_ready = true;
-                  $scope.data_quality_errors = 0;
-                  $scope.data_quality_warnings = 0;
-                  _.forEach(data, function (datum) {
-                    _.forEach(datum.data_quality_results, function (result) {
-                      if (result.severity === 'error') $scope.data_quality_errors++;
-                      else if (result.severity === 'warning') $scope.data_quality_warnings++;
-                    });
+          data_quality_service.start_data_quality_checks_for_import_file($scope.organization.id, $scope.import_file.id).then(function (response) {
+            data_quality_service.data_quality_checks_status(response.progress_key).then(function (check_result) {
+              // Fetch data quality check results
+              $scope.data_quality_results_ready = false;
+              $scope.data_quality_results = data_quality_service.get_data_quality_results($scope.organization.id, check_result.unique_id);
+              $scope.data_quality_results.then(function (data) {
+                $scope.data_quality_results_ready = true;
+                $scope.data_quality_errors = 0;
+                $scope.data_quality_warnings = 0;
+                _.forEach(data, function (datum) {
+                  _.forEach(datum.data_quality_results, function (result) {
+                    if (result.severity === 'error') $scope.data_quality_errors++;
+                    else if (result.severity === 'warning') $scope.data_quality_warnings++;
                   });
                 });
               });
             });
+          });
         });
     };
 

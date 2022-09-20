@@ -6,13 +6,7 @@
     {$ analysis.status $}
   </span>
   <span>
-    <i
-      class="glyphicon glyphicon-play link"
-      title="Start Analysis"
-      aria-hidden="true"
-      ng-if="analysis.status === 'Ready'"
-      ng-click="start_analysis(analysis.id)"
-    ></i>
+    <i class="glyphicon glyphicon-play link" title="Start Analysis" aria-hidden="true" ng-if="analysis.status === 'Ready'" ng-click="start_analysis(analysis.id)"></i>
     <i
       class="glyphicon glyphicon-stop link"
       title="Stop Analysis"
@@ -21,12 +15,7 @@
       ng-disabled="['Pending Creation', 'Queued'].indexOf(analysis.status) >= 0"
       ng-click="stop_analysis(analysis.id)"
     ></i>
-    <i
-      class="glyphicon glyphicon-trash link"
-      title="Delete Analysis"
-      aria-hidden="true"
-      ng-click="delete_analysis(analysis.id)"
-    ></i>
+    <i class="glyphicon glyphicon-trash link" title="Delete Analysis" aria-hidden="true" ng-click="delete_analysis(analysis.id)"></i>
   </span>
 </div>
 <div class="row grow">
@@ -51,10 +40,7 @@
     </div>
     <small>{$:: users | filter : {'user_id':analysis.user} | getAnalysisRunAuthor $}</small>
   </div>
-  <div
-    class="link"
-    ui-sref="analysis_run(::{inventory_type: inventory_type, view_id: view_id, run_id: analysis.views[0], analysis_id: analysis.id, organization_id: org.id})"
-  >
+  <div class="link" ui-sref="analysis_run(::{inventory_type: inventory_type, view_id: view_id, run_id: analysis.views[0], analysis_id: analysis.id, organization_id: org.id})">
     Full Analysis <i class="glyphicon glyphicon-log-out"></i>
   </div>
 </div>

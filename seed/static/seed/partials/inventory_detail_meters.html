@@ -19,15 +19,9 @@
     <div class="section_action_container left" style="width: 50%">
       <span>
         <h2>
-          <span ng-if="::inventory_type==='properties'">
-            <i class="fa fa-building-o"></i><span translate>Property</span> :
-          </span>
-          <span ng-if="::inventory_type==='taxlots'">
-            <i class="fa fa-map-o"></i><span translate>Tax Lot</span> :
-          </span>
-          <span ng-bind-html="inventory_name"
-            >{$ inventory_display_name(inventory_type==='properties' ? 'property' : 'taxlot') | translate $}</span
-          >
+          <span ng-if="::inventory_type==='properties'"> <i class="fa fa-building-o"></i><span translate>Property</span> : </span>
+          <span ng-if="::inventory_type==='taxlots'"> <i class="fa fa-map-o"></i><span translate>Tax Lot</span> : </span>
+          <span ng-bind-html="inventory_name">{$ inventory_display_name(inventory_type==='properties' ? 'property' : 'taxlot') | translate $}</span>
         </h2>
       </span>
     </div>
@@ -39,45 +33,20 @@
     <div class="column">
       <div class="row">
         <label>Filter By:</label>
-        <select
-          class="form-control"
-          ng-model="filterMethod.selected"
-          ng-change="applyFilters()"
-          ng-options="option for option in filterMethod.options"
-        ></select>
+        <select class="form-control" ng-model="filterMethod.selected" ng-change="applyFilters()" ng-options="option for option in filterMethod.options"></select>
       </div>
       <div class="row">
         <label>{$:: 'Interval' | translate $}:</label>
-        <select
-          class="form-control"
-          ng-model="interval.selected"
-          ng-change="refresh_readings()"
-          ng-options="option for option in interval.options"
-        ></select>
+        <select class="form-control" ng-model="interval.selected" ng-change="refresh_readings()" ng-options="option for option in interval.options"></select>
       </div>
       <div class="row" ng-hide="filterMethod.selected !== 'meter'">
-        <div
-          uib-dropdown
-          is-open="meters_options.isopen"
-          auto-close="outsideClick"
-          on-toggle="meter_selection_toggled(open)"
-        >
-          <button type="button" class="btn btn-default" uib-dropdown-toggle>
-            Filter Meters <span class="caret"></span>
-          </button>
+        <div uib-dropdown is-open="meters_options.isopen" auto-close="outsideClick" on-toggle="meter_selection_toggled(open)">
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>Filter Meters <span class="caret"></span></button>
           <ul class="dropdown-menu" uib-dropdown-menu style="padding: 0px">
             <li ng-repeat="meter in meter_selections">
               <div>
-                <label
-                  class="btn btn-default"
-                  style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px"
-                >
-                  {$:: meter.label $}<input
-                    type="checkbox"
-                    ng-model="meter.selected"
-                    name="meter.label"
-                    style="width: 14px; height: 14px; margin-left: 10px"
-                  />
+                <label class="btn btn-default" style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px">
+                  {$:: meter.label $}<input type="checkbox" ng-model="meter.selected" name="meter.label" style="width: 14px; height: 14px; margin-left: 10px" />
                 </label>
               </div>
             </li>
@@ -85,28 +54,13 @@
         </div>
       </div>
       <div class="row" ng-hide="filterMethod.selected !== 'scenario'">
-        <div
-          uib-dropdown
-          is-open="scenarios_options.isopen"
-          auto-close="outsideClick"
-          on-toggle="scenario_selection_toggled(open)"
-        >
-          <button type="button" class="btn btn-default" uib-dropdown-toggle>
-            Filter Scenarios <span class="caret"></span>
-          </button>
+        <div uib-dropdown is-open="scenarios_options.isopen" auto-close="outsideClick" on-toggle="scenario_selection_toggled(open)">
+          <button type="button" class="btn btn-default" uib-dropdown-toggle>Filter Scenarios <span class="caret"></span></button>
           <ul class="dropdown-menu" uib-dropdown-menu style="padding: 0px">
             <li ng-repeat="scenario in scenario_selections">
               <div>
-                <label
-                  class="btn btn-default"
-                  style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px"
-                >
-                  {$:: scenario.label $}<input
-                    type="checkbox"
-                    ng-model="scenario.selected"
-                    name="scenario.label"
-                    style="width: 14px; height: 14px; margin-left: 10px"
-                  />
+                <label class="btn btn-default" style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px">
+                  {$:: scenario.label $}<input type="checkbox" ng-model="scenario.selected" name="scenario.label" style="width: 14px; height: 14px; margin-left: 10px" />
                 </label>
               </div>
             </li>
@@ -114,9 +68,7 @@
         </div>
       </div>
       <div class="row">
-        <button type="button" ng-click="open_green_button_upload_modal()" class="btn btn-primary" translate>
-          UPLOAD_GB_DATA_BUTTON
-        </button>
+        <button type="button" ng-click="open_green_button_upload_modal()" class="btn btn-primary" translate>UPLOAD_GB_DATA_BUTTON</button>
       </div>
     </div>
 

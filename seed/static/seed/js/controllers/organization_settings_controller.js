@@ -13,18 +13,7 @@ angular.module('BE.seed.controller.organization_settings', []).controller('organ
   'taxlot_column_names',
   'meters_service',
   '$translate',
-  function (
-    $scope,
-    $uibModal,
-    urls,
-    organization_payload,
-    auth_payload,
-    organization_service,
-    property_column_names,
-    taxlot_column_names,
-    meters_service,
-    $translate
-  ) {
+  function ($scope, $uibModal, urls, organization_payload, auth_payload, organization_service, property_column_names, taxlot_column_names, meters_service, $translate) {
     $scope.org = organization_payload.organization;
     $scope.auth = auth_payload.auth;
     $scope.property_column_names = property_column_names;

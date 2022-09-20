@@ -60,25 +60,20 @@ angular.module('BE.seed.service.note', []).factory('note_service', [
     note_factory.update_note = function (org_id, inventory_type, view_id, note_id, note_data) {
       var payload = note_data;
       payload.organization_id = org_id;
-      return $http
-        .put('/api/v3/' + inventory_type + '/' + view_id + '/notes/' + note_id + '/', payload)
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.put('/api/v3/' + inventory_type + '/' + view_id + '/notes/' + note_id + '/', payload).then(function (response) {
+        return response.data;
+      });
     };
 
     note_factory.delete_note = function (inventory_type, view_id, note_id) {
-      return $http
-        .delete('/api/v3/' + inventory_type + '/' + view_id + '/notes/' + note_id + '/', {})
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.delete('/api/v3/' + inventory_type + '/' + view_id + '/notes/' + note_id + '/', {}).then(function (response) {
+        return response.data;
+      });
     };
 
     note_factory.inventory_display_name = function (property_type, organization, item_state) {
       let error = '';
-      let field =
-        property_type === 'property' ? organization.property_display_field : organization.taxlot_display_field;
+      let field = property_type === 'property' ? organization.property_display_field : organization.taxlot_display_field;
       if (!(field in item_state)) {
         error = field + ' does not exist';
         field = 'address_line_1';
@@ -86,11 +81,7 @@ angular.module('BE.seed.service.note', []).factory('note_service', [
       if (!item_state[field]) {
         error += (error === '' ? '' : ' and default ') + field + ' is blank';
       }
-      return item_state[field]
-        ? item_state[field]
-        : '(' +
-            error +
-            ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
+      return item_state[field] ? item_state[field] : '(' + error + ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
     };
 
     note_factory.open_create_note_modal = function (inventory_type, org_id, view_id) {

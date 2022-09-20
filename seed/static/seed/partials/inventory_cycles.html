@@ -13,16 +13,8 @@
 </div>
 
 <div class="inventory-list-controls" style="display: flex; justify-content: space-between">
-  <div
-    class="form-group settings_profile"
-    style="display: flex; justify-content: space-between; flex-direction: column"
-  >
-    <div
-      uib-dropdown
-      is-open="cycles_options.isopen"
-      auto-close="outsideClick"
-      on-toggle="cycle_selection_toggled(open)"
-    >
+  <div class="form-group settings_profile" style="display: flex; justify-content: space-between; flex-direction: column">
+    <div uib-dropdown is-open="cycles_options.isopen" auto-close="outsideClick" on-toggle="cycle_selection_toggled(open)">
       <label>{$:: 'Cycle' | translate $}:</label>
       <button type="button" class="btn btn-default" uib-dropdown-toggle>
         Selected (<span ng-bind="included_cycle_ids.length"></span>)
@@ -31,16 +23,8 @@
       <ul class="dropdown-menu" uib-dropdown-menu style="padding: 0px">
         <li ng-repeat="cycle in cycle_options">
           <div>
-            <label
-              class="btn btn-default"
-              style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px"
-            >
-              {$:: cycle.label $}<input
-                type="checkbox"
-                ng-model="cycle.selected"
-                name="cycle.label"
-                style="width: 14px; height: 14px; margin-left: 10px"
-              />
+            <label class="btn btn-default" style="width: 100%; display: flex; justify-content: space-between; border-radius: 0px">
+              {$:: cycle.label $}<input type="checkbox" ng-model="cycle.selected" name="cycle.label" style="width: 14px; height: 14px; margin-left: 10px" />
             </label>
           </div>
         </li>
@@ -54,19 +38,12 @@
     <div class="btn-group" ng-show="profiles.length > 0">
       <label>{$:: 'Column List Profile' | translate $}:</label>
       <div style="display: inline-block">
-        <select
-          class="form-control input-sm"
-          ng-model="currentProfile"
-          ng-options="option.name for option in profiles track by option.id"
-          ng-change="profile_change()"
-        ></select>
+        <select class="form-control input-sm" ng-model="currentProfile" ng-options="option.name for option in profiles track by option.id" ng-change="profile_change()"></select>
       </div>
     </div>
 
     <div class="btn-group" style="padding-top: 15px">
-      <button type="button" ng-click="gridApi.grid.clearAllFilters();" class="btn btn-default btn-sm" translate>
-        Clear Filters
-      </button>
+      <button type="button" ng-click="gridApi.grid.clearAllFilters();" class="btn btn-default btn-sm" translate>Clear Filters</button>
     </div>
   </div>
 </div>

@@ -13,9 +13,7 @@ angular.module('BE.seed.service.organization', []).factory('organization_service
 
     organization_factory.get_organizations = function () {
       return $http.get('/api/v3/organizations/').then(function (response) {
-        organization_factory.total_organizations_for_user = _.has(response.data.organizations, 'length')
-          ? response.data.organizations.length
-          : 0;
+        organization_factory.total_organizations_for_user = _.has(response.data.organizations, 'length') ? response.data.organizations.length : 0;
         response.data.organizations = response.data.organizations.sort(function (a, b) {
           return naturalSort(a.name, b.name);
         });
@@ -31,9 +29,7 @@ angular.module('BE.seed.service.organization', []).factory('organization_service
           }
         })
         .then(function (response) {
-          organization_factory.total_organizations_for_user = _.has(response.data.organizations, 'length')
-            ? response.data.organizations.length
-            : 0;
+          organization_factory.total_organizations_for_user = _.has(response.data.organizations, 'length') ? response.data.organizations.length : 0;
           response.data.organizations = response.data.organizations.sort(function (a, b) {
             return naturalSort(a.name, b.name);
           });
@@ -59,19 +55,15 @@ angular.module('BE.seed.service.organization', []).factory('organization_service
     };
 
     organization_factory.add_user_to_org = function (org_user) {
-      return $http
-        .put('/api/v3/organizations/' + org_user.organization.org_id + '/users/' + org_user.user.user_id + '/add/')
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.put('/api/v3/organizations/' + org_user.organization.org_id + '/users/' + org_user.user.user_id + '/add/').then(function (response) {
+        return response.data;
+      });
     };
 
     organization_factory.remove_user = function (user_id, org_id) {
-      return $http
-        .delete('/api/v3/organizations/' + org_id + '/users/' + user_id + '/remove/')
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.delete('/api/v3/organizations/' + org_id + '/users/' + user_id + '/remove/').then(function (response) {
+        return response.data;
+      });
     };
 
     organization_factory.get_organization = function (org_id) {
@@ -213,17 +205,9 @@ angular.module('BE.seed.service.organization', []).factory('organization_service
     };
 
     organization_factory.get_match_merge_link_result = function (org_id, match_merge_link_id) {
-      return $http
-        .get(
-          '/api/v3/organizations/' +
-            org_id +
-            '/match_merge_link_result/' +
-            '?match_merge_link_id=' +
-            match_merge_link_id
-        )
-        .then(function (response) {
-          return response.data;
-        });
+      return $http.get('/api/v3/organizations/' + org_id + '/match_merge_link_result/' + '?match_merge_link_id=' + match_merge_link_id).then(function (response) {
+        return response.data;
+      });
     };
 
     organization_factory.check_match_merge_link_status = function (progress_key) {
@@ -267,11 +251,7 @@ angular.module('BE.seed.service.organization', []).factory('organization_service
      * @param  {string} inventory_type 'property' or 'taxlot'
      * @param  {object} inventory_state state object of the inventory
      */
-    organization_factory.get_inventory_display_value = function (
-      { property_display_field, taxlot_display_field },
-      inventory_type,
-      inventory_state
-    ) {
+    organization_factory.get_inventory_display_value = function ({ property_display_field, taxlot_display_field }, inventory_type, inventory_state) {
       const field = inventory_type === 'property' ? property_display_field : taxlot_display_field;
       if (field == null) {
         throw Error(`Provided display field for type "${inventory_type}" is undefined`);

@@ -13,16 +13,10 @@ describe('When I go to the taxlot page', function () {
 
   it('should change to our test cycle', function () {
     browser.get('/app/#/taxlots');
-    $('[ng-change="update_cycle(cycle.selected_cycle)"]')
-      .element(by.cssContainingText('option', '2016 Calendar Year'))
-      .click();
-    $('[ng-change="update_cycle(cycle.selected_cycle)"]')
-      .element(by.cssContainingText('option', browser.params.testOrg.cycle))
-      .click();
+    $('[ng-change="update_cycle(cycle.selected_cycle)"]').element(by.cssContainingText('option', '2016 Calendar Year')).click();
+    $('[ng-change="update_cycle(cycle.selected_cycle)"]').element(by.cssContainingText('option', browser.params.testOrg.cycle)).click();
 
-    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(
-      by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows')
-    );
+    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows'));
 
     rows.count().then(function (count) {
       $('.item-count.ng-binding')
@@ -45,9 +39,7 @@ describe('When I go to the taxlot page', function () {
 
   it('should filter', function () {
     // browser.executeScript("arguments[0].scrollIntoView();", elm.getWebElement());
-    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(
-      by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows')
-    );
+    var rows = $('.left.ui-grid-render-container-left.ui-grid-render-container').all(by.repeater('(rowRenderIndex, row) in rowContainer.renderedRows'));
 
     rows
       .first()
@@ -59,19 +51,11 @@ describe('When I go to the taxlot page', function () {
     expect(rows.count()).toBe(1);
 
     //clear by clicking the 'x' -> child of sibling of text input
-    $$('[ng-model="colFilter.term"]')
-      .first()
-      .element(by.xpath('..'))
-      .$('[ui-grid-one-bind-aria-label="aria.removeFilter"]')
-      .click();
+    $$('[ng-model="colFilter.term"]').first().element(by.xpath('..')).$('[ui-grid-one-bind-aria-label="aria.removeFilter"]').click();
     expect($$('[ng-model="colFilter.term"]').first().getAttribute('value')).toEqual('');
     $$('[ng-model="colFilter.term"]').first().sendKeys('this is something long and fake to get nothing to filter');
     expect(rows.count()).toBeLessThan(1);
-    $$('[ng-model="colFilter.term"]')
-      .first()
-      .element(by.xpath('..'))
-      .$('[ui-grid-one-bind-aria-label="aria.removeFilter"]')
-      .click();
+    $$('[ng-model="colFilter.term"]').first().element(by.xpath('..')).$('[ui-grid-one-bind-aria-label="aria.removeFilter"]').click();
   });
 
   it('should go to info pages', function () {
@@ -153,9 +137,7 @@ describe('When I go to the taxlot page', function () {
     $('[ng-if="grid.options.enableSelectAll"]').click().click();
     $$('[ng-class="{\'ui-grid-row-selected\': row.isSelected}"]').first().click();
     $('#inventory-list').click();
-    var cols = $('.ui-grid-render-container.ui-grid-render-container-body').all(
-      by.repeater('col in colContainer.renderedColumns')
-    );
+    var cols = $('.ui-grid-render-container.ui-grid-render-container-body').all(by.repeater('col in colContainer.renderedColumns'));
     expect(cols.count()).toBe(1);
     $('#column-list-profiles').click();
     $('[ng-click="toggleMenu()"]').click();
@@ -164,9 +146,7 @@ describe('When I go to the taxlot page', function () {
     $$('[ng-click="itemAction($event, title)"]').first().click();
     $('[ng-change="saveShowSharedBuildings()"]').click();
     $('#inventory-list').click();
-    var cols = $('.ui-grid-render-container.ui-grid-render-container-body').all(
-      by.repeater('col in colContainer.renderedColumns')
-    );
+    var cols = $('.ui-grid-render-container.ui-grid-render-container-body').all(by.repeater('col in colContainer.renderedColumns'));
     expect(cols.count()).not.toBeLessThan(2);
     browser.driver.navigate().refresh();
   }, 45000);

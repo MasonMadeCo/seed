@@ -15,19 +15,7 @@ angular.module('BE.seed.controller.label_admin', []).controller('label_admin_con
   'Notification',
   '$translate',
   '$sce',
-  function (
-    $scope,
-    $log,
-    urls,
-    organization_payload,
-    labels_payload,
-    auth_payload,
-    label_service,
-    simple_modal_service,
-    notification,
-    $translate,
-    $sce
-  ) {
+  function ($scope, $log, urls, organization_payload, labels_payload, auth_payload, label_service, simple_modal_service, notification, $translate, $sce) {
     $scope.org = organization_payload.organization;
     $scope.auth = auth_payload.auth;
 

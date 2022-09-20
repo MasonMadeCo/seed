@@ -17,17 +17,7 @@ describe('Controller: menu_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function (
-      $controller,
-      $rootScope,
-      $uibModal,
-      urls,
-      $q,
-      organization_service,
-      user_service,
-      dataset_service,
-      spinner_utility
-    ) {
+    inject(function ($controller, $rootScope, $uibModal, urls, $q, organization_service, user_service, dataset_service, spinner_utility) {
       controller = $controller;
       menu_controller_scope = $rootScope.$new();
       menu_controller_scope.inventory_type = 'properties';

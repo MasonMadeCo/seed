@@ -1,9 +1,7 @@
 <div class="page_header_container">
   <div class="page_header">
     <div class="left page_action_container">
-      <a ui-sref="organizations" class="page_action"
-        ><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a
-      >
+      <a ui-sref="organizations" class="page_action"><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a>
     </div>
     <div class="page_title">
       <h1>{$:: org.name $}</h1>
@@ -30,15 +28,7 @@
   </div>
   <div class="section_content_container">
     <div class="section_content with_padding" style="padding: 15px">
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="collapse"
-        data-target="#instruction"
-        ng-click="changeText(btnText)"
-      >
-        {$ btnText $}
-      </button>
+      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#instruction" ng-click="changeText(btnText)">{$ btnText $}</button>
     </div>
     <div class="section_content with_padding collapse in" style="margin-bottom: 15px" id="instruction">
       <h4 translate>MODIFYING_COLUMN_SETTINGS</h4>
@@ -141,16 +131,10 @@
       <div class="data-quality-tab-container">
         <ul class="nav nav-tabs" style="margin-bottom: 1px">
           <li ui-sref-active="active" heading="{$:: 'View by Property' | translate $}">
-            <a
-              ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'properties'})"
-              translate
-              >View by Property</a
-            >
+            <a ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'properties'})" translate>View by Property</a>
           </li>
           <li ui-sref-active="active" heading="{$:: 'View by Tax Lot' | translate $}">
-            <a ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'taxlots'})" translate
-              >View by Tax Lot</a
-            >
+            <a ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'taxlots'})" translate>View by Tax Lot</a>
           </li>
         </ul>
       </div>
@@ -179,9 +163,7 @@
                 <span>Match Criteria</span>
                 <i class="glyphicon glyphicon-sort"></i>
               </th>
-              <th class="text-center" style="min-width: 80px" ng-if="::org.comstock_enabled" translate>
-                ComStock Mapping
-              </th>
+              <th class="text-center" style="min-width: 80px" ng-if="::org.comstock_enabled" translate>ComStock Mapping</th>
               <th class="text-center" style="min-width: 65px; width: 65px" translate>Delete</th>
             </tr>
             <tr class="sub_head">
@@ -217,28 +199,14 @@
           <tbody>
             <tr ng-repeat="column in columns | filter:filter_params:strict">
               <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="column.displayName"
-                  ng-change="setModified()"
-                  ng-model-options="{debounce: 125}"
-                  required
-                />
+                <input type="text" class="form-control" ng-model="column.displayName" ng-change="setModified()" ng-model-options="{debounce: 125}" required />
               </td>
               <td>
                 {$:: column.column_name $}
                 <span ng-if="column.is_extra_data" class="badge" style="margin-left: 10px">extra data</span>
               </td>
               <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  ng-model="column.column_description"
-                  ng-change="setModified()"
-                  ng-model-options="{debounce: 125}"
-                  required
-                />
+                <input type="text" class="form-control" ng-model="column.column_description" ng-change="setModified()" ng-model-options="{debounce: 125}" required />
               </td>
 
               <td>
@@ -257,13 +225,7 @@
               </td>
 
               <td class="text-center">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  ng-click="open_rename_column_modal(column.id, column.column_name)"
-                >
-                  {$:: 'Rename' | translate $}
-                </button>
+                <button type="button" class="btn btn-default" ng-click="open_rename_column_modal(column.id, column.column_name)">{$:: 'Rename' | translate $}</button>
               </td>
               <td class="text-center">
                 <select
@@ -288,20 +250,10 @@
                 <span ng-if="column.is_extra_data" translate>Ineligible</span>
               </td>
               <td class="text-center" ng-if="::org.comstock_enabled">
-                <select
-                  class="form-control input-sm"
-                  ng-model="column.comstock_mapping"
-                  ng-options="type.id as type.label for type in ::comstock_types"
-                  ng-change="comstockModified(column)"
-                ></select>
+                <select class="form-control input-sm" ng-model="column.comstock_mapping" ng-options="type.id as type.label for type in ::comstock_types" ng-change="comstockModified(column)"></select>
               </td>
               <td class="text-center">
-                <button
-                  ng-if="::column.is_extra_data"
-                  class="btn btn-danger"
-                  type="button"
-                  ng-click="delete_column(column)"
-                >
+                <button ng-if="::column.is_extra_data" class="btn btn-danger" type="button" ng-click="delete_column(column)">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
               </td>

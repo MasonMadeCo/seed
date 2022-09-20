@@ -17,9 +17,7 @@
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-2">
-              <h2 style="font-size: 18px">
-                <i class="fa fa-bar-chart pull-left"></i> {$:: 'Property Reports' | translate $}
-              </h2>
+              <h2 style="font-size: 18px"><i class="fa fa-bar-chart pull-left"></i> {$:: 'Property Reports' | translate $}</h2>
             </div>
             <div class="col-md-10">
               <form class="form-inline pull-right chart-inputs" role="form">
@@ -49,28 +47,16 @@
 
                 <div class="form-group">
                   <label for="xAxisSelector">{$:: 'X Axis' | translate $}:</label>
-                  <sd-dropdown
-                    is-button
-                    id="xAxisSelector"
-                    ng-model="xAxisSelectedItem"
-                    items="xAxisVars"
-                  ></sd-dropdown>
+                  <sd-dropdown is-button id="xAxisSelector" ng-model="xAxisSelectedItem" items="xAxisVars"></sd-dropdown>
                 </div>
 
                 <div class="form-group">
                   <label for="yAxisSelector">{$:: 'Y Axis' | translate $}:</label>
-                  <sd-dropdown
-                    is-button
-                    id="yAxisSelector"
-                    ng-model="yAxisSelectedItem"
-                    items="yAxisVars"
-                  ></sd-dropdown>
+                  <sd-dropdown is-button id="yAxisSelector" ng-model="yAxisSelectedItem" items="yAxisVars"></sd-dropdown>
                 </div>
 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary" ng-click="updateChartData()" translate>
-                    Update Charts
-                  </button>
+                  <button type="submit" class="btn btn-primary" ng-click="updateChartData()" translate>Update Charts</button>
                 </div>
               </form>
             </div>
@@ -78,15 +64,7 @@
           <!-- ./row -->
 
           <div class="row" style="padding: 20px; text-align: right">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              ng-click="open_export_modal()"
-              ng-disabled="!chartData.chartData.length"
-              translate
-            >
-              Export Chart Data
-            </button>
+            <button type="submit" class="btn btn-primary" ng-click="open_export_modal()" ng-disabled="!chartData.chartData.length" translate>Export Chart Data</button>
           </div>
           <!-- ./row -->
         </div>
@@ -104,14 +82,7 @@
             <div ng-show="chartStatusMessage" class="status-message">
               {$ chartStatusMessage | translate $}
               <div class="progress progress-striped active" ng-show="chartIsLoading">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  aria-valuenow="100"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 100%"
-                ></div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
               </div>
             </div>
           </div>
@@ -146,14 +117,7 @@
               <div>
                 {$ aggChartStatusMessage | translate $}
                 <div class="progress progress-striped active" ng-show="aggChartIsLoading">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    aria-valuenow="100"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    style="width: 100%"
-                  ></div>
+                  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
                 </div>
               </div>
             </div>

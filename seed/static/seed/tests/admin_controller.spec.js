@@ -148,9 +148,7 @@ describe('controller: admin_controller', function () {
 
       // assertions
       // spyOn(window, 'confirm').andReturn(false);
-      expect(confirm).toHaveBeenCalledWith(
-        "Are you sure you want to PERMANENTLY delete 'my new org's properties and tax lots?"
-      );
+      expect(confirm).toHaveBeenCalledWith("Are you sure you want to PERMANENTLY delete 'my new org's properties and tax lots?");
 
       confirm = oldConfirm;
     });

@@ -54,7 +54,7 @@ angular.module('BE.seed.controller.inventory_summary', []).controller('inventory
     const load_charts = function () {
       if (!charts_loaded) {
         charts_loaded = true;
-        $scope.charts.forEach(config => {
+        $scope.charts.forEach((config) => {
           const svg = dimple.newSvg('#chart-' + config.name, '100%', 500);
           const chart = new dimple.chart(svg, []);
           const xaxis = chart.addCategoryAxis('x', config.x);
@@ -65,7 +65,7 @@ angular.module('BE.seed.controller.inventory_summary', []).controller('inventory
         });
       }
 
-      $scope.charts.forEach(config => {
+      $scope.charts.forEach((config) => {
         const chart = $scope.charts[config.name];
         if ($scope.summary_data[config.name].length < 1) {
           return;

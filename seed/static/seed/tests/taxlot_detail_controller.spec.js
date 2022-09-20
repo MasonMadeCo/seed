@@ -15,19 +15,7 @@ describe('controller: inventory_detail_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function (
-      $controller,
-      $rootScope,
-      $state,
-      $uibModal,
-      $log,
-      $filter,
-      $stateParams,
-      $q,
-      urls,
-      label_service,
-      inventory_service
-    ) {
+    inject(function ($controller, $rootScope, $state, $uibModal, $log, $filter, $stateParams, $q, urls, label_service, inventory_service) {
       controller = $controller;
       state = $state;
       ngFilter = $filter;
@@ -91,12 +79,7 @@ describe('controller: inventory_detail_controller', function () {
           some_extra_data_field_4: '4'
         }
       },
-      extra_data_keys: [
-        'some_extra_data_field_1',
-        'some_extra_data_field_2',
-        'some_extra_data_field_3',
-        'some_extra_data_field_4'
-      ],
+      extra_data_keys: ['some_extra_data_field_1', 'some_extra_data_field_2', 'some_extra_data_field_3', 'some_extra_data_field_4'],
       changed_fields: {
         regular_fields: ['address_line_2'],
         extra_data_fields: []
@@ -267,10 +250,7 @@ describe('controller: inventory_detail_controller', function () {
     inventory_detail_controller_scope.save_item();
 
     // assertions
-    expect(mock_inventory_service.update_taxlot).toHaveBeenCalledWith(
-      inventory_detail_controller_scope.inventory.view_id,
-      inventory_detail_controller_scope.item_state
-    );
+    expect(mock_inventory_service.update_taxlot).toHaveBeenCalledWith(inventory_detail_controller_scope.inventory.view_id, inventory_detail_controller_scope.item_state);
     expect(inventory_detail_controller_scope.item_state.address_line_1).toEqual('ABC Main St.');
   });
 

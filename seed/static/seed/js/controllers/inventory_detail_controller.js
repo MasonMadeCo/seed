@@ -89,17 +89,12 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
     /** See service for structure of returned payload */
     $scope.historical_items = inventory_payload.history;
     $scope.item_state = inventory_payload.state;
-    $scope.inventory_docs =
-      $scope.inventory_type == 'properties' ? inventory_payload.property.inventory_documents : null;
+    $scope.inventory_docs = $scope.inventory_type == 'properties' ? inventory_payload.property.inventory_documents : null;
 
     // stores derived column values -- updated later once we fetch the data
     $scope.item_derived_values = {};
 
-    $scope.inventory_display_name = organization_service.get_inventory_display_value(
-      $scope.organization,
-      $scope.inventory_type === 'properties' ? 'property' : 'taxlot',
-      $scope.item_state
-    );
+    $scope.inventory_display_name = organization_service.get_inventory_display_value($scope.organization, $scope.inventory_type === 'properties' ? 'property' : 'taxlot', $scope.item_state);
 
     // item_parent is the property or the tax lot instead of the PropertyState / TaxLotState
     if ($scope.inventory_type === 'properties') {
@@ -120,7 +115,7 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
     $scope.users = users_payload.users;
 
     // handle popovers cleared on scrolling
-    [document.getElementsByClassName('ui-view-container')[0], document.getElementById('pin')].forEach(el => {
+    [document.getElementsByClassName('ui-view-container')[0], document.getElementById('pin')].forEach((el) => {
       if (el) el.onscroll = document.body.click;
     });
 
@@ -422,20 +417,14 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
         if (ignored_root_keys.includes(key)) return;
         if (value === $scope.item_copy[key]) return;
         if (_.isNull($scope.item_copy[key]) && _.isString(value) && _.isEmpty(value)) return;
-        if (_.isNumber($scope.item_copy[key]) && _.isString(value) && $scope.item_copy[key] === _.toNumber(value))
-          return;
+        if (_.isNumber($scope.item_copy[key]) && _.isString(value) && $scope.item_copy[key] === _.toNumber(value)) return;
 
         _.set(result, key, value);
       });
       _.forEach($scope.item_state.extra_data, function (value, key) {
         if (value === $scope.item_copy.extra_data[key]) return;
         if (_.isNull($scope.item_copy.extra_data[key]) && _.isString(value) && _.isEmpty(value)) return;
-        if (
-          _.isNumber($scope.item_copy.extra_data[key]) &&
-          _.isString(value) &&
-          $scope.item_copy.extra_data[key] === _.toNumber(value)
-        )
-          return;
+        if (_.isNumber($scope.item_copy.extra_data[key]) && _.isString(value) && $scope.item_copy.extra_data[key] === _.toNumber(value)) return;
 
         _.set(result, 'extra_data.' + key, value);
       });
@@ -499,15 +488,9 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
 
     $scope.save_item = function () {
       if ($scope.inventory_type === 'properties') {
-        inventory_service
-          .update_property($scope.inventory.view_id, $scope.diff())
-          .then(save_item_resolve, save_item_reject)
-          .catch(save_item_catch);
+        inventory_service.update_property($scope.inventory.view_id, $scope.diff()).then(save_item_resolve, save_item_reject).catch(save_item_catch);
       } else if ($scope.inventory_type === 'taxlots') {
-        inventory_service
-          .update_taxlot($scope.inventory.view_id, $scope.diff())
-          .then(save_item_resolve, save_item_reject)
-          .catch(save_item_catch);
+        inventory_service.update_taxlot($scope.inventory.view_id, $scope.diff()).then(save_item_resolve, save_item_reject).catch(save_item_catch);
       }
     };
 
@@ -607,20 +590,11 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
             'column_mappings_service',
             'COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT',
             'COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM',
-            function (
-              column_mappings_service,
-              COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT,
-              COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM
-            ) {
-              var filter_profile_types = [
-                COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT,
-                COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM
-              ];
-              return column_mappings_service
-                .get_column_mapping_profiles_for_org($scope.organization.id, filter_profile_types)
-                .then(function (response) {
-                  return response.data;
-                });
+            function (column_mappings_service, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM) {
+              var filter_profile_types = [COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM];
+              return column_mappings_service.get_column_mapping_profiles_for_org($scope.organization.id, filter_profile_types).then(function (response) {
+                return response.data;
+              });
             }
           ]
         }
@@ -778,9 +752,7 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
     var table_container = $('.table-xscroll-fixed-header-container');
 
     table_container.scroll(function () {
-      $('.table-xscroll-fixed-header-container > .table-body-x-scroll').width(
-        table_container.width() + table_container.scrollLeft()
-      );
+      $('.table-xscroll-fixed-header-container > .table-body-x-scroll').width(table_container.width() + table_container.scrollLeft());
     });
 
     $scope.displayValue = function (dataType, value) {
@@ -794,28 +766,24 @@ angular.module('BE.seed.controller.inventory_detail', []).controller('inventory_
 
     // evaluate all derived columns and store the results
     var evaluate_derived_columns = function () {
-      const visible_columns_with_derived_columns = $scope.columns.filter(col => col.derived_column);
-      const derived_column_ids = visible_columns_with_derived_columns.map(col => col.derived_column);
-      const attatched_derived_columns = derived_columns_payload.derived_columns.filter(col =>
-        derived_column_ids.includes(col.id)
-      );
+      const visible_columns_with_derived_columns = $scope.columns.filter((col) => col.derived_column);
+      const derived_column_ids = visible_columns_with_derived_columns.map((col) => col.derived_column);
+      const attatched_derived_columns = derived_columns_payload.derived_columns.filter((col) => derived_column_ids.includes(col.id));
       column_name_lookup = {};
-      visible_columns_with_derived_columns.forEach(col => (column_name_lookup[col.column_name] = col.name));
+      visible_columns_with_derived_columns.forEach((col) => (column_name_lookup[col.column_name] = col.name));
 
-      const all_evaluation_results = attatched_derived_columns.map(col => {
-        return derived_columns_service
-          .evaluate($scope.organization.id, col.id, $scope.cycle.id, [$scope.item_parent.id])
-          .then(res => {
-            return {
-              derived_column_id: col.id,
-              value: _.round(res.results[0].value, $scope.organization.display_decimal_places)
-            };
-          });
+      const all_evaluation_results = attatched_derived_columns.map((col) => {
+        return derived_columns_service.evaluate($scope.organization.id, col.id, $scope.cycle.id, [$scope.item_parent.id]).then((res) => {
+          return {
+            derived_column_id: col.id,
+            value: _.round(res.results[0].value, $scope.organization.display_decimal_places)
+          };
+        });
       });
 
-      $q.all(all_evaluation_results).then(results => {
-        results.forEach(result => {
-          col_id = $scope.columns.find(col => col.derived_column == result.derived_column_id).id;
+      $q.all(all_evaluation_results).then((results) => {
+        results.forEach((result) => {
+          col_id = $scope.columns.find((col) => col.derived_column == result.derived_column_id).id;
           $scope.item_derived_values[col_id] = result.value;
         });
       });

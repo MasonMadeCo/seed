@@ -18,23 +18,7 @@ angular.module('BE.seed.controller.menu', []).controller('menu_controller', [
   'inventory_service',
   '$timeout',
   '$state',
-  function (
-    $rootScope,
-    $scope,
-    $location,
-    $window,
-    $uibModal,
-    $log,
-    urls,
-    auth_service,
-    organization_service,
-    user_service,
-    dataset_service,
-    modified_service,
-    inventory_service,
-    $timeout,
-    $state
-  ) {
+  function ($rootScope, $scope, $location, $window, $uibModal, $log, urls, auth_service, organization_service, user_service, dataset_service, modified_service, inventory_service, $timeout, $state) {
     // initial state of css classes for menu and sidebar
     $scope.expanded_controller = false;
     $scope.collapsed_controller = false;
@@ -170,7 +154,7 @@ angular.module('BE.seed.controller.menu', []).controller('menu_controller', [
             'Notification',
             'organization_service',
             function (Notification, organization_service) {
-              return organization_service.get_organization($scope.menu.user.organization.org_id).then(response => {
+              return organization_service.get_organization($scope.menu.user.organization.org_id).then((response) => {
                 if (!response.organization.cycles.length) {
                   Notification.error('Error: please create a cycle before Auto-Populating data');
                   return;
@@ -178,7 +162,7 @@ angular.module('BE.seed.controller.menu', []).controller('menu_controller', [
                 let lastCycleId = inventory_service.get_last_cycle();
                 let lastCycle;
                 if (typeof lastCycleId === 'number') {
-                  lastCycle = response.organization.cycles.find(cycle => cycle.cycle_id === lastCycleId);
+                  lastCycle = response.organization.cycles.find((cycle) => cycle.cycle_id === lastCycleId);
                 }
                 if (lastCycleId === undefined || !lastCycle) {
                   lastCycle = response.organization.cycles[0];

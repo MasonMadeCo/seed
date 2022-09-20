@@ -96,9 +96,7 @@ describe('When I go to admin page', function () {
     $('[ng-model="user.organization"]').element(by.cssContainingText('option', browser.params.testOrg.parent)).click();
     $('[ng-click="user_form.add(user)"]').click();
 
-    $('[ng-model="org_user.organization"]')
-      .element(by.cssContainingText('option', browser.params.testOrg.parent))
-      .click();
+    $('[ng-model="org_user.organization"]').element(by.cssContainingText('option', browser.params.testOrg.parent)).click();
     var myNewUser = element
       .all(by.repeater('user in org_user.users'))
       .filter(function (rows) {
@@ -112,9 +110,7 @@ describe('When I go to admin page', function () {
   });
 
   it('should delete new user for test org', function () {
-    $('[ng-model="org_user.organization"]')
-      .element(by.cssContainingText('option', browser.params.testOrg.parent))
-      .click();
+    $('[ng-model="org_user.organization"]').element(by.cssContainingText('option', browser.params.testOrg.parent)).click();
     var myNewUser = element
       .all(by.repeater('user in org_user.users'))
       .filter(function (rows) {

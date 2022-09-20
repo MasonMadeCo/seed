@@ -16,18 +16,7 @@ angular
     'urls',
     'analyses_service',
     'Notification',
-    function (
-      $scope,
-      analyses_payload,
-      organization_payload,
-      organization_service,
-      users_payload,
-      auth_payload,
-      messages_payload,
-      urls,
-      analyses_service,
-      Notification
-    ) {
+    function ($scope, analyses_payload, organization_payload, organization_service, users_payload, auth_payload, messages_payload, urls, analyses_service, Notification) {
       $scope.org = organization_payload.organization;
       $scope.auth = auth_payload.auth;
       $scope.analyses = analyses_payload.analyses;
@@ -41,7 +30,7 @@ angular
 
       $scope.$on('$destroy', () => {
         // cancel all polling
-        Object.values(analysis_polling_stoppers).forEach(stop_func => stop_func());
+        Object.values(analysis_polling_stoppers).forEach((stop_func) => stop_func());
       });
 
       const refresh_analyses = function () {
@@ -50,10 +39,10 @@ angular
         });
       };
 
-      const refresh_analysis = analysis_id => {
+      const refresh_analysis = (analysis_id) => {
         // update analysis in scope
-        return analyses_service.get_analysis_for_org(analysis_id, $scope.org.id).then(data => {
-          const analysis_index = $scope.analyses.findIndex(analysis => {
+        return analyses_service.get_analysis_for_org(analysis_id, $scope.org.id).then((data) => {
+          const analysis_index = $scope.analyses.findIndex((analysis) => {
             return analysis.id === analysis_id;
           });
           $scope.analyses[analysis_index] = data.analysis;
@@ -63,8 +52,8 @@ angular
 
       // add flag to the analysis indicating it has no currently running tasks
       // Used to determine if we should indicate on UI if an analysis's status is being polled
-      const mark_analysis_not_active = analysis_id => {
-        const analysis_index = $scope.analyses.findIndex(analysis => {
+      const mark_analysis_not_active = (analysis_id) => {
+        const analysis_index = $scope.analyses.findIndex((analysis) => {
           return analysis.id === analysis_id;
         });
         $scope.analyses[analysis_index]._finished_with_tasks = true;
@@ -72,7 +61,7 @@ angular
 
       // Entry point for keeping track of analysis progress
       // Refreshes analysis in $scope when necessary
-      const poll_analysis_progress = analysis => {
+      const poll_analysis_progress = (analysis) => {
         if (analysis_polling_stoppers[analysis.id]) {
           analysis_polling_stoppers[analysis.id]();
         }
@@ -82,7 +71,7 @@ angular
       };
 
       // start polling all of the analyses
-      $scope.analyses.forEach(analysis => {
+      $scope.analyses.forEach((analysis) => {
         poll_analysis_progress(analysis);
       });
 
@@ -95,7 +84,7 @@ angular
         analyses_service.start_analysis(analysis_id).then(function (result) {
           if (result.status === 'success') {
             Notification.primary('Analysis started');
-            refresh_analysis(analysis_id).then(updated_analysis => {
+            refresh_analysis(analysis_id).then((updated_analysis) => {
               poll_analysis_progress(updated_analysis);
             });
           } else {
@@ -113,7 +102,7 @@ angular
         analyses_service.stop_analysis(analysis_id).then(function (result) {
           if (result.status === 'success') {
             Notification.primary('Analysis stopped');
-            refresh_analysis(analysis_id).then(updated_analysis => {
+            refresh_analysis(analysis_id).then((updated_analysis) => {
               poll_analysis_progress(updated_analysis);
             });
           } else {
@@ -133,7 +122,7 @@ angular
             Notification.primary('Analysis deleted');
             // stop polling and remove the analysis from the scope
             analysis_polling_stoppers[analysis_id]();
-            const analysis_index = $scope.analyses.findIndex(analysis => {
+            const analysis_index = $scope.analyses.findIndex((analysis) => {
               return analysis.id === analysis_id;
             });
             $scope.analyses.splice(analysis_index, 1);

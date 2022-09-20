@@ -29,54 +29,30 @@
               </td>
               <td class="account_org right">
                 <a ui-sref="organization_settings(::{organization_id: org.id})"><i class="fa fa-cogs"></i>Settings</a>
-                <a ui-sref="organization_sharing(::{organization_id: org.id})" ng-if="::org.is_parent"
-                  ><i class="fa fa-share-square-o"></i>{$:: 'Sharing' | translate $}</a
-                >
-                <a
-                  ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'properties'})"
-                  ng-if="::org.is_parent"
+                <a ui-sref="organization_sharing(::{organization_id: org.id})" ng-if="::org.is_parent"><i class="fa fa-share-square-o"></i>{$:: 'Sharing' | translate $}</a>
+                <a ui-sref="organization_column_settings(::{organization_id: org.id, inventory_type: 'properties'})" ng-if="::org.is_parent"
                   ><i class="fa fa-sliders"></i>{$:: 'Column Settings' | translate $}</a
                 >
-                <a
-                  ui-sref="organization_column_mappings(::{organization_id: org.id, inventory_type: 'properties'})"
-                  ng-if="::org.is_parent"
+                <a ui-sref="organization_column_mappings(::{organization_id: org.id, inventory_type: 'properties'})" ng-if="::org.is_parent"
                   ><i class="fa fa-sitemap"></i>{$:: 'Column Mappings' | translate $}</a
                 >
-                <a
-                  ui-sref="organization_data_quality(::{organization_id: org.id, inventory_type: 'properties'})"
-                  ng-if="::org.is_parent"
+                <a ui-sref="organization_data_quality(::{organization_id: org.id, inventory_type: 'properties'})" ng-if="::org.is_parent"
                   ><i class="fa fa-flag"></i>{$:: 'Data Quality' | translate $}</a
                 >
-                <a ui-sref="organization_cycles(::{organization_id: org.id})" ng-if="::org.is_parent"
-                  ><i class="fa fa-calendar"></i>{$:: 'Cycles' | translate $}</a
-                >
-                <a ui-sref="organization_labels(::{organization_id: org.id})"
-                  ><i class="fa fa-tags"></i>{$:: 'Labels' | translate $}</a
-                >
-                <a ui-sref="organization_sub_orgs(::{organization_id: org.id})" ng-if="::org.is_parent"
-                  ><i class="fa fa-users"></i>{$:: 'Sub-Organizations' | translate $}</a
-                >
-                <a ui-sref="organization_members(::{organization_id: org.id})"
-                  ><i class="fa fa-user"></i>{$:: 'Members' | translate $}</a
-                >
-                <a ui-sref="organization_email_templates(::{organization_id: org.id})"
-                  ><i class="fa fa-envelope"></i>{$:: 'Email Templates' | translate $}</a
-                >
-                <a ui-sref="analyses(::{organization_id: org.id})"
-                  ><i class="fa fa-bar-chart"></i>{$:: 'Analyses' | translate $}</a
-                >
-                <a ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'properties'})"
-                  ><i class="fa fa-calculator"></i>Derived Columns</a
-                >
+                <a ui-sref="organization_cycles(::{organization_id: org.id})" ng-if="::org.is_parent"><i class="fa fa-calendar"></i>{$:: 'Cycles' | translate $}</a>
+                <a ui-sref="organization_labels(::{organization_id: org.id})"><i class="fa fa-tags"></i>{$:: 'Labels' | translate $}</a>
+                <a ui-sref="organization_sub_orgs(::{organization_id: org.id})" ng-if="::org.is_parent"><i class="fa fa-users"></i>{$:: 'Sub-Organizations' | translate $}</a>
+                <a ui-sref="organization_members(::{organization_id: org.id})"><i class="fa fa-user"></i>{$:: 'Members' | translate $}</a>
+                <a ui-sref="organization_email_templates(::{organization_id: org.id})"><i class="fa fa-envelope"></i>{$:: 'Email Templates' | translate $}</a>
+                <a ui-sref="analyses(::{organization_id: org.id})"><i class="fa fa-bar-chart"></i>{$:: 'Analyses' | translate $}</a>
+                <a ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'properties'})"><i class="fa fa-calculator"></i>Derived Columns</a>
                 <i class="fa fa-cog"></i>
               </td>
             </tr>
             <tr ng-if="::org.is_parent">
               <th class="sub_head sub_org" translate>Sub-Organizations</th>
               <th class="sub_head sub_org right">
-                <a ng-click="create_sub_organization_modal(org)"
-                  ><i class="fa fa-plus"></i>{$:: 'Create new sub-organization' | translate $}</a
-                >
+                <a ng-click="create_sub_organization_modal(org)"><i class="fa fa-plus"></i>{$:: 'Create new sub-organization' | translate $}</a>
                 <i class="fa fa-cog"></i>
               </th>
             </tr>
@@ -85,15 +61,9 @@
                 <a ui-sref="organization_members(::{organization_id: sub_org.id})">{$:: sub_org.name $}</a>
               </td>
               <td class="account_org right">
-                <a ui-sref="organization_settings(::{organization_id: sub_org.id})"
-                  ><i class="fa fa-cogs"></i>{$:: 'Settings' | translate $}</a
-                >
-                <a ui-sref="organization_labels(::{organization_id: sub_org.id})"
-                  ><i class="fa fa-tags"></i>{$:: 'Labels' | translate $}</a
-                >
-                <a ui-sref="organization_members(::{organization_id: sub_org.id})"
-                  ><i class="fa fa-user"></i>{$:: 'Members' | translate $}</a
-                >
+                <a ui-sref="organization_settings(::{organization_id: sub_org.id})"><i class="fa fa-cogs"></i>{$:: 'Settings' | translate $}</a>
+                <a ui-sref="organization_labels(::{organization_id: sub_org.id})"><i class="fa fa-tags"></i>{$:: 'Labels' | translate $}</a>
+                <a ui-sref="organization_members(::{organization_id: sub_org.id})"><i class="fa fa-user"></i>{$:: 'Members' | translate $}</a>
                 <i class="fa fa-cog"></i>
               </td>
             </tr>
@@ -123,20 +93,14 @@
           <tbody>
             <tr ng-repeat="org in orgs">
               <td class="align_to_top">
-                <a ui-sref="organization_members(::{organization_id: org.id})" ng-if="org.user_role !== 'viewer'"
-                  >{$ org.name $}</a
-                >
+                <a ui-sref="organization_members(::{organization_id: org.id})" ng-if="org.user_role !== 'viewer'">{$ org.name $}</a>
                 <span ng-if="org.user_role === 'viewer'">{$ org.name $}</span>
               </td>
               <td class="align_to_top">
-                <div ng-repeat="cycle in org.cycles" ng-if="cycle.num_properties">
-                  {$ cycle.name $}: {$ cycle.num_properties $}
-                </div>
+                <div ng-repeat="cycle in org.cycles" ng-if="cycle.num_properties">{$ cycle.name $}: {$ cycle.num_properties $}</div>
               </td>
               <td class="align_to_top">
-                <div ng-repeat="cycle in org.cycles" ng-if="cycle.num_taxlots">
-                  {$ cycle.name $}: {$ cycle.num_taxlots $}
-                </div>
+                <div ng-repeat="cycle in org.cycles" ng-if="cycle.num_taxlots">{$ cycle.name $}: {$ cycle.num_taxlots $}</div>
               </td>
               <td class="align_to_top">{$ org.user_role || "-" $}</td>
               <td>

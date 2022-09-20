@@ -15,19 +15,7 @@ describe('controller: inventory_detail_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function (
-      $controller,
-      $rootScope,
-      $state,
-      $uibModal,
-      $log,
-      $filter,
-      $stateParams,
-      $q,
-      urls,
-      label_service,
-      inventory_service
-    ) {
+    inject(function ($controller, $rootScope, $state, $uibModal, $log, $filter, $stateParams, $q, urls, label_service, inventory_service) {
       controller = $controller;
       state = $state;
       ngFilter = $filter;
@@ -358,10 +346,7 @@ describe('controller: inventory_detail_controller', function () {
     inventory_detail_controller_scope.save_item();
 
     // assertions
-    expect(mock_inventory_service.update_property).toHaveBeenCalledWith(
-      inventory_detail_controller_scope.inventory.view_id,
-      inventory_detail_controller_scope.item_state
-    );
+    expect(mock_inventory_service.update_property).toHaveBeenCalledWith(inventory_detail_controller_scope.inventory.view_id, inventory_detail_controller_scope.item_state);
     expect(inventory_detail_controller_scope.item_state.address_line_1).toEqual('ABC Main St.');
   });
 

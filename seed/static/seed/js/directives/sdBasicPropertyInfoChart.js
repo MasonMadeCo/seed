@@ -84,13 +84,7 @@ angular.module('sdBasicPropertyInfoChart', []).directive('sdBasicPropertyInfoCha
           var self = this;
           var truncateLength = 15;
 
-          var defaultColors = [
-            new dimple.color('#458cc8'),
-            new dimple.color('#c83737'),
-            new dimple.color('#1159a3'),
-            new dimple.color('#f2c41d'),
-            new dimple.color('#939495')
-          ];
+          var defaultColors = [new dimple.color('#458cc8'), new dimple.color('#c83737'), new dimple.color('#1159a3'), new dimple.color('#f2c41d'), new dimple.color('#939495')];
 
           var width = '100%';
           var height = $scope.height;
@@ -108,17 +102,7 @@ angular.module('sdBasicPropertyInfoChart', []).directive('sdBasicPropertyInfoCha
 
           /*  Define the Dimple chart and load data based on the configuration and data arguments passed in.
          We do a complete recreation of the chart each time this method is called.  */
-          this.updateChart = function (
-            series,
-            chartData,
-            xAxisTitle,
-            yAxisTitle,
-            yAxisType,
-            yAxisMin,
-            xAxisTickFormat,
-            yAxisTickFormat,
-            colors
-          ) {
+          this.updateChart = function (series, chartData, xAxisTitle, yAxisTitle, yAxisType, yAxisMin, xAxisTickFormat, yAxisTickFormat, colors) {
             self.clearChart();
             self.createChart();
             self.createChartAxes(yAxisType, yAxisMin, xAxisTickFormat, yAxisTickFormat);

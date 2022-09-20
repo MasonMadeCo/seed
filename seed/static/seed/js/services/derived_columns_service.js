@@ -27,10 +27,7 @@ angular.module('BE.seed.service.derived_columns', []).factory('derived_columns_s
       });
     };
 
-    derived_columns_factory.create_derived_column = function (
-      organization_id,
-      { name, expression, inventory_type, parameters }
-    ) {
+    derived_columns_factory.create_derived_column = function (organization_id, { name, expression, inventory_type, parameters }) {
       return $http({
         url: '/api/v3/derived_columns/',
         method: 'POST',
@@ -41,11 +38,7 @@ angular.module('BE.seed.service.derived_columns', []).factory('derived_columns_s
       });
     };
 
-    derived_columns_factory.update_derived_column = function (
-      organization_id,
-      derived_column_id,
-      { name, expression, inventory_type, parameters }
-    ) {
+    derived_columns_factory.update_derived_column = function (organization_id, derived_column_id, { name, expression, inventory_type, parameters }) {
       return $http({
         url: `/api/v3/derived_columns/${derived_column_id}/`,
         method: 'PUT',

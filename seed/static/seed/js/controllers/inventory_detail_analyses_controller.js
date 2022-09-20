@@ -133,9 +133,7 @@ angular.module('BE.seed.controller.inventory_detail_analyses', []).controller('i
       }
       $scope.inventory_name = $scope.item_state[field]
         ? $scope.item_state[field]
-        : '(' +
-          error +
-          ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
+        : '(' + error + ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
     };
 
     $scope.open_analysis_modal = function () {

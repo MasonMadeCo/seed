@@ -7,9 +7,7 @@
 <div class="page_header_container">
   <div class="page_header">
     <div class="left page_action_container">
-      <a ui-sref="organizations" class="page_action"
-        ><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a
-      >
+      <a ui-sref="organizations" class="page_action"><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a>
     </div>
     <div class="page_title">
       <h1>{$:: org.name $}</h1>
@@ -49,24 +47,10 @@
       >
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
       </button>
-      <button
-        class="btn btn-primary"
-        type="button"
-        ng-click="rename_profile()"
-        ng-disabled="!profiles.length || !profile_action_ok('rename')"
-        tooltip-placement="bottom"
-        uib-tooltip="Rename"
-      >
+      <button class="btn btn-primary" type="button" ng-click="rename_profile()" ng-disabled="!profiles.length || !profile_action_ok('rename')" tooltip-placement="bottom" uib-tooltip="Rename">
         <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
       </button>
-      <button
-        class="btn btn-danger"
-        type="button"
-        ng-click="remove_profile()"
-        ng-disabled="!profiles.length || !profile_action_ok('delete')"
-        tooltip-placement="bottom"
-        uib-tooltip="Delete"
-      >
+      <button class="btn btn-danger" type="button" ng-click="remove_profile()" ng-disabled="!profiles.length || !profile_action_ok('delete')" tooltip-placement="bottom" uib-tooltip="Delete">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
       <button class="btn btn-info" type="button" ng-click="new_profile()" tooltip-placement="bottom" uib-tooltip="New">
@@ -92,13 +76,7 @@
       <div class="col-sm-5 key tab_content wide" ng-hide="!profile_action_ok('copy_csv_headers')">
         <p translate>IF_MARKED_AS_DUPLICATE_ADVICE</p>
         <br />
-        <textarea
-          ng-model="csv_headers"
-          rows="8"
-          cols="45"
-          style="resize: none"
-          placeholder="<File Column 1>,<File Column 2>,<File Column 3>,..."
-        ></textarea>
+        <textarea ng-model="csv_headers" rows="8" cols="45" style="resize: none" placeholder="<File Column 1>,<File Column 2>,<File Column 3>,..."></textarea>
         <br />
         <button
           class="btn btn-info"
@@ -115,23 +93,11 @@
     </div>
   </div>
   <div class="section_content_container">
-    <div
-      class="section_content with_padding"
-      style="margin-bottom: 15px; padding-right: 200px"
-      ng-hide="!profile_action_ok('mirror_data_file_headers')"
-    >
-      <button type="button" class="btn btn-primary" ng-click="mirror_data_file_headers()" translate>
-        Copy Data File Headers directly to SEED Headers
-      </button>
+    <div class="section_content with_padding" style="margin-bottom: 15px; padding-right: 200px" ng-hide="!profile_action_ok('mirror_data_file_headers')">
+      <button type="button" class="btn btn-primary" ng-click="mirror_data_file_headers()" translate>Copy Data File Headers directly to SEED Headers</button>
     </div>
-    <div
-      class="section_content with_padding"
-      style="margin-bottom: 15px; padding-right: 200px"
-      ng-hide="!profile_action_ok('suggestions_from_existing_columns')"
-    >
-      <button type="button" class="btn btn-primary" ng-click="suggestions_from_existing_columns()" translate>
-        Populate SEED Headers with best known matches
-      </button>
+    <div class="section_content with_padding" style="margin-bottom: 15px; padding-right: 200px" ng-hide="!profile_action_ok('suggestions_from_existing_columns')">
+      <button type="button" class="btn btn-primary" ng-click="suggestions_from_existing_columns()" translate>Populate SEED Headers with best known matches</button>
     </div>
 
     <div class="alert alert-danger" ng-show="header_duplicates_present()" translate>DATA_FILE_HEADER_DUP_WARNING</div>
@@ -150,11 +116,7 @@
               <td style="border-right: 0 none; max-width: 160px; width: 160px; text-align: right">
                 <span ng-hide="!profile_action_ok('set_all_inventory_types')">
                   <span style="padding-right: 5px">{$:: 'Set all fields to' | translate $}:</span>
-                  <select
-                    ng-model="setAllFields"
-                    ng-change="setAllInventoryTypes()"
-                    ng-options="item as (item.name | translate) for item in ::setAllFieldsOptions track by item.value"
-                  ></select>
+                  <select ng-model="setAllFields" ng-change="setAllInventoryTypes()" ng-options="item as (item.name | translate) for item in ::setAllFieldsOptions track by item.value"></select>
                 </span>
               </td>
               <td style="border-right: 0 none">
@@ -168,16 +130,11 @@
             <tr>
               <th><translate>Inventory Type</translate></th>
               <th class="mapping_field ellipsis-resizable" ng-click="sort_by('seed')" sd-resizable>
-                <span
-                  ><translate>SEED Header</translate><i class="glyphicon {$ get_sort_icon('seed') $} pad-left-5"></i
-                ></span>
+                <span><translate>SEED Header</translate><i class="glyphicon {$ get_sort_icon('seed') $} pad-left-5"></i></span>
               </th>
               <th><translate>Measurement Units</translate></th>
               <th class="import_column_name ellipsis-resizable" ng-click="sort_by('file')" sd-resizable>
-                <span
-                  ><translate>Data File Header</translate
-                  ><i class="glyphicon {$ get_sort_icon('file') $} pad-left-5"></i
-                ></span>
+                <span><translate>Data File Header</translate><i class="glyphicon {$ get_sort_icon('file') $} pad-left-5"></i></span>
               </th>
               <th style="width: 120px">
                 <button
@@ -198,15 +155,10 @@
               <td style="text-align: right" ng-attr-id="mapped-row-type-{$:: $index $}">
                 <select ng-model="col.to_table_name" ng-change="updateSingleInventoryTypeDropdown()">
                   <option value="PropertyState" translate>Property</option>
-                  <option value="TaxLotState" translate ng-if="profile_action_ok('select_tax_lot_state')">
-                    Tax Lot
-                  </option>
+                  <option value="TaxLotState" translate ng-if="profile_action_ok('select_tax_lot_state')">Tax Lot</option>
                 </select>
               </td>
-              <td
-                ng-class="{'danger': col.is_duplicate || col.suggestion === ''}"
-                ng-attr-id="mapped-row-input-{$:: $index $}"
-              >
+              <td ng-class="{'danger': col.is_duplicate || col.suggestion === ''}" ng-attr-id="mapped-row-input-{$:: $index $}">
                 <input
                   type="text"
                   uib-typeahead="column.displayName for column in (col.to_table_name === 'PropertyState' ? mappable_property_columns : mappable_taxlot_columns) | filter:$viewValue | limitTo:20"
@@ -221,21 +173,11 @@
                 />
               </td>
               <td ng-class="{'danger': col.from_units === null && (is_area_column(col) || is_eui_column(col))}">
-                <select
-                  ng-model="col.from_units"
-                  ng-change="flag_change()"
-                  ng-if="is_area_column(col)"
-                  ng-disabled="!profile_action_ok('change_from_units')"
-                >
+                <select ng-model="col.from_units" ng-change="flag_change()" ng-if="is_area_column(col)" ng-disabled="!profile_action_ok('change_from_units')">
                   <option value="ft**2" translate>square feet</option>
                   <option value="m**2" translate>square metres</option>
                 </select>
-                <select
-                  ng-model="col.from_units"
-                  ng-change="flag_change()"
-                  ng-if="is_eui_column(col)"
-                  ng-disabled="!profile_action_ok('change_from_units')"
-                >
+                <select ng-model="col.from_units" ng-change="flag_change()" ng-if="is_eui_column(col)" ng-disabled="!profile_action_ok('change_from_units')">
                   <option value="kBtu/ft**2/year" translate>kBtu/sq. ft./year</option>
                   <option value="kWh/m**2/year" translate>kWh/m²/year</option>
                   <option value="GJ/m**2/year" translate>GJ/m²/year</option>
@@ -254,24 +196,11 @@
                 </select>
               </td>
               <td ng-class="{'danger': is_file_header_duplicate(col)}">
-                <input
-                  type="text"
-                  class="form-control input-sm tcm_field"
-                  ng-model="col.from_field"
-                  ng-change="flag_change()"
-                  ng-disabled="!profile_action_ok('change_from_field')"
-                />
+                <input type="text" class="form-control input-sm tcm_field" ng-model="col.from_field" ng-change="flag_change()" ng-disabled="!profile_action_ok('change_from_field')" />
               </td>
               <td ng-repeat="cell_value in ::col.raw_data track by $index">{$:: cell_value $}</td>
               <td style="text-align: center">
-                <button
-                  class="btn btn-danger"
-                  type="button"
-                  ng-click="remove_column(index)"
-                  tooltip-placement="bottom"
-                  uib-tooltip="Delete"
-                  ng-hide="!profile_action_ok('remove_column')"
-                >
+                <button class="btn btn-danger" type="button" ng-click="remove_column(index)" tooltip-placement="bottom" uib-tooltip="Delete" ng-hide="!profile_action_ok('remove_column')">
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </button>
               </td>

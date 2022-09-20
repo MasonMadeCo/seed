@@ -14,19 +14,7 @@ angular.module('BE.seed.controller.delete_cycle_modal', []).controller('delete_c
   'uploader_service',
   'cycle',
   'organization_id',
-  function (
-    $scope,
-    $window,
-    $state,
-    $q,
-    $uibModalInstance,
-    inventory_service,
-    user_service,
-    cycle_service,
-    uploader_service,
-    cycle,
-    organization_id
-  ) {
+  function ($scope, $window, $state, $q, $uibModalInstance, inventory_service, user_service, cycle_service, uploader_service, cycle, organization_id) {
     $scope.cycle_id = cycle.cycle_id;
     $scope.cycle_name = cycle.name;
     $scope.organization_id = organization_id;

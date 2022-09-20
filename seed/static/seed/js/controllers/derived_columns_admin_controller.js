@@ -14,18 +14,7 @@ angular.module('BE.seed.controller.derived_columns_admin', []).controller('deriv
   'auth_payload',
   'organization_payload',
   'derived_columns_payload',
-  function (
-    $scope,
-    $log,
-    $state,
-    $stateParams,
-    derived_columns_service,
-    Notification,
-    simple_modal_service,
-    auth_payload,
-    organization_payload,
-    derived_columns_payload
-  ) {
+  function ($scope, $log, $state, $stateParams, derived_columns_service, Notification, simple_modal_service, auth_payload, organization_payload, derived_columns_payload) {
     $scope.auth = auth_payload.auth;
     $scope.org = organization_payload.organization;
     $scope.derived_columns = derived_columns_payload.derived_columns;
@@ -52,7 +41,7 @@ angular.module('BE.seed.controller.derived_columns_admin', []).controller('deriv
     };
 
     $scope.delete_derived_column = function (derived_column_id) {
-      const derived_column = $scope.derived_columns.find(dc => dc.id == derived_column_id);
+      const derived_column = $scope.derived_columns.find((dc) => dc.id == derived_column_id);
 
       const modalOptions = {
         type: 'default',
@@ -70,23 +59,19 @@ angular.module('BE.seed.controller.derived_columns_admin', []).controller('deriv
               Notification.success(`Deleted "${derived_column.name}"`);
               derived_columns_service
                 .get_derived_columns($scope.org.id, $stateParams.inventory_type)
-                .then(res => ($scope.derived_columns = res.derived_columns))
-                .catch(err => {
+                .then((res) => ($scope.derived_columns = res.derived_columns))
+                .catch((err) => {
                   $log.error(err);
                   // try just refreshing the page...
                   location.reload();
                 });
             })
-            .catch(err => {
+            .catch((err) => {
               $log.error(err);
               if (err.data.detail == 'Cannot delete protected objects while related objects still exist') {
-                Notification.error(
-                  `Cannot delete Derived Column "${derived_column.name}" while related Derived Columns exist. Delete unrelated Derived Columns and retry.`
-                );
+                Notification.error(`Cannot delete Derived Column "${derived_column.name}" while related Derived Columns exist. Delete unrelated Derived Columns and retry.`);
               } else {
-                Notification.error(
-                  `Error attempting to delete "${derived_column.name}". Please refresh the page and try again.`
-                );
+                Notification.error(`Error attempting to delete "${derived_column.name}". Please refresh the page and try again.`);
               }
             });
         },

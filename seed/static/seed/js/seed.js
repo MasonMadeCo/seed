@@ -118,28 +118,8 @@ angular.module('BE.seed.controllers', [
   'BE.seed.controller.unmerge_modal',
   'BE.seed.controller.update_item_labels_modal'
 ]);
-angular.module('BE.seed.filters', [
-  'district',
-  'fromNow',
-  'getAnalysisRunAuthor',
-  'htmlToPlainText',
-  'ignoremap',
-  'startFrom',
-  'stripImportPrefix',
-  'titleCase',
-  'typedNumber'
-]);
-angular.module('BE.seed.directives', [
-  'sdBasicPropertyInfoChart',
-  'sdCheckCycleExists',
-  'sdCheckLabelExists',
-  'sdDropdown',
-  'sdEnter',
-  'sdLabel',
-  'sdResizable',
-  'sdScrollSync',
-  'sdUploader'
-]);
+angular.module('BE.seed.filters', ['district', 'fromNow', 'getAnalysisRunAuthor', 'htmlToPlainText', 'ignoremap', 'startFrom', 'stripImportPrefix', 'titleCase', 'typedNumber']);
+angular.module('BE.seed.directives', ['sdBasicPropertyInfoChart', 'sdCheckCycleExists', 'sdCheckLabelExists', 'sdDropdown', 'sdEnter', 'sdLabel', 'sdResizable', 'sdScrollSync', 'sdUploader']);
 angular.module('BE.seed.services', [
   'BE.seed.service.audit_template',
   'BE.seed.service.analyses',
@@ -177,16 +157,7 @@ angular.module('BE.seed.utilities', ['BE.seed.utility.spinner']);
 
 var SEED_app = angular.module(
   'BE.seed',
-  [
-    'BE.seed.angular_dependencies',
-    'BE.seed.vendor_dependencies',
-    'BE.seed.filters',
-    'BE.seed.directives',
-    'BE.seed.services',
-    'BE.seed.controllers',
-    'BE.seed.utilities',
-    'BE.seed.constants'
-  ],
+  ['BE.seed.angular_dependencies', 'BE.seed.vendor_dependencies', 'BE.seed.filters', 'BE.seed.directives', 'BE.seed.services', 'BE.seed.controllers', 'BE.seed.utilities', 'BE.seed.constants'],
   [
     '$interpolateProvider',
     '$qProvider',
@@ -213,19 +184,7 @@ SEED_app.run([
   'editableOptions',
   'modified_service',
   'spinner_utility',
-  function (
-    $rootScope,
-    $cookies,
-    $http,
-    $log,
-    $q,
-    $state,
-    $transitions,
-    $translate,
-    editableOptions,
-    modified_service,
-    spinner_utility
-  ) {
+  function ($rootScope, $cookies, $http, $log, $q, $state, $transitions, $translate, editableOptions, modified_service, spinner_utility) {
     var csrftoken = $cookies.get('csrftoken');
     BE.csrftoken = csrftoken;
     $http.defaults.headers.common['X-CSRFToken'] = csrftoken;
@@ -256,11 +215,7 @@ SEED_app.run([
     });
 
     $transitions.onSuccess({}, function (/*transition*/) {
-      if (
-        $rootScope.route_load_error &&
-        $rootScope.load_error_message ===
-          'Your SEED account is not associated with any organizations. Please contact a SEED administrator.'
-      ) {
+      if ($rootScope.route_load_error && $rootScope.load_error_message === 'Your SEED account is not associated with any organizations. Please contact a SEED administrator.') {
         $state.go('home');
         return;
       }
@@ -274,11 +229,7 @@ SEED_app.run([
       if (transition.error().message === 'The transition was ignored') return;
 
       // route_load_error already set (User has no associated orgs)
-      if (
-        $rootScope.route_load_error &&
-        $rootScope.load_error_message ===
-          'Your SEED account is not associated with any organizations. Please contact a SEED administrator.'
-      ) {
+      if ($rootScope.route_load_error && $rootScope.load_error_message === 'Your SEED account is not associated with any organizations. Please contact a SEED administrator.') {
         $state.go('home');
         return;
       }
@@ -528,20 +479,18 @@ SEED_app.config([
             'user_service',
             '$q',
             function (auth_service, user_service, $q) {
-              return auth_service
-                .is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member'])
-                .then(
-                  function (data) {
-                    if (data.auth.requires_member) {
-                      return data;
-                    } else {
-                      return $q.reject('not authorized');
-                    }
-                  },
-                  function (data) {
-                    return $q.reject(data.message);
+              return auth_service.is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member']).then(
+                function (data) {
+                  if (data.auth.requires_member) {
+                    return data;
+                  } else {
+                    return $q.reject('not authorized');
                   }
-                );
+                },
+                function (data) {
+                  return $q.reject(data.message);
+                }
+              );
             }
           ]
         }
@@ -557,10 +506,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_for_org(
-                $stateParams.analysis_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_for_org($stateParams.analysis_id, user_service.get_organization().id);
             }
           ],
           messages_payload: [
@@ -568,10 +514,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_messages_for_org(
-                $stateParams.analysis_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_messages_for_org($stateParams.analysis_id, user_service.get_organization().id);
             }
           ],
           organization_payload: [
@@ -595,10 +538,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_views_for_org(
-                $stateParams.analysis_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_views_for_org($stateParams.analysis_id, user_service.get_organization().id);
             }
           ],
           auth_payload: [
@@ -606,20 +546,18 @@ SEED_app.config([
             'user_service',
             '$q',
             function (auth_service, user_service, $q) {
-              return auth_service
-                .is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member'])
-                .then(
-                  function (data) {
-                    if (data.auth.requires_member) {
-                      return data;
-                    } else {
-                      return $q.reject('not authorized');
-                    }
-                  },
-                  function (data) {
-                    return $q.reject(data.message);
+              return auth_service.is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member']).then(
+                function (data) {
+                  if (data.auth.requires_member) {
+                    return data;
+                  } else {
+                    return $q.reject('not authorized');
                   }
-                );
+                },
+                function (data) {
+                  return $q.reject(data.message);
+                }
+              );
             }
           ]
         }
@@ -635,10 +573,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_for_org(
-                $stateParams.analysis_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_for_org($stateParams.analysis_id, user_service.get_organization().id);
             }
           ],
           messages_payload: [
@@ -646,10 +581,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_messages_for_org(
-                $stateParams.analysis_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_messages_for_org($stateParams.analysis_id, user_service.get_organization().id);
             }
           ],
           view_payload: [
@@ -657,11 +589,7 @@ SEED_app.config([
             'user_service',
             '$stateParams',
             function (analyses_service, user_service, $stateParams) {
-              return analyses_service.get_analysis_view_for_org(
-                $stateParams.analysis_id,
-                $stateParams.run_id,
-                user_service.get_organization().id
-              );
+              return analyses_service.get_analysis_view_for_org($stateParams.analysis_id, $stateParams.run_id, user_service.get_organization().id);
             }
           ],
           organization_payload: [
@@ -685,20 +613,18 @@ SEED_app.config([
             'user_service',
             '$q',
             function (auth_service, user_service, $q) {
-              return auth_service
-                .is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member'])
-                .then(
-                  function (data) {
-                    if (data.auth.requires_member) {
-                      return data;
-                    } else {
-                      return $q.reject('not authorized');
-                    }
-                  },
-                  function (data) {
-                    return $q.reject(data.message);
+              return auth_service.is_authorized(user_service.get_organization().id, ['requires_owner', 'requires_member']).then(
+                function (data) {
+                  if (data.auth.requires_member) {
+                    return data;
+                  } else {
+                    return $q.reject('not authorized');
                   }
-                );
+                },
+                function (data) {
+                  return $q.reject(data.message);
+                }
+              );
             }
           ]
         }
@@ -879,8 +805,7 @@ SEED_app.config([
                 return _.find(profiles, { id: lastProfileId });
               }
               var currentProfile = _.first(profiles);
-              if (currentProfile)
-                inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
+              if (currentProfile) inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
               return currentProfile;
             }
           ]
@@ -967,19 +892,14 @@ SEED_app.config([
             ) {
               var filter_profile_types;
               if (import_file_payload.import_file.source_type === 'BuildingSync Raw') {
-                filter_profile_types = [
-                  COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT,
-                  COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM
-                ];
+                filter_profile_types = [COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_DEFAULT, COLUMN_MAPPING_PROFILE_TYPE_BUILDINGSYNC_CUSTOM];
               } else {
                 filter_profile_types = [COLUMN_MAPPING_PROFILE_TYPE_NORMAL];
               }
               var organization_id = user_service.get_organization().id;
-              return column_mappings_service
-                .get_column_mapping_profiles_for_org(organization_id, filter_profile_types)
-                .then(function (response) {
-                  return response.data;
-                });
+              return column_mappings_service.get_column_mapping_profiles_for_org(organization_id, filter_profile_types).then(function (response) {
+                return response.data;
+              });
             }
           ],
           import_file_payload: [
@@ -1211,10 +1131,7 @@ SEED_app.config([
             'spinner_utility',
             function (dataset_service, $stateParams, $state, $q, spinner_utility) {
               return dataset_service.get_dataset($stateParams.dataset_id).catch(function (response) {
-                if (
-                  response.status === 400 &&
-                  response.data.message === 'Organization ID mismatch between dataset and organization'
-                ) {
+                if (response.status === 400 && response.data.message === 'Organization ID mismatch between dataset and organization') {
                   // Org id mismatch, likely due to switching organizations while viewing a dataset_detail page
                   _.delay(function () {
                     $state.go('dataset_list');
@@ -1499,11 +1416,9 @@ SEED_app.config([
             '$stateParams',
             function (column_mappings_service, $stateParams) {
               var organization_id = $stateParams.organization_id;
-              return column_mappings_service
-                .get_column_mapping_profiles_for_org(organization_id)
-                .then(function (response) {
-                  return response.data;
-                });
+              return column_mappings_service.get_column_mapping_profiles_for_org(organization_id).then(function (response) {
+                return response.data;
+              });
             }
           ],
           organization_payload: [
@@ -1601,10 +1516,7 @@ SEED_app.config([
             'derived_columns_service',
             '$stateParams',
             function (derived_columns_service, $stateParams) {
-              return derived_columns_service.get_derived_columns(
-                $stateParams.organization_id,
-                $stateParams.inventory_type
-              );
+              return derived_columns_service.get_derived_columns($stateParams.organization_id, $stateParams.inventory_type);
             }
           ],
           organization_payload: [
@@ -1822,26 +1734,18 @@ SEED_app.config([
             '$q',
             function (auth_service, $stateParams, $q) {
               var organization_id = $stateParams.organization_id;
-              return auth_service
-                .is_authorized(organization_id, [
-                  'can_invite_member',
-                  'can_remove_member',
-                  'requires_owner',
-                  'requires_member',
-                  'requires_superuser'
-                ])
-                .then(
-                  function (data) {
-                    if (data.auth.requires_member) {
-                      return data;
-                    } else {
-                      return $q.reject('not authorized');
-                    }
-                  },
-                  function (data) {
-                    return $q.reject(data.message);
+              return auth_service.is_authorized(organization_id, ['can_invite_member', 'can_remove_member', 'requires_owner', 'requires_member', 'requires_superuser']).then(
+                function (data) {
+                  if (data.auth.requires_member) {
+                    return data;
+                  } else {
+                    return $q.reject('not authorized');
                   }
-                );
+                },
+                function (data) {
+                  return $q.reject(data.message);
+                }
+              );
             }
           ],
           user_profile_payload: [
@@ -1903,8 +1807,7 @@ SEED_app.config([
                 return _.find(templates_payload, { id: lastTemplateId });
               }
               var currentTemplate = _.first(templates_payload);
-              if (currentTemplate)
-                postoffice_service.save_last_template(currentTemplate.id, $stateParams.organization_id);
+              if (currentTemplate) postoffice_service.save_last_template(currentTemplate.id, $stateParams.organization_id);
               return currentTemplate;
             }
           ]
@@ -1928,10 +1831,7 @@ SEED_app.config([
             'derived_columns_service',
             '$stateParams',
             function (derived_columns_service, $stateParams) {
-              return derived_columns_service.get_derived_columns(
-                $stateParams.organization_id,
-                $stateParams.inventory_type
-              );
+              return derived_columns_service.get_derived_columns($stateParams.organization_id, $stateParams.inventory_type);
             }
           ],
           auth_payload: [
@@ -1978,10 +1878,7 @@ SEED_app.config([
                 return {};
               }
 
-              return derived_columns_service.get_derived_column(
-                $stateParams.organization_id,
-                $stateParams.derived_column_id
-              );
+              return derived_columns_service.get_derived_column($stateParams.organization_id, $stateParams.derived_column_id);
             }
           ],
           derived_columns_payload: [
@@ -2165,10 +2062,7 @@ SEED_app.config([
             'derived_columns_service',
             'organization_payload',
             function ($stateParams, derived_columns_service, organization_payload) {
-              return derived_columns_service.get_derived_columns(
-                organization_payload.organization.id,
-                $stateParams.inventory_type
-              );
+              return derived_columns_service.get_derived_columns(organization_payload.organization.id, $stateParams.inventory_type);
             }
           ]
         }
@@ -2273,10 +2167,7 @@ SEED_app.config([
             'derived_columns_service',
             'organization_payload',
             function ($stateParams, derived_columns_service, organization_payload) {
-              return derived_columns_service.get_derived_columns(
-                organization_payload.organization.id,
-                $stateParams.inventory_type
-              );
+              return derived_columns_service.get_derived_columns(organization_payload.organization.id, $stateParams.inventory_type);
             }
           ]
         }
@@ -2457,8 +2348,7 @@ SEED_app.config([
                 return _.find(profiles, { id: lastProfileId });
               }
               var currentProfile = _.first(profiles);
-              if (currentProfile)
-                inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
+              if (currentProfile) inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
               return currentProfile;
             }
           ],
@@ -2556,8 +2446,7 @@ SEED_app.config([
                 return _.find(profiles, { id: lastProfileId });
               }
               var currentProfile = _.first(profiles);
-              if (currentProfile)
-                inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
+              if (currentProfile) inventory_service.save_last_detail_profile(currentProfile.id, $stateParams.inventory_type);
               return currentProfile;
             }
           ],

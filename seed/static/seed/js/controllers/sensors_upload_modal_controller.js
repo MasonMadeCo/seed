@@ -11,20 +11,7 @@ angular.module('BE.seed.controller.sensors_upload_modal', []).controller('sensor
   'view_id',
   'data_logger',
   'datasets',
-  function (
-    $scope,
-    $state,
-    $uibModalInstance,
-    uiGridConstants,
-    filler_cycle,
-    dataset_service,
-    organization_id,
-    sensor_service,
-    uploader_service,
-    view_id,
-    data_logger,
-    datasets
-  ) {
+  function ($scope, $state, $uibModalInstance, uiGridConstants, filler_cycle, dataset_service, organization_id, sensor_service, uploader_service, view_id, data_logger, datasets) {
     $scope.step = {
       number: 1
     };
@@ -132,10 +119,7 @@ angular.module('BE.seed.controller.sensors_upload_modal', []).controller('sensor
             columnDefs: base_sensor_col_defs,
             enableColumnResizing: true,
             enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-            enableVerticalScrollbar:
-              result.proposed_imports.length <= 5
-                ? uiGridConstants.scrollbars.NEVER
-                : uiGridConstants.scrollbars.WHEN_NEEDED,
+            enableVerticalScrollbar: result.proposed_imports.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
             minRowsToShow: grid_rows_to_display(result.proposed_imports)
           };
 
@@ -171,8 +155,7 @@ angular.module('BE.seed.controller.sensors_upload_modal', []).controller('sensor
         columnDefs: col_defs,
         enableColumnResizing: true,
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-        enableVerticalScrollbar:
-          message.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
+        enableVerticalScrollbar: message.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
         minRowsToShow: grid_rows_to_display(message)
       };
     };

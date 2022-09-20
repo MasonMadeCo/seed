@@ -90,12 +90,12 @@ angular.module('BE.seed.controller.inventory_plots', []).controller('inventory_p
       }
     ];
 
-    const property_name_column = all_columns.find(c => c['column_name'] == 'property_name');
+    const property_name_column = all_columns.find((c) => c['column_name'] == 'property_name');
     neededColumns = new Set([property_name_column['id']]);
 
-    $scope.chartsInfo.forEach(chartInfo => {
-      x_column = all_columns.find(c => c['displayName'] == chartInfo['xDisplayName']);
-      y_column = all_columns.find(c => c['displayName'] == chartInfo['yDisplayName']);
+    $scope.chartsInfo.forEach((chartInfo) => {
+      x_column = all_columns.find((c) => c['displayName'] == chartInfo['xDisplayName']);
+      y_column = all_columns.find((c) => c['displayName'] == chartInfo['yDisplayName']);
 
       if (!!x_column) neededColumns.add(x_column['id']);
       if (!!y_column) neededColumns.add(y_column['id']);
@@ -176,7 +176,7 @@ angular.module('BE.seed.controller.inventory_plots', []).controller('inventory_p
             xAxisKey: xAxisKey,
             yAxisKey: yAxisKey
           },
-          onClick: evt => {
+          onClick: (evt) => {
             var activePoints = evt.chart.getActiveElements(evt);
 
             if (activePoints[0]) {
@@ -184,7 +184,7 @@ angular.module('BE.seed.controller.inventory_plots', []).controller('inventory_p
               window.location.href = '/app/#/' + $scope.inventory_type + '/' + activePoint['id'];
             }
           },
-          onHover: evt => {
+          onHover: (evt) => {
             var activePoints = evt.chart.getActiveElements(evt);
             onHover(activePoints);
           }
@@ -213,8 +213,8 @@ angular.module('BE.seed.controller.inventory_plots', []).controller('inventory_p
     }
 
     charts = $scope.chartsInfo
-      .filter(chartInfo => chartInfo['populated'])
-      .map(chartInfo => {
+      .filter((chartInfo) => chartInfo['populated'])
+      .map((chartInfo) => {
         return createChart(
           (elementId = chartInfo['chartName']),
           (xAxisKey = chartInfo['xName']),
@@ -242,7 +242,7 @@ angular.module('BE.seed.controller.inventory_plots', []).controller('inventory_p
     };
 
     var populate_charts = function (data) {
-      labels = data.map(property => property[property_name_column['name']]);
+      labels = data.map((property) => property[property_name_column['name']]);
 
       for (const chart of charts) {
         chart.data.datasets[0].data = data;

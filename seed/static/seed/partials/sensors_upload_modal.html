@@ -7,12 +7,7 @@
 
 <div class="modal-body" ng-switch on="step.number">
   <div class="data_upload_steps container-fluid" ng-switch-when="1">
-    <div
-      class="alert alert-danger"
-      ng-show="uploader.invalid_csv_extension_alert"
-      style="margin-bottom: 18px"
-      translate="INVALID_CSV_EXTENSION_ALERT"
-    ></div>
+    <div class="alert alert-danger" ng-show="uploader.invalid_csv_extension_alert" style="margin-bottom: 18px" translate="INVALID_CSV_EXTENSION_ALERT"></div>
     <div class="alert alert-danger" ng-show="uploader.invalid_file_contents" style="margin-bottom: 18px" translate>
       An error occurred while processing the file. Please ensure that your file meets the required specifications.
     </div>
@@ -35,10 +30,7 @@
       <div class="progress_bar_copy_top" translate="UPLOADING_FILE_TITLE"></div>
 
       <uib-progressbar class="progress-striped active" value="uploader.progress" type="success"></uib-progressbar>
-      <div class="progress_bar_copy_bottom">
-        {$ uploader.progress | number:0 $}% {$:: 'Complete' | translate $} {$ uploader.status_message ? ': ' +
-        uploader.status_message : '' $}
-      </div>
+      <div class="progress_bar_copy_bottom">{$ uploader.progress | number:0 $}% {$:: 'Complete' | translate $} {$ uploader.status_message ? ': ' + uploader.status_message : '' $}</div>
     </div>
   </div>
 
@@ -70,17 +62,13 @@
 
   <div ng-switch-when="2">
     <div class="row text-center">
-      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-click="accept_sensors()" translate>
-        Confirm
-      </button>
+      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-click="accept_sensors()" translate>Confirm</button>
     </div>
   </div>
 
   <div ng-switch-when="4">
     <div class="row text-center">
-      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-click="refresh_page()" translate>
-        COMPLETE_AND_REFRESH
-      </button>
+      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-click="refresh_page()" translate>COMPLETE_AND_REFRESH</button>
     </div>
   </div>
 

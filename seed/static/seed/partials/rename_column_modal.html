@@ -11,12 +11,8 @@
     <div class="row" style="padding-bottom: 20px">
       <p translate>Desired Name</p>
       <input type="text" class="form-control" ng-model="column.name" ng-change="check_name_exists()" />
-      <div class="alert alert-warning" style="margin: 16px 0 0" ng-if="column.exists" translate>
-        COLUMN_NAME_EXISTS_WARNING
-      </div>
-      <div class="alert alert-danger" style="margin: 16px 0 0" ng-if="column.name === current_column_name" translate>
-        COLUMN_NAME_DUPLICATE_ERROR
-      </div>
+      <div class="alert alert-warning" style="margin: 16px 0 0" ng-if="column.exists" translate>COLUMN_NAME_EXISTS_WARNING</div>
+      <div class="alert alert-danger" style="margin: 16px 0 0" ng-if="column.name === current_column_name" translate>COLUMN_NAME_DUPLICATE_ERROR</div>
     </div>
     <div class="row" style="padding-bottom: 30px">
       <div class="alert alert-danger" style="margin: 0px">
@@ -51,15 +47,7 @@
 <div class="modal-footer container-fluid" ng-switch on="step.number">
   <div ng-switch-when="1">
     <div class="row text-center">
-      <button
-        type="button"
-        class="btn btn-primary col-sm-6 center-block"
-        ng-disabled="!valid()"
-        ng-click="accept_rename()"
-        translate
-      >
-        Confirm
-      </button>
+      <button type="button" class="btn btn-primary col-sm-6 center-block" ng-disabled="!valid()" ng-click="accept_rename()" translate>Confirm</button>
     </div>
 
     <div class="row text-center">
@@ -69,9 +57,7 @@
 
   <div ng-switch-when="2">
     <div class="row text-center">
-      <button type="button" class="btn btn-default col-sm-6 center-block" ng-click="dismiss_and_refresh()" translate>
-        Dismiss
-      </button>
+      <button type="button" class="btn btn-default col-sm-6 center-block" ng-click="dismiss_and_refresh()" translate>Dismiss</button>
     </div>
   </div>
 </div>

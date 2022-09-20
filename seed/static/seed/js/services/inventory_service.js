@@ -701,8 +701,8 @@ angular.module('BE.seed.service.inventory', []).factory('inventory_service', [
           }
         })
         .then(function (response) {
-          let property_columns = response.data.columns.filter(column => column.table_name == 'PropertyState');
-          return property_columns.map(a => {
+          let property_columns = response.data.columns.filter((column) => column.table_name == 'PropertyState');
+          return property_columns.map((a) => {
             return { column_name: a.column_name, display_name: a.display_name };
           });
         });
@@ -719,11 +719,11 @@ angular.module('BE.seed.service.inventory', []).factory('inventory_service', [
           }
         })
         .then(function (response) {
-          let taxlot_columns = response.data.columns.filter(column => column.table_name == 'TaxLotState');
-          return taxlot_columns.map(a => {
+          let taxlot_columns = response.data.columns.filter((column) => column.table_name == 'TaxLotState');
+          return taxlot_columns.map((a) => {
             return {
               column_name: a.column_name,
-              display_name: taxlot_columns.find(x => x.column_name == a.column_name).display_name
+              display_name: taxlot_columns.find((x) => x.column_name == a.column_name).display_name
             };
           });
         });
@@ -1024,18 +1024,11 @@ angular.module('BE.seed.service.inventory', []).factory('inventory_service', [
                   match =
                     cellYMD.y !== ymd.y ||
                     (!_.isNaN(ymd.m) && cellYMD.y === ymd.y && cellYMD.m !== ymd.m) ||
-                    (!_.isNaN(ymd.m) &&
-                      !_.isNaN(ymd.d) &&
-                      cellYMD.y === ymd.y &&
-                      cellYMD.m === ymd.m &&
-                      cellYMD.d !== ymd.d);
+                    (!_.isNaN(ymd.m) && !_.isNaN(ymd.d) && cellYMD.y === ymd.y && cellYMD.m === ymd.m && cellYMD.d !== ymd.d);
                   return match;
                 } else {
                   // Equal
-                  match =
-                    cellYMD.y === ymd.y &&
-                    (_.isNaN(ymd.m) || cellYMD.m === ymd.m) &&
-                    (_.isNaN(ymd.d) || cellYMD.d === ymd.d);
+                  match = cellYMD.y === ymd.y && (_.isNaN(ymd.m) || cellYMD.m === ymd.m) && (_.isNaN(ymd.d) || cellYMD.d === ymd.d);
                   return match;
                 }
               } else {
@@ -1167,26 +1160,10 @@ angular.module('BE.seed.service.inventory', []).factory('inventory_service', [
     // from the server rather than hardcoded here.
 
     // TODO: Identify Tax Lot specific values that have dates.
-    inventory_service.property_state_date_columns = [
-      'generation_date',
-      'release_date',
-      'recent_sale_date',
-      'year_ending',
-      'record_created',
-      'record_modified',
-      'record_year_ending'
-    ];
+    inventory_service.property_state_date_columns = ['generation_date', 'release_date', 'recent_sale_date', 'year_ending', 'record_created', 'record_modified', 'record_year_ending'];
 
     // TODO: Identify Tax Lot specific values that have dates.
-    inventory_service.taxlot_state_date_columns = [
-      'generation_date',
-      'release_date',
-      'recent_sale_date',
-      'year_ending',
-      'record_created',
-      'record_modified',
-      'record_year_ending'
-    ];
+    inventory_service.taxlot_state_date_columns = ['generation_date', 'release_date', 'recent_sale_date', 'year_ending', 'record_created', 'record_modified', 'record_year_ending'];
 
     inventory_service.reorderSettings = function (columns) {
       var pinned = _.remove(columns, 'pinnedLeft');

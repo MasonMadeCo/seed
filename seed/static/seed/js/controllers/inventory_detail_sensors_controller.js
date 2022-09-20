@@ -57,8 +57,8 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
         };
       });
 
-      var sensorTypes = new Set(_.map(sorted_sensors, s => s.type));
-      $scope.sensor_type_selections = [...sensorTypes].map(t => {
+      var sensorTypes = new Set(_.map(sorted_sensors, (s) => s.type));
+      $scope.sensor_type_selections = [...sensorTypes].map((t) => {
         return {
           selected: true,
           label: t,
@@ -195,8 +195,7 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
       enableFiltering: true,
       flatEntityAccess: true,
       fastWatch: true,
-      exporterCsvFilename:
-        window.BE.initial_org_name + ($scope.inventory_type === 'taxlots' ? ' Tax Lot ' : ' Property ') + 'sensors.csv',
+      exporterCsvFilename: window.BE.initial_org_name + ($scope.inventory_type === 'taxlots' ? ' Tax Lot ' : ' Property ') + 'sensors.csv',
       enableGridMenu: true,
       exporterMenuPdf: false,
       exporterMenuExcel: false,
@@ -210,10 +209,7 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
       enableFiltering: true,
       flatEntityAccess: true,
       fastWatch: true,
-      exporterCsvFilename:
-        window.BE.initial_org_name +
-        ($scope.inventory_type === 'taxlots' ? ' Tax Lot ' : ' Property ') +
-        'sensor readings.csv',
+      exporterCsvFilename: window.BE.initial_org_name + ($scope.inventory_type === 'taxlots' ? ' Tax Lot ' : ' Property ') + 'sensor readings.csv',
       enableGridMenu: true,
       exporterMenuPdf: false,
       exporterMenuExcel: false,
@@ -281,8 +277,8 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
 
     // given the sensor selections, it returns the filtered readings and column defs
     var filterBySensorSelections = function (readings, columnDefs, dataLoggerSelections, sensor_type_selections) {
-      var selectedDataLoggerDisplayNames = dataLoggerSelections.filter(dl => dl.selected).map(dl => dl.label);
-      var selectedSensorType = sensor_type_selections.filter(t => t.selected).map(t => t.label);
+      var selectedDataLoggerDisplayNames = dataLoggerSelections.filter((dl) => dl.selected).map((dl) => dl.label);
+      var selectedSensorType = sensor_type_selections.filter((t) => t.selected).map((t) => t.label);
 
       // filter according to sensor selections
       var selectedSensorLabels = sensors
@@ -298,12 +294,7 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
 
     // filters the sensor readings by selected sensors and updates the table
     $scope.applyFilters = function () {
-      const results = filterBySensorSelections(
-        $scope.property_sensor_usage.readings,
-        $scope.property_sensor_usage.column_defs,
-        $scope.data_logger_selections,
-        $scope.sensor_type_selections
-      );
+      const results = filterBySensorSelections($scope.property_sensor_usage.readings, $scope.property_sensor_usage.column_defs, $scope.data_logger_selections, $scope.sensor_type_selections);
       const readings = results.readings;
       const columnDefs = results.columnDefs;
 
@@ -417,10 +408,7 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
 
     $scope.inventory_display_name = function (property_type) {
       let error = '';
-      let field =
-        property_type == 'property'
-          ? $scope.organization.property_display_field
-          : $scope.organization.taxlot_display_field;
+      let field = property_type == 'property' ? $scope.organization.property_display_field : $scope.organization.taxlot_display_field;
       if (!(field in $scope.item_state)) {
         error = field + ' does not exist';
         field = 'address_line_1';
@@ -430,9 +418,7 @@ angular.module('BE.seed.controller.inventory_detail_sensors', []).controller('in
       }
       $scope.inventory_name = $scope.item_state[field]
         ? $scope.item_state[field]
-        : '(' +
-          error +
-          ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
+        : '(' + error + ') <i class="glyphicon glyphicon-question-sign" title="This can be changed from the organization settings page."></i>';
     };
   }
 ]);

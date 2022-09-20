@@ -92,21 +92,11 @@ angular.module('BE.seed.service.postoffice', []).factory('postoffice_service', [
     };
 
     template_factory.send_templated_email = function (template_id, inventory_id, inventory_type) {
-      return template_factory.send_templated_email_for_org(
-        template_id,
-        inventory_id,
-        inventory_type,
-        user_service.get_organization().id
-      );
+      return template_factory.send_templated_email_for_org(template_id, inventory_id, inventory_type, user_service.get_organization().id);
     };
 
     // Passing data from the Front End to the View
-    template_factory.send_templated_email_for_org = function (
-      template_id,
-      inventory_id,
-      inventory_type,
-      organization_id
-    ) {
+    template_factory.send_templated_email_for_org = function (template_id, inventory_id, inventory_type, organization_id) {
       var data = {
         from_email: 'dummy_email@example.com', // The from_email field has to be passed to the view, can put a dummy email in place.
         template_id: template_id,

@@ -176,10 +176,7 @@ angular.module('BE.seed.controller.admin', []).controller('admin_controller', [
             $scope.$emit('organization_list_updated');
           });
           $scope.get_organizations_users($scope.org_user.organization);
-          update_alert(
-            true,
-            'user ' + $scope.org_user.user.email + ' added to organization ' + $scope.org_user.organization.name
-          );
+          update_alert(true, 'user ' + $scope.org_user.user.email + ' added to organization ' + $scope.org_user.organization.name);
         })
         .catch(function (response) {
           $log.log({
@@ -210,11 +207,7 @@ angular.module('BE.seed.controller.admin', []).controller('admin_controller', [
     };
 
     $scope.confirm_column_mappings_delete = function (org) {
-      var yes = confirm(
-        "Are you sure you want to delete the '" +
-          org.name +
-          "' column mappings?  This will invalidate preexisting mapping review data"
-      );
+      var yes = confirm("Are you sure you want to delete the '" + org.name + "' column mappings?  This will invalidate preexisting mapping review data");
       if (yes) {
         $scope.delete_org_column_mappings(org);
       }

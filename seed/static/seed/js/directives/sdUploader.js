@@ -89,10 +89,7 @@ var makeFileSystemUploader = function (scope, element, allowed_extensions) {
             file: {
               filename: fileName,
               file_id: responseJSON.import_file_id,
-              cycle_id:
-                scope.sourceprog === 'PortfolioManager' && scope.$parent.useField
-                  ? 'year_ending'
-                  : scope.$parent.selectedCycle.id,
+              cycle_id: scope.sourceprog === 'PortfolioManager' && scope.$parent.useField ? 'year_ending' : scope.$parent.selectedCycle.id,
               source_type: scope.sourcetype,
               source_program: scope.sourceprog,
               source_program_version: scope.sourcever
@@ -169,13 +166,7 @@ var makeBuildingSyncUpdater = function (scope, element, allowed_extensions) {
     button: element[0],
     request: {
       method: 'PUT',
-      endpoint:
-        '/api/v3/properties/' +
-        scope.importrecord +
-        '/update_with_building_sync/?cycle_id=' +
-        scope.cycleId +
-        '&organization_id=' +
-        scope.organizationId,
+      endpoint: '/api/v3/properties/' + scope.importrecord + '/update_with_building_sync/?cycle_id=' + scope.cycleId + '&organization_id=' + scope.organizationId,
       inputName: 'file',
       paramsInBody: true,
       forceMultipart: true,
@@ -318,11 +309,7 @@ var makeDocumentUploader = function (scope, element, allowed_extensions) {
     button: element[0],
     request: {
       method: 'PUT',
-      endpoint:
-        '/api/v3/properties/' +
-        scope.importrecord +
-        '/upload_inventory_document/?organization_id=' +
-        scope.organizationId,
+      endpoint: '/api/v3/properties/' + scope.importrecord + '/upload_inventory_document/?organization_id=' + scope.organizationId,
       inputName: 'file',
       paramsInBody: true,
       forceMultipart: true,

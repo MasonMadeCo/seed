@@ -18,23 +18,7 @@ angular.module('BE.seed.controller.merge_modal', []).controller('merge_modal_con
   'spinner_utility',
   'uiGridConstants',
   'urls',
-  function (
-    $log,
-    $scope,
-    $uibModal,
-    $uibModalInstance,
-    columns,
-    data,
-    has_meters,
-    inventory_type,
-    matching_service,
-    naturalSort,
-    Notification,
-    org_id,
-    spinner_utility,
-    uiGridConstants,
-    urls
-  ) {
+  function ($log, $scope, $uibModal, $uibModalInstance, columns, data, has_meters, inventory_type, matching_service, naturalSort, Notification, org_id, spinner_utility, uiGridConstants, urls) {
     spinner_utility.hide();
 
     $scope.inventory_type = inventory_type;

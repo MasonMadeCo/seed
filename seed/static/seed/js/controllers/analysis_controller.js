@@ -14,18 +14,7 @@ angular.module('BE.seed.controller.analysis', []).controller('analysis_controlle
   'users_payload',
   'views_payload',
   'auth_payload',
-  function (
-    $scope,
-    $stateParams,
-    $state,
-    organization_service,
-    analysis_payload,
-    organization_payload,
-    messages_payload,
-    users_payload,
-    views_payload,
-    auth_payload
-  ) {
+  function ($scope, $stateParams, $state, organization_service, analysis_payload, organization_payload, messages_payload, users_payload, views_payload, auth_payload) {
     // WARNING: $scope.org is used by "child" controller - analysis_details_controller
     $scope.org = organization_payload.organization;
     $scope.auth = auth_payload.auth;

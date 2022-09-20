@@ -1,9 +1,7 @@
 <div class="page_header_container">
   <div class="page_header">
     <div class="left page_action_container">
-      <a ui-sref="organizations" class="page_action"
-        ><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a
-      >
+      <a ui-sref="organizations" class="page_action"><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a>
     </div>
     <div class="page_title">
       <h1>{$:: org.name $}</h1>
@@ -46,31 +44,13 @@
             </tr>
             <tr class="sub_head">
               <th class="sub_head">
-                <input
-                  type="text"
-                  placeholder="{$:: 'member name' | translate $}"
-                  class="form-control input-sm"
-                  ng-model="filter_params.name"
-                  ng-class="{active: filter_params.name.length}"
-                />
+                <input type="text" placeholder="{$:: 'member name' | translate $}" class="form-control input-sm" ng-model="filter_params.name" ng-class="{active: filter_params.name.length}" />
               </th>
               <th class="sub_head">
-                <input
-                  type="text"
-                  placeholder="{$:: 'member email' | translate $}"
-                  class="form-control input-sm"
-                  ng-model="filter_params.email"
-                  ng-class="{active: filter_params.email.length}"
-                />
+                <input type="text" placeholder="{$:: 'member email' | translate $}" class="form-control input-sm" ng-model="filter_params.email" ng-class="{active: filter_params.email.length}" />
               </th>
               <th class="sub_head">
-                <input
-                  type="text"
-                  placeholder="{$:: 'member role' | translate $}"
-                  class="form-control input-sm"
-                  ng-model="filter_params.role"
-                  ng-class="{active: filter_params.role.length}"
-                />
+                <input type="text" placeholder="{$:: 'member role' | translate $}" class="form-control input-sm" ng-model="filter_params.role" ng-class="{active: filter_params.role.length}" />
               </th>
               <th class="sub_head" ng-if="auth.can_remove_member"></th>
             </tr>
@@ -83,29 +63,15 @@
                 <div class="row">
                   <div class="form-group">
                     <div class="col-sm-12" ng-switch="can_edit(u)">
-                      <select
-                        ng-switch-when="owner"
-                        class="form-control input-sm hide_transition"
-                        ng-model="u.role"
-                        ng-options="role for role in ::ownerRoles"
-                        ng-change="update_role(u)"
-                      ></select>
-                      <select
-                        ng-switch-when="member"
-                        class="form-control input-sm hide_transition"
-                        ng-model="u.role"
-                        ng-options="role for role in ::memberRoles"
-                        ng-change="update_role(u)"
-                      ></select>
+                      <select ng-switch-when="owner" class="form-control input-sm hide_transition" ng-model="u.role" ng-options="role for role in ::ownerRoles" ng-change="update_role(u)"></select>
+                      <select ng-switch-when="member" class="form-control input-sm hide_transition" ng-model="u.role" ng-options="role for role in ::memberRoles" ng-change="update_role(u)"></select>
                       <span ng-switch-default style="padding-left: 15px">{$:: u.role | translate $}</span>
                     </div>
                   </div>
                 </div>
               </td>
               <td ng-if="auth.can_remove_member">
-                <a ng-if="!only_one_owner || u.email !== user_profile.email" ng-click="remove_member(u)" translate
-                  >Remove</a
-                >
+                <a ng-if="!only_one_owner || u.email !== user_profile.email" ng-click="remove_member(u)" translate>Remove</a>
               </td>
             </tr>
           </tbody>

@@ -8,23 +8,13 @@
   </div>
 
   <div class="col-sm-12" style="padding-top: 30px">
-    <strong style="padding-left: 10px"
-      >Records will be merged together from bottom to top, with the top record having the highest priority. Drag to
-      reorder.</strong
-    >
-    <div
-      ui-grid="gridOptions"
-      class="merge-grid"
-      ui-grid-draggable-rows
-      ui-grid-resize-columns
-      style="margin-top: 5px"
-    ></div>
+    <strong style="padding-left: 10px">Records will be merged together from bottom to top, with the top record having the highest priority. Drag to reorder.</strong>
+    <div ui-grid="gridOptions" class="merge-grid" ui-grid-draggable-rows ui-grid-resize-columns style="margin-top: 5px"></div>
   </div>
 </div>
 <div class="modal-body row">
   <div class="alert alert-warning" ng-show="has_meters">
-    These records have energy readings that will be merged together. Readings of records with higher priority are used
-    for overlapping readings.
+    These records have energy readings that will be merged together. Readings of records with higher priority are used for overlapping readings.
   </div>
 </div>
 <div class="modal-footer" ng-class="{'no-click': processing}">

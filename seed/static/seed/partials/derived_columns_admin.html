@@ -1,9 +1,7 @@
 <div class="page_header_container">
   <div class="page_header">
     <div class="left page_action_container">
-      <a ui-sref="organizations" class="page_action"
-        ><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a
-      >
+      <a ui-sref="organizations" class="page_action"><i class="fa fa-chevron-left"></i> {$:: 'Organizations' | translate $}</a>
     </div>
     <div class="page_title">
       <h1>{$:: org.name $}</h1>
@@ -37,16 +35,10 @@
       <div class="data-quality-tab-container">
         <ul class="nav nav-tabs" style="margin-bottom: 1px">
           <li ui-sref-active="active" heading="{$:: 'View by Property' | translate $}">
-            <a
-              ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'properties'})"
-              translate
-              >View by Property</a
-            >
+            <a ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'properties'})" translate>View by Property</a>
           </li>
           <li ui-sref-active="active" heading="{$:: 'View by Tax Lot' | translate $}">
-            <a ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'taxlots'})" translate
-              >View by Tax Lot</a
-            >
+            <a ui-sref="organization_derived_columns(::{organization_id: org.id, inventory_type: 'taxlots'})" translate>View by Tax Lot</a>
           </li>
         </ul>
       </div>

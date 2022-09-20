@@ -14,19 +14,7 @@ angular.module('BE.seed.controller.export_inventory_modal', []).controller('expo
   'profile_id',
   'spinner_utility',
   'filter_header_string',
-  function (
-    $http,
-    $scope,
-    $uibModalInstance,
-    user_service,
-    uploader_service,
-    ids,
-    columns,
-    inventory_type,
-    profile_id,
-    spinner_utility,
-    filter_header_string
-  ) {
+  function ($http, $scope, $uibModalInstance, user_service, uploader_service, ids, columns, inventory_type, profile_id, spinner_utility, filter_header_string) {
     $scope.export_name = '';
     $scope.include_notes = true;
     $scope.include_label_header = false;
@@ -48,7 +36,7 @@ angular.module('BE.seed.controller.export_inventory_modal', []).controller('expo
             organization_id: user_service.get_organization().id
           }
         })
-        .then(data => {
+        .then((data) => {
           uploader_service.check_progress_loop(
             data.data.progress_key,
             0,
