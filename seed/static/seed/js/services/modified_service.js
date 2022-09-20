@@ -8,7 +8,6 @@ angular.module('BE.seed.service.modified', []).factory('modified_service', [
   '$uibModal',
   'urls',
   function ($window, $uibModal, urls) {
-
     var modified_service = {};
     var modified = false;
 
@@ -49,4 +48,5 @@ angular.module('BE.seed.service.modified', []).factory('modified_service', [
     };
 
     return modified_service;
-  }]);
+  }
+]);

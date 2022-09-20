@@ -1,4 +1,5 @@
-angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
+angular
+  .module('BE.seed.controller.sensor_readings_upload_modal', [])
   .controller('sensor_readings_upload_modal_controller', [
     '$scope',
     '$state',
@@ -22,7 +23,7 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
       uploader_service,
       view_id,
       datasets,
-      data_logger_id,
+      data_logger_id
     ) {
       $scope.step = {
         number: 1
@@ -59,7 +60,7 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
         }
       };
 
-      $scope.uploaderfunc = function (event_message, file/*, progress*/) {
+      $scope.uploaderfunc = function (event_message, file /*, progress*/) {
         switch (event_message) {
           case 'invalid_extension':
             $scope.$apply(function () {
@@ -90,16 +91,19 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
         $scope.step.number = 1;
       };
 
-      const base_sensor_readings_col_defs = [{
-        field: 'column_name',
-        displayName: 'column name',
-        enableHiding: false,
-        type: 'string'
-      }, {
-        field: 'num_readings',
-        displayName: 'number of readings',
-        enableHiding: false
-      }];
+      const base_sensor_readings_col_defs = [
+        {
+          field: 'column_name',
+          displayName: 'column name',
+          enableHiding: false,
+          type: 'string'
+        },
+        {
+          field: 'num_readings',
+          displayName: 'number of readings',
+          enableHiding: false
+        }
+      ];
 
       const successfully_imported_col_def = {
         field: 'successfully_imported',
@@ -111,28 +115,32 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
       };
 
       var show_confirmation_info = function () {
-        uploader_service.sensor_readings_preview($scope.file_id, $scope.organization_id, $scope.view_id, $scope.data_logger_id).then(function (result) {
-          var addtional_columnDefs = [
-            {
-              field: 'exists',
-              enableHiding: false
-            }
-          ]
+        uploader_service
+          .sensor_readings_preview($scope.file_id, $scope.organization_id, $scope.view_id, $scope.data_logger_id)
+          .then(function (result) {
+            var addtional_columnDefs = [
+              {
+                field: 'exists',
+                enableHiding: false
+              }
+            ];
 
-          $scope.proposed_imports_options = {
-            data: result,
-            columnDefs: [...base_sensor_readings_col_defs, ...addtional_columnDefs],
-            enableColumnResizing: true,
-            enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-            enableVerticalScrollbar: result.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
-            minRowsToShow: grid_rows_to_display(result)
-          };
+            $scope.proposed_imports_options = {
+              data: result,
+              columnDefs: [...base_sensor_readings_col_defs, ...addtional_columnDefs],
+              enableColumnResizing: true,
+              enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+              enableVerticalScrollbar:
+                result.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
+              minRowsToShow: grid_rows_to_display(result)
+            };
 
-          const modal_element = angular.element(document.getElementsByClassName('modal-dialog'));
-          modal_element.addClass('modal-lg');
+            const modal_element = angular.element(document.getElementsByClassName('modal-dialog'));
+            modal_element.addClass('modal-lg');
 
-          $scope.step.number = 2;
-        }).catch(saveFailure);
+            $scope.step.number = 2;
+          })
+          .catch(saveFailure);
       };
 
       const saveSuccess = function (progress_data) {
@@ -146,18 +154,21 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
       };
 
       const buildImportResults = function (message) {
-        const additional_columnDefs = [{
-          field: 'errors',
-          displayName: 'errors',
-          enableHiding: false
-        }];
+        const additional_columnDefs = [
+          {
+            field: 'errors',
+            displayName: 'errors',
+            enableHiding: false
+          }
+        ];
 
         $scope.import_result_options = {
           data: message,
           columnDefs: [...base_sensor_readings_col_defs, ...additional_columnDefs],
           enableColumnResizing: true,
           enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-          enableVerticalScrollbar: message.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
+          enableVerticalScrollbar:
+            message.length <= 5 ? uiGridConstants.scrollbars.NEVER : uiGridConstants.scrollbars.WHEN_NEEDED,
           minRowsToShow: grid_rows_to_display(message)
         };
       };
@@ -173,7 +184,7 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
           uploader_service.check_progress_loop(
             data.progress_key,
             progress,
-            1 - (progress / 100),
+            1 - progress / 100,
             saveSuccess,
             saveFailure, // difficult to reach this as failures should be caught in confirmation step
             $scope.uploader
@@ -185,5 +196,5 @@ angular.module('BE.seed.controller.sensor_readings_upload_modal', [])
         $state.reload();
         $uibModalInstance.dismiss('cancel');
       };
-
-    }]);
+    }
+  ]);

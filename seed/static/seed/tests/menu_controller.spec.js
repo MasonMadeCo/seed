@@ -9,7 +9,6 @@ describe('Controller: menu_controller', function () {
   var mock_spinner_utility;
   // var mock_dataset_service;
 
-
   // make the seed app available for each test
   // 'config.seed' is created in TestFilters.html
   beforeEach(function () {
@@ -18,7 +17,17 @@ describe('Controller: menu_controller', function () {
       $httpBackend = _$httpBackend_;
       $httpBackend.whenGET(/^\/static\/seed\/locales\/.*\.json/).respond(200, {});
     });
-    inject(function ($controller, $rootScope, $uibModal, urls, $q, organization_service, user_service, dataset_service, spinner_utility) {
+    inject(function (
+      $controller,
+      $rootScope,
+      $uibModal,
+      urls,
+      $q,
+      organization_service,
+      user_service,
+      dataset_service,
+      spinner_utility
+    ) {
       controller = $controller;
       menu_controller_scope = $rootScope.$new();
       menu_controller_scope.inventory_type = 'properties';
@@ -38,19 +47,17 @@ describe('Controller: menu_controller', function () {
       //   });
 
       mock_spinner_utility = spinner_utility;
-      spyOn(mock_spinner_utility, 'show')
-        .andCallFake(function () {
-          // Do nothing
-        });
-      spyOn(mock_spinner_utility, 'hide')
-        .andCallFake(function () {
-          // Do nothing
-        });
+      spyOn(mock_spinner_utility, 'show').andCallFake(function () {
+        // Do nothing
+      });
+      spyOn(mock_spinner_utility, 'hide').andCallFake(function () {
+        // Do nothing
+      });
     });
   });
 
   // this is outside the beforeEach so it can be configured by each unit test
-  function create_menu_controller () {
+  function create_menu_controller() {
     controller('menu_controller', {
       $scope: menu_controller_scope,
       $stateParams: {
@@ -61,7 +68,6 @@ describe('Controller: menu_controller', function () {
       }
     });
   }
-
 
   /**
    * Test scenarios

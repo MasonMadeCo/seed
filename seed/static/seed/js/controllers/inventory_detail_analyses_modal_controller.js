@@ -8,7 +8,8 @@
  *
  *
  */
-angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
+angular
+  .module('BE.seed.controller.inventory_detail_analyses_modal', [])
   .controller('inventory_detail_analyses_modal_controller', [
     '$scope',
     '$log',
@@ -17,15 +18,7 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
     'analyses_service',
     'inventory_ids',
     'current_cycle',
-    function (
-      $scope,
-      $log,
-      $uibModalInstance,
-      Notification,
-      analyses_service,
-      inventory_ids,
-      current_cycle
-    ) {
+    function ($scope, $log, $uibModalInstance, Notification, analyses_service, inventory_ids, current_cycle) {
       $scope.inventory_count = inventory_ids.length;
       // used to disable buttons on submit
       $scope.waiting_for_server = false;
@@ -43,16 +36,9 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
         'Four Parameter Linear Model'
       ];
 
-      $scope.better_savings_targets = [
-        'CONSERVATIVE',
-        'NOMINAL',
-        'AGGRESSIVE'
-      ];
+      $scope.better_savings_targets = ['CONSERVATIVE', 'NOMINAL', 'AGGRESSIVE'];
 
-      $scope.better_benchmark_options = [
-        'DEFAULT',
-        'GENERATE'
-      ];
+      $scope.better_benchmark_options = ['DEFAULT', 'GENERATE'];
 
       // Datepickers
       $scope.startDatePickerOpen = false;
@@ -77,7 +63,6 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
 
       $scope.initializeAnalysisConfig = () => {
         switch ($scope.new_analysis.service) {
-
           case 'BSyncr':
             $scope.new_analysis.configuration = {
               model_type: null
@@ -108,7 +93,7 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
               }
             };
             // if a cycle is selected, default inputs to cycle start/end
-            if (('start' in current_cycle) && ('end' in current_cycle)) {
+            if ('start' in current_cycle && 'end' in current_cycle) {
               $scope.new_analysis.configuration.meter.start_date = new Date(current_cycle.start);
               $scope.new_analysis.configuration.meter.end_date = new Date(current_cycle.end);
             }
@@ -117,7 +102,6 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
           default:
             $log.error('Unknown analysis type.', $scope.new_analysis.service);
             Notification.error('Unknown analysis type: ' + $scope.new_analysis.service);
-
         }
       };
 
@@ -128,21 +112,26 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
         }
         $scope.waiting_for_server = true;
 
-        analyses_service.create_analysis(
-          $scope.new_analysis.name,
-          $scope.new_analysis.service,
-          $scope.new_analysis.configuration,
-          inventory_ids
-        ).then(function (data) {
-          $scope.waiting_for_server = false;
-          Notification.primary('Created Analysis');
-          form.$setPristine();
-          $scope.$close(data);
-        }, function (response) {
-          $scope.waiting_for_server = false;
-          $log.error('Error creating new analysis.', response);
-          Notification.error('Failed to create Analysis: ' + response.data.message);
-        });
+        analyses_service
+          .create_analysis(
+            $scope.new_analysis.name,
+            $scope.new_analysis.service,
+            $scope.new_analysis.configuration,
+            inventory_ids
+          )
+          .then(
+            function (data) {
+              $scope.waiting_for_server = false;
+              Notification.primary('Created Analysis');
+              form.$setPristine();
+              $scope.$close(data);
+            },
+            function (response) {
+              $scope.waiting_for_server = false;
+              $log.error('Error creating new analysis.', response);
+              Notification.error('Failed to create Analysis: ' + response.data.message);
+            }
+          );
       };
 
       /* User has cancelled dialog */
@@ -155,12 +144,13 @@ angular.module('BE.seed.controller.inventory_detail_analyses_modal', [])
         $scope.checkInvalidDate();
       });
 
-      $scope.$watch('new_analysis.configuration.meter.end_date', function ( ) {
+      $scope.$watch('new_analysis.configuration.meter.end_date', function () {
         $scope.checkInvalidDate();
       });
 
       $scope.checkInvalidDate = function () {
-        $scope.invalidDates = ($scope.new_analysis.configuration.meter.end_date < $scope.new_analysis.configuration.meter.start_date);
+        $scope.invalidDates =
+          $scope.new_analysis.configuration.meter.end_date < $scope.new_analysis.configuration.meter.start_date;
       };
-
-    }]);
+    }
+  ]);

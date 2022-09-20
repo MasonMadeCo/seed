@@ -2,7 +2,8 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.controller.column_mapping_profile_modal', [])
+angular
+  .module('BE.seed.controller.column_mapping_profile_modal', [])
   .controller('column_mapping_profile_modal_controller', [
     '$scope',
     '$uibModalInstance',
@@ -18,10 +19,12 @@ angular.module('BE.seed.controller.column_mapping_profile_modal', [])
       $scope.rename_profile = function () {
         if (!$scope.disabled()) {
           var profile_id = $scope.data.id;
-          var updated_data = {name: $scope.newName};
-          column_mappings_service.update_column_mapping_profile($scope.org_id, profile_id, updated_data).then(function (result) {
-            $uibModalInstance.close(result.data.name);
-          });
+          var updated_data = { name: $scope.newName };
+          column_mappings_service
+            .update_column_mapping_profile($scope.org_id, profile_id, updated_data)
+            .then(function (result) {
+              $uibModalInstance.close(result.data.name);
+            });
         }
       };
 
@@ -33,13 +36,15 @@ angular.module('BE.seed.controller.column_mapping_profile_modal', [])
 
       $scope.new_profile = function () {
         if (!$scope.disabled()) {
-          column_mappings_service.new_column_mapping_profile_for_org($scope.org_id, {
-            name: $scope.newName,
-            mappings: $scope.data.mappings,
-            profile_type: $scope.data.profile_type
-          }).then(function (result) {
-            $uibModalInstance.close(result.data);
-          });
+          column_mappings_service
+            .new_column_mapping_profile_for_org($scope.org_id, {
+              name: $scope.newName,
+              mappings: $scope.data.mappings,
+              profile_type: $scope.data.profile_type
+            })
+            .then(function (result) {
+              $uibModalInstance.close(result.data);
+            });
         }
       };
 
@@ -54,4 +59,5 @@ angular.module('BE.seed.controller.column_mapping_profile_modal', [])
       $scope.cancel = function () {
         $uibModalInstance.dismiss();
       };
-    }]);
+    }
+  ]);

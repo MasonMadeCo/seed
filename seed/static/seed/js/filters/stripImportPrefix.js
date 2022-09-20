@@ -30,6 +30,5 @@ angular.module('stripImportPrefix', []).filter('stripImportPrefix', function () 
     }
 
     return input;
-
   };
 });

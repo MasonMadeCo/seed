@@ -7,7 +7,6 @@
  * For when you want to capitalize each word, remove underscores.
  */
 angular.module('titleCase', []).filter('titleCase', function () {
-
   return function (input) {
     if (_.isNil(input)) {
       return input;
@@ -20,5 +19,4 @@ angular.module('titleCase', []).filter('titleCase', function () {
 
     return input;
   };
-
 });

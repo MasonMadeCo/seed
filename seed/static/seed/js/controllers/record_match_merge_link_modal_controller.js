@@ -2,7 +2,8 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.controller.record_match_merge_link_modal', [])
+angular
+  .module('BE.seed.controller.record_match_merge_link_modal', [])
   .controller('record_match_merge_link_modal_controller', [
     '$scope',
     '$q',
@@ -41,9 +42,7 @@ angular.module('BE.seed.controller.record_match_merge_link_modal', [])
         }
       };
 
-      var promises = [
-        organization_service.matching_criteria_columns(organization_id)
-      ];
+      var promises = [organization_service.matching_criteria_columns(organization_id)];
 
       if (inventory_type === 'properties') {
         promises.unshift(inventory_service.get_property_columns());
@@ -54,12 +53,14 @@ angular.module('BE.seed.controller.record_match_merge_link_modal', [])
       $scope.matching_criteria_columns = ['Loading...'];
 
       $q.all(promises).then(function (results) {
-        var inventory_columns = _.filter(results[0], {table_name: $scope.table_name});
+        var inventory_columns = _.filter(results[0], {
+          table_name: $scope.table_name
+        });
         var raw_column_names = results[1][$scope.table_name];
 
         // Use display names to identify matching criteria columns.
         $scope.matching_criteria_columns = _.map(raw_column_names, function (col_name) {
-          return _.find(inventory_columns, {column_name: col_name}).displayName;
+          return _.find(inventory_columns, { column_name: col_name }).displayName;
         });
       });
 
@@ -70,4 +71,5 @@ angular.module('BE.seed.controller.record_match_merge_link_modal', [])
       $scope.cancel = function () {
         $uibModalInstance.dismiss();
       };
-    }]);
+    }
+  ]);

@@ -9,12 +9,10 @@
  */
 angular.module('BE.seed.utility.spinner', []).factory('spinner_utility', [
   function () {
-
     var spinner_utility = {};
     var _spinner;
 
     spinner_utility.show = function (params, target) {
-
       var refresh = !!(params || target);
       target = target || $('.display')[0];
 
@@ -38,4 +36,5 @@ angular.module('BE.seed.utility.spinner', []).factory('spinner_utility', [
     };
 
     return spinner_utility;
-  }]);
+  }
+]);

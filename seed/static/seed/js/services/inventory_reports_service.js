@@ -2,18 +2,11 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.service.inventory_reports',
-  []).factory('inventory_reports_service', [
+angular.module('BE.seed.service.inventory_reports', []).factory('inventory_reports_service', [
   '$http',
   '$log',
   'user_service',
-  function (
-    $http,
-    $log,
-    user_service
-  ) {
-
-
+  function ($http, $log, user_service) {
     /**
      * Get inventory data given the provided parameters.
      Data will be passed back to caller as well as stored as a property
@@ -41,8 +34,7 @@ angular.module('BE.seed.service.inventory_reports',
          ]
      }
      */
-    function get_report_data (xVar, yVar, start, end) {
-
+    function get_report_data(xVar, yVar, start, end) {
       // Error checks
       if (_.some([xVar, yVar, start, end], _.isNil)) {
         $log.error('#inventory_reports_service.get_report_data(): null parameter');
@@ -50,21 +42,23 @@ angular.module('BE.seed.service.inventory_reports',
       }
 
       const organization_id = user_service.get_organization().id;
-      return $http.get('/api/v3/organizations/' + organization_id + '/report/', {
-        params: {
-          x_var: xVar,
-          y_var: yVar,
-          start: start,
-          end: end
-        }
-      }).then(function (response) {
-        building_reports_factory.report_data = _.has(response.data, 'report_data') ? response.data.report_data : [];
-        return response.data;
-      }).catch(function () {
-        building_reports_factory.reports_data = [];
-      });
+      return $http
+        .get('/api/v3/organizations/' + organization_id + '/report/', {
+          params: {
+            x_var: xVar,
+            y_var: yVar,
+            start: start,
+            end: end
+          }
+        })
+        .then(function (response) {
+          building_reports_factory.report_data = _.has(response.data, 'report_data') ? response.data.report_data : [];
+          return response.data;
+        })
+        .catch(function () {
+          building_reports_factory.reports_data = [];
+        });
     }
-
 
     /**
      Get aggregated property data given the provided parameters.
@@ -94,8 +88,7 @@ angular.module('BE.seed.service.inventory_reports',
        }
      }
      */
-    function get_aggregated_report_data (xVar, yVar, start, end) {
-
+    function get_aggregated_report_data(xVar, yVar, start, end) {
       // Error checks
       if (_.some([xVar, yVar, start, end], _.isNil)) {
         $log.error('#inventory_reports_service.get_aggregated_report_data(): null parameter');
@@ -103,22 +96,27 @@ angular.module('BE.seed.service.inventory_reports',
       }
 
       const organization_id = user_service.get_organization().id;
-      return $http.get('/api/v3/organizations/' + organization_id + '/report_aggregated/', {
-        params: {
-          x_var: xVar,
-          y_var: yVar,
-          start: start,
-          end: end
-        }
-      }).then(function (response) {
-        building_reports_factory.aggregated_reports_data = _.has(response.data, 'report_data') ? response.data.report_data : [];
-        return response.data;
-      }).catch(function () {
-        building_reports_factory.aggregated_reports_data = [];
-      });
+      return $http
+        .get('/api/v3/organizations/' + organization_id + '/report_aggregated/', {
+          params: {
+            x_var: xVar,
+            y_var: yVar,
+            start: start,
+            end: end
+          }
+        })
+        .then(function (response) {
+          building_reports_factory.aggregated_reports_data = _.has(response.data, 'report_data')
+            ? response.data.report_data
+            : [];
+          return response.data;
+        })
+        .catch(function () {
+          building_reports_factory.aggregated_reports_data = [];
+        });
     }
 
-    function export_reports_data (axes_data, start, end) {
+    function export_reports_data(axes_data, start, end) {
       var xVar = axes_data.xVar;
       var xLabel = axes_data.xLabel;
       var yVar = axes_data.yVar;
@@ -130,25 +128,26 @@ angular.module('BE.seed.service.inventory_reports',
       }
 
       const organization_id = user_service.get_organization().id;
-      return $http.get('/api/v3/organizations/' + organization_id + '/report_export/', {
-        params: {
-          x_var: xVar,
-          x_label: xLabel,
-          y_var: yVar,
-          y_label: yLabel,
-          start: start,
-          end: end
-        },
-        responseType: 'arraybuffer'
-      }).then(function (response) {
-        return response;
-      });
+      return $http
+        .get('/api/v3/organizations/' + organization_id + '/report_export/', {
+          params: {
+            x_var: xVar,
+            x_label: xLabel,
+            y_var: yVar,
+            y_label: yLabel,
+            start: start,
+            end: end
+          },
+          responseType: 'arraybuffer'
+        })
+        .then(function (response) {
+          return response;
+        });
     }
 
     /* Public API */
 
     var building_reports_factory = {
-
       //properties
       reports_data: [],
       aggregated_reports_data: [],
@@ -159,9 +158,8 @@ angular.module('BE.seed.service.inventory_reports',
       get_report_data: get_report_data,
       get_aggregated_report_data: get_aggregated_report_data,
       export_reports_data: export_reports_data
-
     };
 
     return building_reports_factory;
-
-  }]);
+  }
+]);

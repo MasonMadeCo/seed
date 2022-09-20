@@ -22,11 +22,13 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
       // yes this is a global, but otherwise we'll have to use a promise in
       // front of every request that needs this. window.config.initial_org_id is
       // set in base.html via the seed.views.main home view
-      return organization || {
-        id: window.BE.initial_org_id,
-        name: window.BE.initial_org_name,
-        user_role: window.BE.initial_org_user_role
-      };
+      return (
+        organization || {
+          id: window.BE.initial_org_id,
+          name: window.BE.initial_org_name,
+          user_role: window.BE.initial_org_user_role
+        }
+      );
     };
 
     /**
@@ -37,11 +39,17 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
     user_factory.set_organization = function (org) {
       organization = org;
       return user_factory.get_user_id().then(function (this_user_id) {
-        return $http.put('/api/v3/users/' + this_user_id + '/default_organization/', {}, {
-          params: { organization_id: org.id }
-        }).then(function (response) {
-          return response.data;
-        });
+        return $http
+          .put(
+            '/api/v3/users/' + this_user_id + '/default_organization/',
+            {},
+            {
+              params: { organization_id: org.id }
+            }
+          )
+          .then(function (response) {
+            return response.data;
+          });
       });
     };
 
@@ -116,20 +124,24 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
     };
 
     user_factory.set_default_columns = function (columns, show_shared_buildings) {
-      return $http.post(urls.seed.set_default_columns, {
-        columns: columns,
-        show_shared_buildings: show_shared_buildings
-      }).then(function (response) {
-        return response.data;
-      });
+      return $http
+        .post(urls.seed.set_default_columns, {
+          columns: columns,
+          show_shared_buildings: show_shared_buildings
+        })
+        .then(function (response) {
+          return response.data;
+        });
     };
 
     user_factory.set_default_building_detail_columns = function (columns) {
-      return $http.post(urls.seed.set_default_building_detail_columns, {
-        columns: columns
-      }).then(function (response) {
-        return response.data;
-      });
+      return $http
+        .post(urls.seed.set_default_building_detail_columns, {
+          columns: columns
+        })
+        .then(function (response) {
+          return response.data;
+        });
     };
 
     /**
@@ -138,13 +150,15 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
      */
     user_factory.update_user = function (user) {
       return user_factory.get_user_id().then(function (this_user_id) {
-        return $http.put('/api/v3/users/' + this_user_id + '/', {
-          first_name: user.first_name,
-          last_name: user.last_name,
-          email: user.email
-        }).then(function (response) {
-          return response.data;
-        });
+        return $http
+          .put('/api/v3/users/' + this_user_id + '/', {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email
+          })
+          .then(function (response) {
+            return response.data;
+          });
       });
     };
 
@@ -156,13 +170,15 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
      */
     user_factory.set_password = function (current_password, password_1, password_2) {
       return user_factory.get_user_id().then(function (this_user_id) {
-        return $http.put('/api/v3/users/' + this_user_id + '/set_password/', {
-          current_password: current_password,
-          password_1: password_1,
-          password_2: password_2
-        }).then(function (response) {
-          return response.data;
-        });
+        return $http
+          .put('/api/v3/users/' + this_user_id + '/set_password/', {
+            current_password: current_password,
+            password_1: password_1,
+            password_2: password_2
+          })
+          .then(function (response) {
+            return response.data;
+          });
       });
     };
 
@@ -179,4 +195,5 @@ angular.module('BE.seed.service.user', []).factory('user_service', [
     };
 
     return user_factory;
-  }]);
+  }
+]);

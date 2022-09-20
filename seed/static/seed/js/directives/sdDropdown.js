@@ -2,8 +2,9 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('sdDropdown', [])
-  .directive('sdDropdown', ['urls', function (urls) {
+angular.module('sdDropdown', []).directive('sdDropdown', [
+  'urls',
+  function (urls) {
     return {
       restrict: 'E',
       require: '^ngModel',
@@ -30,4 +31,5 @@ angular.module('sdDropdown', [])
       },
       templateUrl: urls.static_url + 'seed/js/directives/sd-dropdown-template.html'
     };
-  }]);
+  }
+]);

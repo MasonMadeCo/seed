@@ -2,7 +2,8 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.controller.show_populated_columns_modal', [])
+angular
+  .module('BE.seed.controller.show_populated_columns_modal', [])
   .controller('show_populated_columns_modal_controller', [
     '$scope',
     '$window',
@@ -16,7 +17,20 @@ angular.module('BE.seed.controller.show_populated_columns_modal', [])
     'cycle',
     'provided_inventory',
     'inventory_type',
-    function ($scope, $window, $uibModalInstance, Notification, inventory_service, modified_service, spinner_utility, columns, currentProfile, cycle, provided_inventory, inventory_type) {
+    function (
+      $scope,
+      $window,
+      $uibModalInstance,
+      Notification,
+      inventory_service,
+      modified_service,
+      spinner_utility,
+      columns,
+      currentProfile,
+      cycle,
+      provided_inventory,
+      inventory_type
+    ) {
       $scope.columns = columns;
       $scope.currentProfile = currentProfile;
       $scope.cycle = cycle;
@@ -39,7 +53,7 @@ angular.module('BE.seed.controller.show_populated_columns_modal', [])
           fn = inventory_service.get_taxlots;
         }
         return fn(page, chunk, $scope.cycle, -1).then(function (data) {
-          $scope.progress = Math.round(data.pagination.end / data.pagination.total * 100);
+          $scope.progress = Math.round((data.pagination.end / data.pagination.total) * 100);
           if (data.pagination.has_next) {
             return fetch(page + 1, chunk).then(function (data2) {
               return data.results.concat(data2);
@@ -79,19 +93,19 @@ angular.module('BE.seed.controller.show_populated_columns_modal', [])
             });
           });
 
-          $scope.progress = index / inventory.length * 50 + 50;
+          $scope.progress = (index / inventory.length) * 50 + 50;
         });
 
         // determine hidden columns
         var visible = _.reject($scope.columns, function (col) {
           if (!col.related) {
-            return _.find(cols, {id: col.id});
+            return _.find(cols, { id: col.id });
           }
-          return _.find(relatedCols, {id: col.id});
+          return _.find(relatedCols, { id: col.id });
         });
 
         var hidden = _.reject($scope.columns, function (col) {
-          return _.find(visible, {id: col.id});
+          return _.find(visible, { id: col.id });
         });
 
         _.forEach(hidden, function (col) {
@@ -141,4 +155,5 @@ angular.module('BE.seed.controller.show_populated_columns_modal', [])
       $scope.cancel = function () {
         $uibModalInstance.dismiss();
       };
-    }]);
+    }
+  ]);

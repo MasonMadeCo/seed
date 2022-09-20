@@ -31,22 +31,28 @@ angular.module('BE.seed.controller.organization_settings', []).controller('organ
     $scope.taxlot_column_names = taxlot_column_names;
     $scope.org_static = angular.copy($scope.org);
 
-    $scope.unit_options_eui = [{
-      label: $translate.instant('kBtu/sq. ft./year'),
-      value: 'kBtu/ft**2/year'
-    }, {
-      label: $translate.instant('GJ/m²/year'),
-      value: 'GJ/m**2/year'
-    }, {
-      label: $translate.instant('MJ/m²/year'),
-      value: 'MJ/m**2/year'
-    }, {
-      label: $translate.instant('kWh/m²/year'),
-      value: 'kWh/m**2/year'
-    }, {
-      label: $translate.instant('kBtu/m²/year'),
-      value: 'kBtu/m**2/year'
-    }];
+    $scope.unit_options_eui = [
+      {
+        label: $translate.instant('kBtu/sq. ft./year'),
+        value: 'kBtu/ft**2/year'
+      },
+      {
+        label: $translate.instant('GJ/m²/year'),
+        value: 'GJ/m**2/year'
+      },
+      {
+        label: $translate.instant('MJ/m²/year'),
+        value: 'MJ/m**2/year'
+      },
+      {
+        label: $translate.instant('kWh/m²/year'),
+        value: 'kWh/m**2/year'
+      },
+      {
+        label: $translate.instant('kBtu/m²/year'),
+        value: 'kBtu/m**2/year'
+      }
+    ];
 
     // Ideally, these units and types for meters should be translatable.
     $scope.chosen_type_unit = {
@@ -90,38 +96,50 @@ angular.module('BE.seed.controller.organization_settings', []).controller('organ
       }
     };
 
-    $scope.unit_options_area = [{
-      label: $translate.instant('square feet'),
-      value: 'ft**2'
-    }, {
-      label: $translate.instant('square metres'),
-      value: 'm**2'
-    }];
+    $scope.unit_options_area = [
+      {
+        label: $translate.instant('square feet'),
+        value: 'ft**2'
+      },
+      {
+        label: $translate.instant('square metres'),
+        value: 'm**2'
+      }
+    ];
 
-    $scope.decimal_places_options = [{
-      label: '0 (e.g., 0)',
-      value: 0
-    }, {
-      label: '1 (e.g., 0.1)',
-      value: 1
-    }, {
-      label: '2 (e.g., 0.12)',
-      value: 2
-    }, {
-      label: '3 (e.g., 0.123)',
-      value: 3
-    }, {
-      label: '4 (e.g., 0.1234)',
-      value: 4
-    }];
+    $scope.decimal_places_options = [
+      {
+        label: '0 (e.g., 0)',
+        value: 0
+      },
+      {
+        label: '1 (e.g., 0.1)',
+        value: 1
+      },
+      {
+        label: '2 (e.g., 0.12)',
+        value: 2
+      },
+      {
+        label: '3 (e.g., 0.123)',
+        value: 3
+      },
+      {
+        label: '4 (e.g., 0.1234)',
+        value: 4
+      }
+    ];
 
-    $scope.thermal_conversion_countries = [{
-      label: 'US',
-      value: 1
-    }, {
-      label: 'Canada',
-      value: 2
-    }];
+    $scope.thermal_conversion_countries = [
+      {
+        label: 'US',
+        value: 1
+      },
+      {
+        label: 'Canada',
+        value: 2
+      }
+    ];
 
     $scope.confirm_delete = function (org) {
       $uibModal.open({
@@ -154,4 +172,5 @@ angular.module('BE.seed.controller.organization_settings', []).controller('organ
         // $scope.$emit('app_error', data);
       });
     };
-  }]);
+  }
+]);

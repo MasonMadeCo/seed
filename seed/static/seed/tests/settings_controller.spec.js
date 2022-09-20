@@ -22,37 +22,43 @@ describe('controller: organization_settings_controller', function () {
       mock_organization_service = organization_service;
       mock_meters_service = meters_service;
 
-      spyOn(mock_organization_service, 'save_org_settings')
-        .andCallFake(function () {
-          // return $q.reject for error scenario
-          return $q.resolve({
-            status: 'success'
-          });
+      spyOn(mock_organization_service, 'save_org_settings').andCallFake(function () {
+        // return $q.reject for error scenario
+        return $q.resolve({
+          status: 'success'
         });
+      });
 
-      spyOn(mock_meters_service, 'valid_energy_types_units')
-        .andCallFake(function () {
-          // return $q.reject for error scenario
-          return $q.resolve({
-            status: 'success'
-          });
+      spyOn(mock_meters_service, 'valid_energy_types_units').andCallFake(function () {
+        // return $q.reject for error scenario
+        return $q.resolve({
+          status: 'success'
         });
+      });
     });
   });
 
   // this is outside the beforeEach so it can be configured by each unit test
-  function create_settings_controller () {
+  function create_settings_controller() {
     controller('organization_settings_controller', {
       $scope: ctrl_scope,
       all_columns: {
         fields: [
-          {checked: false, title: 'PM Property ID', sort_column: 'pm_property_id'},
-          {checked: false, title: 'G', sort_column: 'g'},
-          {checked: false, title: 'Gross Floor Area', sort_column: 'gross_floor_area'}
+          {
+            checked: false,
+            title: 'PM Property ID',
+            sort_column: 'pm_property_id'
+          },
+          { checked: false, title: 'G', sort_column: 'g' },
+          {
+            checked: false,
+            title: 'Gross Floor Area',
+            sort_column: 'gross_floor_area'
+          }
         ]
       },
       organization_payload: {
-        organization: {name: 'my org', id: 4}
+        organization: { name: 'my org', id: 4 }
       },
       query_threshold_payload: {
         query_threshold: 10
@@ -68,7 +74,8 @@ describe('controller: organization_settings_controller', function () {
           {
             title: 'Gross Floor Area',
             sort_column: 'gross_floor_area'
-          }]
+          }
+        ]
       },
       auth_payload: {
         auth: {
@@ -76,8 +83,8 @@ describe('controller: organization_settings_controller', function () {
           is_parent_org_owner: false
         }
       },
-      property_column_names: { 'column_name': 'test', 'display_name': 'test' },
-      taxlot_column_names: { 'column_name': 'test', 'display_name': 'test' }
+      property_column_names: { column_name: 'test', display_name: 'test' },
+      taxlot_column_names: { column_name: 'test', display_name: 'test' }
     });
   }
 

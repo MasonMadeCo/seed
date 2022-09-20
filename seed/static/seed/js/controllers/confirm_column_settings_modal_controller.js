@@ -2,7 +2,8 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.controller.confirm_column_settings_modal', [])
+angular
+  .module('BE.seed.controller.confirm_column_settings_modal', [])
   .controller('confirm_column_settings_modal_controller', [
     '$scope',
     '$uibModalInstance',
@@ -48,22 +49,29 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
 
       // parse proposed changes to create change summary to be presented to user
       var all_changed_settings = ['column_name']; // add column_name to describe each row
-      $scope.change_summary_data = _.reduce(proposed_changes, function (summary, value, key) {
-        var column = _.find($scope.columns, {id: parseInt(key)});
-        var change = _.pick(_.cloneDeep(column), ['column_name']);
+      $scope.change_summary_data = _.reduce(
+        proposed_changes,
+        function (summary, value, key) {
+          var column = _.find($scope.columns, { id: parseInt(key) });
+          var change = _.pick(_.cloneDeep(column), ['column_name']);
 
-        // capture changed setting values
-        summary.push(_.merge(change, value));
+          // capture changed setting values
+          summary.push(_.merge(change, value));
 
-        // capture corresponding settings columns
-        all_changed_settings = _.concat(all_changed_settings, _.keys(value));
-        return summary;
-      }, []);
+          // capture corresponding settings columns
+          all_changed_settings = _.concat(all_changed_settings, _.keys(value));
+          return summary;
+        },
+        []
+      );
 
       // If a preexisting ComStock mapping exists on the other table add it to the diff list for removal
       _.forEach($scope.change_summary_data, function (diff) {
         if (!_.isNil(diff.comstock_mapping)) {
-          var found = _.find(all_columns, {related: true, comstock_mapping: diff.comstock_mapping});
+          var found = _.find(all_columns, {
+            related: true,
+            comstock_mapping: diff.comstock_mapping
+          });
           if (found) {
             $scope.change_summary_data.push({
               column_name: found.column_name + ' (' + found.table_name + ')',
@@ -84,13 +92,14 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
         {
           field: 'geocoding_order',
           displayName: 'Geocoding Order',
-          cellTemplate: '<div class="ui-grid-cell-contents text-center">' +
-              '<span style="display: flex; align-items:center;">' +
-                '<span style="margin-right: 5px;">' +
-                  '<input type="checkbox" ng-checked="row.entity.geocoding_order" class="no-click">' +
-                '</span>' +
-                '<select class="form-control input-sm" ng-disabled=true><option value="">{$:: row.entity.geocoding_order || \'\' $}</option></select>' +
-              '</span>' +
+          cellTemplate:
+            '<div class="ui-grid-cell-contents text-center">' +
+            '<span style="display: flex; align-items:center;">' +
+            '<span style="margin-right: 5px;">' +
+            '<input type="checkbox" ng-checked="row.entity.geocoding_order" class="no-click">' +
+            '</span>' +
+            '<select class="form-control input-sm" ng-disabled=true><option value="">{$:: row.entity.geocoding_order || \'\' $}</option></select>' +
+            '</span>' +
             '</div>'
         },
         {
@@ -100,28 +109,32 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
         {
           field: 'merge_protection',
           displayName: 'Merge Protection Change',
-          cellTemplate: '<div class="ui-grid-cell-contents text-center">' +
+          cellTemplate:
+            '<div class="ui-grid-cell-contents text-center">' +
             '<input type="checkbox" class="no-click" ng-show="{$ row.entity.merge_protection != undefined $}" ng-checked="{$ row.entity.merge_protection === \'Favor Existing\' $}" style="margin: 0;">' +
             '</div>'
         },
         {
           field: 'recognize_empty',
           displayName: 'Recognize Empty',
-          cellTemplate: '<div class="ui-grid-cell-contents text-center">' +
+          cellTemplate:
+            '<div class="ui-grid-cell-contents text-center">' +
             '<input type="checkbox" class="no-click" ng-hide="{$ row.entity.recognize_empty === undefined $}" ng-checked="{$ row.entity.recognize_empty === true $}" style="margin: 0;">' +
             '</div>'
         },
         {
           field: 'is_matching_criteria',
           displayName: 'Matching Criteria Change',
-          cellTemplate: '<div class="ui-grid-cell-contents text-center">' +
+          cellTemplate:
+            '<div class="ui-grid-cell-contents text-center">' +
             '<input type="checkbox" class="no-click" ng-hide="{$ row.entity.is_matching_criteria === undefined $}" ng-checked="{$ row.entity.is_matching_criteria === true $}" style="margin: 0;">' +
             '</div>'
         },
         {
           field: 'comstock_mapping',
           displayName: 'ComStock Mapping Change',
-          cellTemplate: '<div class="ui-grid-cell-contents">{$ row.entity.comstock_mapping === undefined ? "" : row.entity.comstock_mapping === null ? "(removed)" : "comstock." + row.entity.comstock_mapping | translate $}</div>'
+          cellTemplate:
+            '<div class="ui-grid-cell-contents">{$ row.entity.comstock_mapping === undefined ? "" : row.entity.comstock_mapping === null ? "(removed)" : "comstock." + row.entity.comstock_mapping | translate $}</div>'
         }
       ];
 
@@ -146,7 +159,12 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
       };
 
       // Check if PM Property ID is actually being removed from matching criteria
-      if (_.find($scope.change_summary_data, {column_name: 'pm_property_id', is_matching_criteria: false})) {
+      if (
+        _.find($scope.change_summary_data, {
+          column_name: 'pm_property_id',
+          is_matching_criteria: false
+        })
+      ) {
         $scope.checks.matching_criteria_excludes_pm_property_id = true;
         $scope.checks.warnings_acknowledged = false;
       }
@@ -178,15 +196,19 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
 
       // Takes raw cycle-partitioned records and returns array of cycle-aware records
       var format_preview_records = function (raw_inventory) {
-        return _.reduce(raw_inventory, function (all_records, records, cycle_id) {
-          var cycle = _.find($scope.cycles, { id: parseInt(cycle_id) });
-          _.forEach(records, function (record) {
-            record.cycle_name = cycle.name;
-            record.cycle_start = cycle.start;
-            all_records.push(record);
-          });
-          return all_records;
-        }, []);
+        return _.reduce(
+          raw_inventory,
+          function (all_records, records, cycle_id) {
+            var cycle = _.find($scope.cycles, { id: parseInt(cycle_id) });
+            _.forEach(records, function (record) {
+              record.cycle_name = cycle.name;
+              record.cycle_start = cycle.start;
+              all_records.push(record);
+            });
+            return all_records;
+          },
+          []
+        );
       };
 
       // Builds preview columns using non-extra_data columns
@@ -205,7 +227,7 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
         _.map(preview_column_defs, function (col) {
           var options = {};
           if (col.data_type === 'datetime') {
-            options.cellFilter = 'date:\'yyyy-MM-dd h:mm a\'';
+            options.cellFilter = "date:'yyyy-MM-dd h:mm a'";
             options.filter = inventory_service.dateFilter();
           } else {
             options.filter = inventory_service.combinedFilter();
@@ -253,7 +275,7 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
           {
             name: 'cycle_start',
             displayName: 'Cycle Start',
-            cellFilter: 'date:\'yyyy-MM-dd\'',
+            cellFilter: "date:'yyyy-MM-dd'",
             filter: inventory_service.dateFilter(),
             type: 'date',
             sort: { priority: 1, direction: 'asc' },
@@ -279,7 +301,7 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
           $scope.gridApi.table_category = 'year-over-year';
 
           $scope.gridApi.core.on.filterChanged($scope, function () {
-          // This is a workaround for losing the state of expanded rows during filtering.
+            // This is a workaround for losing the state of expanded rows during filtering.
             _.delay($scope.gridApi.treeBase.expandAllRows, 500);
           });
 
@@ -326,17 +348,20 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
       var get_preview = function () {
         // Use new proposed matching_criteria_columns to request a preview then render this preview.
         var spinner_options = {
-          scale: 0.40,
+          scale: 0.4,
           position: 'relative',
           left: '100%'
         };
         spinner_utility.show(spinner_options, $('#spinner_placeholder')[0]);
 
-        organization_service.match_merge_link_preview($scope.org_id, $scope.inventory_type, $scope.criteria_changes)
+        organization_service
+          .match_merge_link_preview($scope.org_id, $scope.inventory_type, $scope.criteria_changes)
           .then(function (response) {
-            organization_service.check_match_merge_link_status(response.progress_key)
+            organization_service
+              .check_match_merge_link_status(response.progress_key)
               .then(function (completion_notice) {
-                organization_service.get_match_merge_link_result($scope.org_id, completion_notice.unique_id)
+                organization_service
+                  .get_match_merge_link_result($scope.org_id, completion_notice.unique_id)
                   .then(build_preview)
                   .then(preview_loading_complete);
               });
@@ -351,7 +376,8 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
       if ($scope.matching_criteria_exists) {
         $scope.preview_loading = true;
 
-        organization_service.matching_criteria_columns($scope.org_id)
+        organization_service
+          .matching_criteria_columns($scope.org_id)
           .then(build_proposed_matching_columns)
           .then(get_preview);
       }
@@ -363,4 +389,5 @@ angular.module('BE.seed.controller.confirm_column_settings_modal', [])
       $scope.cancel = function () {
         $uibModalInstance.dismiss();
       };
-    }]);
+    }
+  ]);

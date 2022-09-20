@@ -2,7 +2,8 @@
  * :copyright (c) 2014 - 2022, The Regents of the University of California, through Lawrence Berkeley National Laboratory (subject to receipt of any required approvals from the U.S. Department of Energy) and contributors. All rights reserved.
  * :author
  */
-angular.module('BE.seed.controller.inventory_detail_notes_modal', [])
+angular
+  .module('BE.seed.controller.inventory_detail_notes_modal', [])
   .controller('inventory_detail_notes_modal_controller', [
     '$scope',
     '$uibModalInstance',
@@ -12,16 +13,7 @@ angular.module('BE.seed.controller.inventory_detail_notes_modal', [])
     'viewId',
     'note',
     'orgId',
-    function (
-      $scope,
-      $uibModalInstance,
-      action,
-      note_service,
-      inventoryType,
-      viewId,
-      note,
-      orgId
-    ) {
+    function ($scope, $uibModalInstance, action, note_service, inventoryType, viewId, note, orgId) {
       $scope.inventoryType = inventoryType;
       $scope.viewId = viewId;
       $scope.orgId = orgId;
@@ -49,9 +41,11 @@ angular.module('BE.seed.controller.inventory_detail_notes_modal', [])
           note_type: $scope.note.note_type,
           text: $scope.note.text
         };
-        note_service.update_note($scope.orgId, $scope.inventoryType, $scope.viewId, $scope.note.id, data).then(function () {
-          $uibModalInstance.close();
-        });
+        note_service
+          .update_note($scope.orgId, $scope.inventoryType, $scope.viewId, $scope.note.id, data)
+          .then(function () {
+            $uibModalInstance.close();
+          });
       };
 
       $scope.delete = function () {
@@ -59,4 +53,5 @@ angular.module('BE.seed.controller.inventory_detail_notes_modal', [])
           $uibModalInstance.close();
         });
       };
-    }]);
+    }
+  ]);

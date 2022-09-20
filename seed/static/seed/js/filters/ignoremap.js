@@ -3,10 +3,8 @@
  * :author
  */
 angular.module('ignoremap', []).filter('ignoremap', function () {
-
   return function (input) {
     if (_.isEmpty(input)) return '------ Ignore Row ------';
     return input;
   };
-
 });
